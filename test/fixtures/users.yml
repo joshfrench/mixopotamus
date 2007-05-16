@@ -1,0 +1,31 @@
+quentin:
+  id: 1
+  login: quentin
+  email: quentin@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  #crypted_password: "ce2/iFrNtQ8=\n" # quentin, use only if you're using 2-way encryption
+  created_at: <%= 5.days.ago.to_s :db %>
+  # activated_at: <%= 5.days.ago.to_s :db %> # only if you're activating new signups
+  address: 123 Any Street USA
+  invites: 0
+aaron:
+  id: 2
+  login: aaron
+  email: aaron@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  # activation_code: aaronscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  address: 111 North Plain, Ithaca NY
+  invites: 5
+anne:
+    id: 3
+    login: anne
+    email: anne@example.com
+    salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    # activation_code: aaronscode # only if you're activating new signups
+    created_at: <%= 1.days.ago.to_s :db %>
+    address: 650 President
+    invites: 0

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+alligator:
+  id: 1
+  name: Alligator
+  swap_id: 1
+banana:
+  id: 2
+  name: Bananabread
+  swap_id: 1

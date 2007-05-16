@@ -1,0 +1,2 @@
+class SwapsetsController < ApplicationController
+end

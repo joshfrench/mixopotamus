@@ -1,0 +1,10 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+registration_period:
+  id: 1
+  deadline: <%= 8.weeks.from_now.to_s :db %>
+mix_period:
+  id: 2
+  deadline: <%= 4.weeks.from_now.to_s :db %>
+expired:
+  id: 3
+  deadline: <%= 6.months.ago.to_s :db %>
