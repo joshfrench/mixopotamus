@@ -50,22 +50,25 @@ class Swap < ActiveRecord::Base
     raise "No doubles in swap" if self.doubles.empty? 
     return set if SWAPSET_SIZE == set.users.size
     combinations = self.doubles.combinations(SWAPSET_SIZE - set.users.size)
-    best = nil
-    combinations.each do |users|
+    # random stroll through combinations,
+    # in case there is an absurd number of them
+    [combinations.size,1000].min.times do
+      users = combinations.slice!(rand(combinations.size))
       next if (users & set.users).length > 0 # can't assign A to set that includes A
       k = Kset.new(self) << (set.users + users)
       if 0 == k.score
-        best = users
+        @best = users
         break
-      else
-        best = users if k.score < self.max_score
+      elsif k.score < self.max_score
+        @best = users
+        self.max_score = k.score
       end
     end
     
-    if best.nil?
+    if @best.nil?
       raise "Unable to fill short set with unique users"
     else
-      best.each { |user| set.assign user }
+      @best.each { |user| set.assign user }
     end
   end
   

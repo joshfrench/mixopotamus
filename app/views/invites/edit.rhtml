@@ -1,0 +1,3 @@
+<% remote_form_for :invite, Invite.new, :url => invites_url(current_user), :html => { :id => 'invite-form' } do |f| -%>
+	<%= f.text_field :to %>
+<% end %>

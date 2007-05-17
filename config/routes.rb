@@ -1,14 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :invites
-
-  map.resources :favorites
-
-  map.resources :swapsets
-
-  map.resources :swaps
-
-
-  map.resources :account
+  map.resources :favorites, :swapsets, :swaps
+  map.resources :users do |user|
+    user.resources :invites
+  end
+  
+  map.resources :invites, :name_prefix => "redeem_"
   
   map.login 'login', :controller => 'account', :action => 'login'
   map.logout 'logout', :controller => 'account', :action => 'logout'
@@ -17,4 +13,5 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default route as the lowest priority.
   # map.connect ':controller/:action/:id.:format'
   # map.connect ':controller/:action/:id'
+  map.default '/', :controller => 'account', :action => 'show'
 end

@@ -110,6 +110,13 @@ class AccountControllerTest < Test::Unit::TestCase
     get :index
     assert !@controller.send(:logged_in?)
   end
+  
+  def test_should_populate_email_if_given
+    email = 'test@foobar.com'
+    get :signup, :email => email
+    assert_tag :tag => "input",
+               :attributes => { :value => /#{email}/ }
+  end
 
   protected
     def create_user(options = {})

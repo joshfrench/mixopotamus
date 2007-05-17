@@ -132,12 +132,16 @@ class SwapTest < Test::Unit::TestCase
     @old_set_2 = @old.swapsets.create :name => "Old Set 2"
     @old_set_3 = @old.swapsets.create :name => "Old Set 3"
     @old_set_4 = @old.swapsets.create :name => "Old Set 4"
+    @old_set_5 = @old.swapsets.create :name => "Old Set 5"
+    @old_set_6 = @old.swapsets.create :name => "Old Set 6"
     @set = @swap.swapsets.create :name => "New Set"
     # old sets are constructed so that [G,H] is the best possible solution
-    %w{ A G }.each { |i| @old_set_1.assign User.find_by_login "user_#{i}" }
-    %w{ B H }.each { |i| @old_set_2.assign User.find_by_login "user_#{i}" }
-    %w{ A C E }.each { |i| @old_set_3.assign User.find_by_login "user_#{i}" }
-    %w{ B D F }.each { |i| @old_set_1.assign User.find_by_login "user_#{i}" }
+    %w{ A E }.each { |i| @old_set_1.assign User.find_by_login "user_#{i}" }
+    %w{ B F }.each { |i| @old_set_2.assign User.find_by_login "user_#{i}" }
+    %w{ C E }.each { |i| @old_set_3.assign User.find_by_login "user_#{i}" }
+    %w{ D F }.each { |i| @old_set_4.assign User.find_by_login "user_#{i}" }
+    %w{ A G }.each { |i| @old_set_5.assign User.find_by_login "user_#{i}" }
+    %w{ B H }.each { |i| @old_set_6.assign User.find_by_login "user_#{i}" }
     %w{ A B C D }.each do |i|
       user =  User.find_by_login "user_#{i}"
       @swap.register user

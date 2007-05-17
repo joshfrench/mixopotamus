@@ -5,7 +5,7 @@ require 'invites_controller'
 class InvitesController; def rescue_action(e) raise e end; end
 
 class InvitesControllerTest < Test::Unit::TestCase
-  fixtures :invites
+  fixtures :invites, :users
 
   def setup
     @controller = InvitesController.new
@@ -14,7 +14,29 @@ class InvitesControllerTest < Test::Unit::TestCase
   end
 
   # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_accept_open_invite
+    invite = invites(:open)
+    get :show, { :id => invite.uuid }
+    assert_response :redirect
+    assert_redirected_to :controller => 'account', :action => 'signup', :email => invite.to_email
+  end
+  
+  def test_deny_redeemed_invite
+    invite = invites(:accepted)
+    get :show, :id => invite.uuid
+    assert_response :success
+    assert flash.has_key? :error
+  end
+  
+  def test_catch_missing_invite
+    get :show, :id => 'notavalidid'
+    assert_response :success
+    assert flash.has_key? :error
+  end
+
+  def test_create_new_invite
+    assert_difference(Invite, :count, 1) do
+      post :create, { :to => 'jed@vitamin-j.com', :from => users(:quentin) }
+    end
   end
 end

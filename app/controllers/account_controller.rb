@@ -1,8 +1,11 @@
 class AccountController < ApplicationController
 
+  before_filter :login_required, :only => [:show, :logout]
+
   # say something nice, you goof!  something sweet.
-  def index
-    redirect_to(:action => 'signup') unless logged_in? || User.count > 0
+  def show
+    redirect_to('/') unless logged_in? || User.count > 0
+    @user = current_user
   end
 
   def login
@@ -11,7 +14,7 @@ class AccountController < ApplicationController
     if logged_in?
       self.current_user.remember_me
       cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
-      redirect_back_or_default('/')
+      redirect_back_or_default(:controller => "account", :action => "show")
       flash[:notice] = "Logged in successfully"
     end
   end

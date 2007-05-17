@@ -17,13 +17,17 @@ class Invite < ActiveRecord::Base
     self.to_email = to
   end
   
+  def to
+    self.to_email
+  end
+  
   def accept
     if 'open' == self.status
       self.status = 'accepted'
       self.accepted_at = Time.now
       save
     else
-      throw :already_accepted
+      raise "Invite #{self.uuid} already accepted."
     end
   end
   

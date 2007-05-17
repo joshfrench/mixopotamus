@@ -54,7 +54,7 @@ class InviteTest < Test::Unit::TestCase
   
   def test_should_not_accept_invite_twice
     i = invites(:accepted)
-    assert_throws :already_accepted do
+    assert_raises RuntimeError do
       i.accept
     end
   end
