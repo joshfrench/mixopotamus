@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :favorites, :swapsets, :swaps
   map.resources :users do |user|
-    user.resources :invites
+    user.resources :invites, :member => {:confirm => :post, :cancel => :post}
   end
   
   map.resources :invites, :name_prefix => "redeem_"

@@ -1,0 +1,10 @@
+<%= error_message_on :invite, :to_email -%>
+<%= show_flash :confirm -%>
+<%= show_flash :error -%>
+<p>You have <%= current_user.invites %> invites left. Go ahead and send one!</p>
+<% remote_form_for :invite, @invite, :url => invites_url(current_user), :html => { :id => 'invite-form' } do |f| -%>
+	<%= f.text_field :to, :class => :textinput %>
+	<%= link_to_remote "<span>SEND</span>", { :url => invites_url(current_user), 
+											  :with => "Form.serialize('invite-form')" },
+											:class => :button %>
+<% end %>

@@ -13,4 +13,11 @@ accepted:
     created_at: <%= 2.week.ago.to_s :db %>
     uuid: 77776666555544443333222211110000
     status: 'accepted'    
+pending:
+    id: 3
+    from_user: 1
+    to_email: 'foo@bar.com'
+    created_at: <%= 3.week.ago.to_s :db %>
+    uuid: AAABBBCCCDDDEEEFFFGGGHHHIIIJJJKK
+    status: 'pending'
     

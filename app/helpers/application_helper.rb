@@ -18,4 +18,20 @@ module ApplicationHelper
    
     tag :button, { "type" => "submit", "name" => "commit", "value" => value }.update(options.stringify_keys)
     end
+    
+    def show_flash(key)
+      case key
+        when :error then bullet = '***'
+        when :confirm then bullet = '+++'
+      end
+      "<div class=\"#{key.to_s}\"><span class=\"bullet\">#{bullet}</span> #{flash[key]}</div>" unless flash[key].nil?
+    end
+    
+    def error_message_on(object, method, prepend_text = "", append_text = "", css_class = "error")
+      if (obj = instance_variable_get("@#{object}")) && (errors = obj.errors.on(method))
+        content_tag("div", "<span class=\"bullet\">***</span> #{prepend_text}#{errors.is_a?(Array) ? errors.first : errors}#{append_text}", :class => css_class)
+      else 
+        ''
+      end
+    end
 end

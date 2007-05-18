@@ -20,11 +20,18 @@ class User < AuthenticatedUser
     update_attribute(:invites, invites+1)
   end
   
-  def invite(email)
+  def create_invite(email)
     throw :out_of_invites if self.invites < 1
-    i = Invite.create(:from => self, :to => email)
-    update_attribute(:invites, invites-1) if i.valid?
-    i
+    Invite.create(:from => self, :to => email)
+  end
+  
+  def send_invite(invite)
+    if self == invite.user && 'pending' == invite.status
+      invite.deliver
+      update_attribute(:invites, invites-1)
+    else
+      raise "Unable to send invite"
+    end
   end
   
   def confirmed_for?(swap)

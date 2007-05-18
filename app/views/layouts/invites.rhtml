@@ -1,5 +1,8 @@
 <div id="invites">
+  <%= flash[:success] -%>
   <h2>Invites</h2>
   <%= separator %>
+  <div id="invites_content">
   <%= yield %>
+  </div>
 </div>

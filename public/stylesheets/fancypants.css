@@ -132,6 +132,15 @@ textarea {
 strong {
 	color: #444;
 }
+.error, .confirm {
+	font-size: 14px;
+	color: #7C0000;
+	clear: left;
+	padding-bottom: 8px;
+}
+.confirm {
+	color: #007C00;
+}
 .bullet {
 	font-size: 1.5em;
 	position: relative;
@@ -139,8 +148,7 @@ strong {
 	letter-spacing: -1px;
 	padding: 0;
 }
-.error {
-	font-size: 14px;
-	color: #7C0000;
-	clear: left;
+.confirm .bullet {
+	font-size: 1.2em;
+	top: 1px;
 }

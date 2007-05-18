@@ -3,10 +3,11 @@ require 'uuidtools'
 
 class Invite < ActiveRecord::Base
   belongs_to  :user,
-              :foreign_key => 'from'
+              :foreign_key => 'from_user'
               
   validates_presence_of :to_email
-  validates_format_of :to_email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  validates_format_of :to_email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
+                      :message => "That's not a valid email."
   validates_presence_of :from_user
   
   def from=(from)
@@ -21,6 +22,10 @@ class Invite < ActiveRecord::Base
     self.to_email
   end
   
+  def deliver
+    update_attribute :status, 'open'
+  end
+  
   def accept
     if 'open' == self.status
       self.status = 'accepted'
@@ -31,9 +36,13 @@ class Invite < ActiveRecord::Base
     end
   end
   
+  def is_unique?
+    self.class.count(:conditions => { :to_email => to_email, :status => 'open' }) == 0
+  end
+  
   def before_create
     self.uuid = UUID.random_create.to_s.gsub(/\W/, '').upcase
-    self.status = 'open'
+    self.status = 'pending'
   end
   
   def validate

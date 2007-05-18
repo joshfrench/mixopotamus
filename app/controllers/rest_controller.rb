@@ -62,6 +62,7 @@ class RestController < ApplicationController
         flash[:notice] = resource_display_name + ' created.'
         format.html { redirect_to resources_path }
         format.xml {head :created, :location => resource_path}
+        format.js {render}
       else
         @page_title ||= 'Creating ' + resource_display_name
         format.html { render :action => options[:template] || "edit" }

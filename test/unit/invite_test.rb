@@ -21,8 +21,15 @@ class InviteTest < Test::Unit::TestCase
     assert_difference(Invite, :count, 1) do
       i = Invite.create(:from => @quentin, :to => 'josh@vitamin-j.com')
       assert_equal 32, i.uuid.length
-      assert_equal 'open', i.status
+      assert_equal 'pending', i.status
     end
+  end
+  
+  def test_should_deliver
+    invite = invites(:pending)
+    invite.deliver
+    invite.reload
+    assert_equal 'open', invite.status
   end
   
   def test_should_not_invite_existing_user

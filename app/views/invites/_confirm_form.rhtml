@@ -1,0 +1,7 @@
+<%= show_flash :error -%>
+<div textalign="center">
+<%= link_to_remote "<span>SEND</span>", { :url => confirm_invite_url(current_user, @invite) },
+										  :class => :button %>
+<%= link_to_remote "<span>CANCEL</span>", { :url => cancel_invite_url(current_user, @invite) },
+											:class => :button %>
+</div>
