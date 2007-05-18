@@ -1,3 +1,5 @@
+<p>You have <%= current_user.invites %> invites left. Go ahead and send one!</p>
 <% remote_form_for :invite, Invite.new, :url => invites_url(current_user), :html => { :id => 'invite-form' } do |f| -%>
-	<%= f.text_field :to %>
+	<%= f.text_field :to, :class => :textinput %>
+	<%= link_to "<span>SEND</span>", '#', :class => :button %>
 <% end %>

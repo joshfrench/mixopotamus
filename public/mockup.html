@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" version="-//W3C//DTD XHTML 1.1//EN" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+
+	<title>untitled</title>
+	<style type="text/css">
+	/* Don't forget to set a foreground and background color 
+	   on the 'html' or 'body' element! */
+	html, body, div, span,
+	applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, font, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	dd, dl, dt, li, ol, ul,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-weight: inherit;
+		font-style: inherit;
+		font-size: 100%;
+		line-height: 1;
+		font-family: inherit;
+		text-align: left;
+		vertical-align: baseline;
+	}
+	html {
+		background-color: #FFF;
+		color: #000;
+	}
+	a img, :link img, :visited img {
+		border: 0;
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	ol, ul {
+		list-style: none;
+	}
+	
+	body {
+		width: 780px;
+		margin: 2em auto;
+		font-family: Courier, monospace;
+		color: #999;
+		padding-bottom: 23px;
+	}
+	h2 {
+		color: #777;
+	}
+	h2, h3 {
+		font-size: 18px;
+		text-transform: uppercase;
+		margin-bottom: 3px;
+	}
+	h3 {
+		font-size: 14px;
+		clear: left;
+	}
+	#announcements, #current, #invites, #register, #sets, #account {
+		width: 482px;
+		margin-bottom: 43px;
+	}
+	#sets, #info {
+		width: 184px;
+		float: right;
+		margin-bottom: 0;
+	}
+	#info {
+		clear: right;
+		font-size: 10px;
+		margin-top: 113px;
+	}
+	#info p, #info .sep {
+		color: #BBB;
+	}
+	#info p {
+		margin-bottom: 0;
+		text-align: right;
+	}
+	.sep {
+		white-space: nowrap;
+		overflow: hidden;
+		margin-bottom: 3px;
+		color: #777;
+	}
+	p {
+		font-size: 12px;
+		line-height: 17px;
+		color: #888;
+		margin-bottom: 6px;
+	}
+	a {
+		color: #83ACB6;
+		text-decoration: none;
+	}
+	#sets ul {
+		margin-top: 6px;
+	}
+	#sets li {
+		font-size: 12px;
+		margin-bottom: 5px;
+		color: #999;
+	}
+	.username {
+		font-weight: bold;
+	}
+	a.button {
+	    background: transparent url('button_right.gif') no-repeat top right;
+	    display: block;
+	    float: right;
+	    margin-right: 5px;
+	    padding-right: 5px; /* sliding doors padding */
+	    text-decoration: none;
+	}
+
+	a.button span {
+	    background: transparent url('button_left.gif') no-repeat;
+	    display: block;
+		height:25px;
+		padding: 3px 5px 0 10px;
+		font-size: 20px;
+		color: #333;
+	}
+	.button:active {
+	    background-position: bottom right;
+	    outline: none; /* hide dotted outline in Firefox */
+	}
+
+	a.button:active span {
+	    background-position: bottom left;
+		height: 24px;
+	    padding: 4px 5px 0 10px; /* push text down 1px */
+		color: #000;
+	}
+	.textinput, textarea {
+		float: left;
+		font-size: 1.5em;
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		width: 313px;
+		margin-right: 6px;
+		position: relative;
+		top: -2px;
+		color: #555;
+		background-color: #EEE;
+	}
+	textarea {
+		height: 193px;
+	}
+	#current ul {
+		margin-top: 23px;
+	}
+	#current li, #current li p {
+		font-size: 14px;
+		line-height: 17px;
+		color: #484848;
+	}
+	#current li {
+		margin-bottom: 14px;
+		position: relative;
+	}
+	.bigstar, .bigmail { 
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 10px 0 0 60px;
+	}
+	.bigmail {
+		right: 100px;
+	}
+	strong {
+		color: #444;
+	}
+	.bullet {
+		font-size: 1.5em;
+		position: relative;
+		top: 4px;
+		letter-spacing: -1px;
+		padding: 0;
+	}
+	.error {
+		font-size: 14px;
+		color: #7C0000;
+		clear: left;
+	}
+	</style>
+</head>
+
+<body>
+	<div id="sets">
+		<h2>Past swaps</h2>
+		<div class="sep">==================================</div>
+		<h3><a href="#">Alligator</a></h3>
+		<ul>
+			<li><span class="username">Anne Coperdink</span></li>
+			<li><span class="username">Morgan Mirvis</span></li>
+			<li><span class="username">Mustang Sally</span></li>
+			<li><span class="username">Frank Henderschott</span></li>
+			<li><span class="username">Jessica Flopez</span></li>
+		</ul>
+		<div class="sep">-----------------------------------</div>
+		<h3><a href="#">Bungus</a></h3>
+		<div class="sep">-----------------------------------</div>
+		<h3><a href="#">Cordelia</a></h3>
+		<div class="sep">-----------------------------------</div>
+	</div>
+	
+	<div id="info">
+		<div class="sep">=====================================</div>
+		<p><a href="#">My Account</a> <span class="bullet">*</span> <a href="#">Logout</a></p>
+		<div class="sep">-------------------------------------</div>
+		<p><a href="#">FAQ</a> <span class="bullet">*</span> <a href="#">Contact</a></p>
+		<div class="sep">=====================================</div>
+	</div>
+	
+	<div id="current">
+		<h2>Current Swap: Group Doily</h2>
+		<div class="sep">============================================================</div>
+		<p>Let us know who's been naughty and who's been nice: click the mail button to confirm you received a mix. 
+		Get something particularly awesome? Give it a gold star!</p>
+		<ul>
+			<li><p><span class="username">Foxy Brown</span><br/><img src="favorites_gold_32.png" class="bigstar"><img src="email_blue_32.png" class="bigmail">111 N. Plain #3<br/>Ithaca, NY 14850<br/><a href="#" class="email">foxyb@us.hsbc.com</a></p></li>
+			<li><span class="username">Moxy Fruvous</span><p class="address">123 Canada St<br/>Toronto, Canada<br/>OE5 7X<br/><a href="#" class="email">moxyfru@gmail.com</a></p></li>
+			<li><span class="username">Jack Johns</span><p class="address">650 President<br/>Brooklyn, NY 11232<br/><a href="#" class="email">jj1226@mindspring.com</a></p></li>
+			<li><span class="username">Chris Mingus</span><p class="address">13 Oak St<br/>Geneseo, MT 05055<br/><a href="#" class="email">cmingus@geneseo.edu</a></p></li>
+			<li><span class="username">Wally Huckster</span><p class="address">44 Peachtree Dr.<br/>Athens, GA<br/> 44859<br/><a href="#" class="email">wucksman@sbcglobal.net</a></p></li>
+		</ul>
+	</div>
+	
+	<div id="register">
+		<h2>Upcoming Swaps</h2>
+		<div class="sep">============================================================</div>
+		<form><a href="#" class="button"><span>SIGN UP</span></a><p>You're not signed up for the next swap yet.<br/>Registration ends <strong>August 15</strong>.</p></form>
+		<p>You are signed up for the next swap.<br/>You can click here to <a href="#">change your mind</a> any time before August 15.</p>
+	</div>
+	
+	<div id="invites">
+		<h2>Invites</h2>
+		<div class="sep">============================================================</div>
+		<p>You have 4 invites left. Send one now!</p>
+		<form><a href="#" class="button" onclick="this.blur();"><span>SEND</span></a><input type="text" name="email" class="textinput"> </form>
+		<p class="error"><span class="bullet">***</span> Oops, foxyb@us.hsbc.com is already a member.</p>
+	</div>
+	
+	<div id="account">
+		<h2>Your Account</h2>
+		<div class="sep">============================================================</div>
+		<form>
+		<h3>Name</h3>
+		<p><input type="text" class="textinput"></p>
+		<h3>Address</h3>
+		<textarea></textarea>
+		<h3>Email</h3>
+		<input type="text" class="textinput">
+		<a href="#" class="button" onclick="this.blur();"><span>SAVE</span></a>
+		</form>
+</body>
+</html>

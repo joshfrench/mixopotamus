@@ -15,11 +15,12 @@ class CreateUsers < ActiveRecord::Migration
       t.column :invites,                   :int
     end
 
-    User.create(:password => 'test', 
-                :password_confirmation => 'test',
+    User.create(:password => 'b33omber', 
+                :password_confirmation => 'b33omber',
                 :login => "Josh F", 
                 :address => "155 23rd St\nBrooklyn, NY\n11232", 
-                :email => "josh@vitamin-j.com")
+                :email => "josh@vitamin-j.com",
+                :invites => 5)
 
   end
   

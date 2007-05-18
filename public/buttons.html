@@ -1,0 +1,32 @@
+<style type="text/css">
+.button {
+  background: transparent url('/images/button_right.gif') no-repeat top right;
+  display: block;
+  float: right;
+  margin-right: 5px;
+  padding-right: 5px; /* sliding doors padding */
+  text-decoration: none;
+  border: none;
+}
+.button span {
+  background: transparent url('/images/button_left.gif') no-repeat;
+  display: block;
+	height:25px;
+	padding: 3px 5px 0 10px;
+	font-size: 20px;
+	color: #333;
+}
+.button:active {
+    background-position: bottom right;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+.button:active span {
+    background-position: bottom left;
+	height: 24px;
+    padding: 4px 5px 0 10px; /* push text down 1px */
+	color: #000;
+}
+</style>
+
+  <button type="submit" class="button"><span>SEND</span></button>
