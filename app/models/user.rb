@@ -7,6 +7,7 @@ class User < AuthenticatedUser
   has_many  :registrations
   has_many  :swaps,
             :through => :registrations
+  has_many  :invites, :foreign_key => "from_user"
             
   def <=>(other)
     self.id <=> other.id
@@ -17,18 +18,18 @@ class User < AuthenticatedUser
   end
   
   def give_invite
-    update_attribute(:invites, invites+1)
+    update_attribute(:invite_count, invite_count+1)
   end
   
   def create_invite(email)
-    throw :out_of_invites if self.invites < 1
+    raise "Out of invites" if self.invite_count < 1
     Invite.create(:from => self, :to => email)
   end
   
   def send_invite(invite)
     if self == invite.user && 'pending' == invite.status
       invite.deliver
-      update_attribute(:invites, invites-1)
+      update_attribute(:invite_count, invite_count-1)
     else
       raise "Unable to send invite"
     end
@@ -43,6 +44,6 @@ class User < AuthenticatedUser
   end
   
   def before_create
-    self.invites = 0
+    self.invite_count = 0
   end
 end

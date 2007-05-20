@@ -13,7 +13,6 @@ class InvitesControllerTest < Test::Unit::TestCase
     @response   = ActionController::TestResponse.new
   end
 
-  # Replace this with your real tests.
   def test_accept_open_invite
     invite = invites(:open)
     get :show, { :id => invite.uuid }
@@ -35,8 +34,43 @@ class InvitesControllerTest < Test::Unit::TestCase
   end
 
   def test_create_new_invite
+    login_as :aaron
+    assert users(:aaron).invite_count > 0
     assert_difference(Invite, :count, 1) do
-      post :create, { :to => 'jed@vitamin-j.com', :from => users(:quentin) }
+      post :create, :invite => { :to => 'new@invite.com' }
     end
   end
+  
+  def test_dont_invite_existing_member
+    login_as :aaron
+    assert_difference(Invite, :count, 0) do
+      post :create, :invite => { :to => users(:quentin).email }
+    end
+  end
+  
+  def test_catch_open_invite
+    login_as :aaron
+    post :create, :invite => { :to => invites(:open).to_email }
+    assert_template "invites/confirm"
+  end
+  
+  def test_cancel_invite
+    login_as :quentin
+    @invite = invites(:pending)
+    assert_difference(Invite, :count, -1) do
+      post :destroy, :id => @invite.id, :user_id => users(:quentin).id, :method => :delete
+    end
+    assert_template "invites/destroy"
+  end
+  
+  def test_confirm_invite
+    login_as :quentin
+    @quentin = users(:quentin)
+    @quentin.give_invite
+    @invite = invites(:pending)
+    post :confirm, :id => @invite.id, :user_id => @quentin.id
+    @invite.reload
+    assert_equal "open", @invite.status
+  end
+  
 end

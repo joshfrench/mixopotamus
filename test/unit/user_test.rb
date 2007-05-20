@@ -6,7 +6,7 @@ class UserTest < Test::Unit::TestCase
   
   def test_should_give_invite
     @quentin = users(:quentin)
-    assert_difference(@quentin, :invites, 1) do
+    assert_difference(@quentin, :invite_count, 1) do
       @quentin.give_invite
     end
   end
@@ -16,14 +16,14 @@ class UserTest < Test::Unit::TestCase
     assert_difference(Invite, :count, 1) do
       @invite = @aaron.create_invite 'test@foo.com'
     end
-    assert_difference(@aaron, :invites, -1) do
+    assert_difference(@aaron, :invite_count, -1) do
       @aaron.send_invite @invite
     end
   end
   
   def test_should_not_decrement_bad_invite
     @aaron = users(:aaron)
-    assert_no_difference(@aaron, :invites) do
+    assert_no_difference(@aaron, :invite_count) do
       i = @aaron.create_invite 'test@foo'
     end
     assert_no_difference(Invite, :count) do
@@ -33,10 +33,10 @@ class UserTest < Test::Unit::TestCase
   
   def test_should_not_allow_zero_invites_to_send
     @quentin = users(:quentin)
-    assert_throws :out_of_invites do
+    assert_raises RuntimeError do
       i = @quentin.create_invite('test@foo.com')
     end
-    assert_equal 0, @quentin.invites
+    assert_equal 0, @quentin.invite_count
   end
   
   def test_should_add_confirmation

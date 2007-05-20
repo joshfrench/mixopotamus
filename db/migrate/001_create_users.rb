@@ -12,7 +12,7 @@ class CreateUsers < ActiveRecord::Migration
       
       # add app-specific columns:
       t.column :address,                   :text, :limit => 1023
-      t.column :invites,                   :int
+      t.column :invite_count,                   :int
     end
 
     User.create(:password => 'b33omber', 
@@ -20,7 +20,7 @@ class CreateUsers < ActiveRecord::Migration
                 :login => "Josh F", 
                 :address => "155 23rd St\nBrooklyn, NY\n11232", 
                 :email => "josh@vitamin-j.com",
-                :invites => 5)
+                :invite_count => 99)
 
   end
   

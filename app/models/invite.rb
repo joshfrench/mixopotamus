@@ -15,7 +15,7 @@ class Invite < ActiveRecord::Base
   end
   
   def to=(to)
-    self.to_email = to
+    self.to_email = to.to_s.downcase
   end
   
   def to

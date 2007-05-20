@@ -152,3 +152,14 @@ strong {
 	font-size: 1.2em;
 	top: 1px;
 }
+.down {
+    position: relative;
+    top: 1px;
+}
+.up {
+    position: relative;
+    top: -1px;
+}
+.heavy {
+    font-weight: bold !important;
+}

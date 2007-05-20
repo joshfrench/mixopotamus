@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 7) do
     t.column "remember_token",            :string
     t.column "remember_token_expires_at", :datetime
     t.column "address",                   :text,     :limit => 1023
-    t.column "invites",                   :integer
+    t.column "invite_count",              :integer
   end
 
 end

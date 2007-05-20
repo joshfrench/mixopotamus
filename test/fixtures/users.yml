@@ -8,7 +8,7 @@ quentin:
   created_at: <%= 5.days.ago.to_s :db %>
   # activated_at: <%= 5.days.ago.to_s :db %> # only if you're activating new signups
   address: 123 Any Street USA
-  invites: 0
+  invite_count: 0
 aaron:
   id: 2
   login: aaron
@@ -18,7 +18,7 @@ aaron:
   # activation_code: aaronscode # only if you're activating new signups
   created_at: <%= 1.days.ago.to_s :db %>
   address: 111 North Plain, Ithaca NY
-  invites: 5
+  invite_count: 5
 anne:
     id: 3
     login: anne
@@ -28,4 +28,4 @@ anne:
     # activation_code: aaronscode # only if you're activating new signups
     created_at: <%= 1.days.ago.to_s :db %>
     address: 650 President
-    invites: 0
+    invite_count: 0

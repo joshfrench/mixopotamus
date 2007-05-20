@@ -1,2 +1,1 @@
-page.form.reset 'invite-form'
 page.replace_html 'invites_content', :partial => "form"

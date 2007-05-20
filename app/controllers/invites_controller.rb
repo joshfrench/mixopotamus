@@ -18,26 +18,25 @@ class InvitesController < ApplicationController
     if @invite.valid?
       if @invite.is_unique?
         current_user.send_invite(@invite)
-        flash[:confirm] = "Invite sent to #{@invite.to_email}!"
+        flash.now[:confirm] = "Invite sent to #{@invite.to_email}!"
       else
-        flash[:error] = "Someone already sent an invite to #{@invite.to_email}.<br/>Send anyway?"
+        flash.now[:error] = "Someone already sent an invite to #{@invite.to_email}.<br/>Send anyway?"
         render :action => "confirm"
       end
     end
   end
   
-=begin  
   def confirm
-    @invite = Invite.find_by_id(params[:invite])
+    @invite = current_user.invites.find_by_id(params[:id])
     current_user.send_invite @invite
-    flash[:confirm] = "Invite sent to #{@invite.to_email}!"
-    render :action => :new
+    flash.now[:confirm] = "Invite sent to #{@invite.to_email}!"
+    render :action => "create"
   end
-=end  
 
-  def cancel
-    Invite.find_by_id(params[:id]).destroy
-    flash[:error] = "Invite cancelled."
+  def destroy
+    current_user.invites.find_by_id(params[:id]).destroy
+    flash.now[:error] = "Invite cancelled."
+    @invite = Invite.new
   end
   
   def new
