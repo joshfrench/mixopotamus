@@ -16,9 +16,17 @@ class User < AuthenticatedUser
   def <=>(other)
     self.id <=> other.id
   end
+  
+  def find_swapset_by_position(p)
+    self.assignments.find_by_position(p).swapset
+  end
             
   def favorite(user, swapset)
-    Favorite.create(:from => self, :to => user, :swapset_id => swapset)
+    Favorite.create(:from => self, :to => user, :swapset => swapset)
+  end
+  
+  def favorited(user, swapset)
+    favorites.find_by_swapset_id_and_to_user(swapset.id, user.id)
   end
   
   def give_invite

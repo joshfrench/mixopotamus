@@ -1,0 +1,4 @@
+<%# whitespace:pre on this partial %>
+<div class="poll" id="<%= dom_id(poll) %>"><p><span class="username"><%= ibm h poll.login %></span>
+<%= ibm h poll.address %>
+<%= mail_to poll.email, ibm(poll.email), :encode => "hex" -%></a></p><%= star_for(poll) -%><%# render :partial => "account/mail", :object => poll -%></div>

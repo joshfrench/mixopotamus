@@ -1,2 +1,3 @@
-<%= content_tag 'h3', ibm("Does not play well with others"), :class => :error %>
-<p><%= ibm "No one in your last swap reported getting a mix from you, so you are currently barred from registering. If this is incorrect (and we hope it is), please contact us at ___________________ so we can make it right." %></p>
+<p><%= ibm "You will be allowed to register once members of your last swap confirm you sent your mixes. Sorry to make you wait, but it's the only way to determine who's been participating. If you sent your mixes but still are unable to register, please email us at " -%>
+<%= mail_to ADMIN_EMAIL, ibm(ADMIN_EMAIL), :encoding => "hex" -%>
+<%= " so we can make it right." %></p>

@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class UserTest < Test::Unit::TestCase
 
-  fixtures :users, :swaps
+  fixtures :users, :swaps, :swapsets, :favorites, :assignments
   
   def test_should_give_invite
     @quentin = users(:quentin)
@@ -29,6 +29,18 @@ class UserTest < Test::Unit::TestCase
     assert_no_difference(Invite, :count) do
       i = @aaron.create_invite 'test@foo'
     end
+  end
+
+  def test_should_detect_favorites
+    @set = swapsets(:alligator)
+    @quentin = users(:quentin)
+    @aaron = users(:aaron)
+    @set.assign @aaron
+    assert @quentin.favorited(@aaron, @set).nil?
+    assert @quentin.favorite(@aaron, @set)
+    @quentin.reload
+    @set.reload
+    assert !(@quentin.favorited(@aaron, @set).nil?)
   end
   
   def test_should_not_allow_zero_invites_to_send

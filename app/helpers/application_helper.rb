@@ -55,4 +55,11 @@ module ApplicationHelper
       time.strftime "%B %d"
     end
     
+    # multiple RJS templates need access to these #
+    
+    def star_for(user)
+      favorite = current_user.favorited(user,@set)
+      render :partial => (favorite.nil? ? "account/star" : "account/starred"), :object => user, :locals => { :favorite => favorite }
+    end
+    
 end

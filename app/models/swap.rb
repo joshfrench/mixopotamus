@@ -21,6 +21,10 @@ class Swap < ActiveRecord::Base
     deadline - 6.weeks
   end
   
+  def next_open
+    deadline + 2.weeks
+  end
+  
   def register(user, double=false)
     registrations.create :user_id => user.id, :double => double
   end

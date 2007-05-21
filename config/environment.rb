@@ -59,3 +59,4 @@ end
 
 # Include your application configuration below
 SWAPSET_SIZE = 6
+ADMIN_EMAIL = 'josh@vitamin-j.com'

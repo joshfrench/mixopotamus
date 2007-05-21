@@ -1,0 +1,13 @@
+<%# +favorite+ local is passed in for easier handling of it %>
+<%  id = dom_id(starred) + "_star"
+	img = image_tag "star_on.png", 
+					:id => id,
+					:onmouseover => "document.#{id}.src = star_off.src",
+					:onmouseout => "document.#{id}.src = star_on.src" -%>
+<% remote_form_for @favorite, :url => favorite_url(current_user, favorite),
+							  :html => { :class => :bigstar, :id => dom_id(favorite) },
+							  :method => :delete do |f| -%>
+<%= link_to_remote img, :url => favorite_url(current_user, favorite),
+	 					:with => "Form.serialize('#{dom_id(favorite)}')",
+ 						:method => :delete %>
+<% end -%>

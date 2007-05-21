@@ -1,0 +1,13 @@
+<%  id = dom_id(star) + "_star"
+	img = image_tag "star_off.png", 
+					:id => id,
+					:onmouseover => "document.#{id}.src = star_on.src",
+					:onmouseout => "document.#{id}.src = star_off.src" -%>
+<% remote_form_for Favorite.new, :url => favorites_url(current_user), 
+								 :html => { :class => :bigstar,
+									 		:id => "favorite_#{star.id}"} do |f| -%>
+<%= f.hidden_field :swapset, :value => @set.id %>
+<%= f.hidden_field :to, :value => star.id %>
+<%= link_to_remote img, :url => favorites_url(current_user),
+	 					:with => "Form.serialize('favorite_#{star.id}')" %>
+<% end -%>

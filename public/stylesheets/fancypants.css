@@ -111,23 +111,38 @@ a.button:active span {
 textarea {
 	height: 193px;
 }
-#current ul {
-	margin-top: 23px;
+#current .address_container {
+	clear: both;
+	margin-top: 14px;
 }
-#current li, #current li p {
+#current .address, #current .poll p {
 	font-size: 14px;
 	line-height: 17px;
 	color: #484848;
+	white-space: pre;
+	position: relative;
+	width: 241px;
+	float: left;
+	margin-top: 14px;
+	font-size: 14px;
+	line-height: 17px;
+	color: #484848;
+	white-space: pre;
 }
-#current li {
-	margin-bottom: 14px;
+#current .poll p {
+	width: 100%;
+	float: none;
+}
+#current .poll {
 	position: relative;
 }
-.bigstar, .bigmail { 
+.bigstar, .bigmail, #current .bigstar, #current .bigmail { 
 	position: absolute;
 	top: 0;
 	right: 0;
 	margin: 10px 0 0 60px;
+	width: 32px;
+	height: 32px;
 }
 .bigmail {
 	right: 100px;

@@ -1,2 +1,9 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+star_on = new Image;
+star_off = new Image;
+mail_on = new Image;
+mail_off = new Image;
+
+star_on.src = "/images/star_on.png";
+star_off.src = "/images/star_off.png";
+mail_on.src = "/images/mail_on.png";
+mail_off.src = "/images/mail_off.png";
