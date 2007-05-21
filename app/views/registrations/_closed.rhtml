@@ -1,0 +1,5 @@
+<p><%= ibm "Registration for the current swap is now closed. You " -%>
+<%= ibm "#{Swap.current.users.include?(current_user) ? 'are signed up' : 'did not sign up' }" %>
+<%= ibm " for this round." %></p>
+<p><%= ibm "Registration for the next swap will begin on " %>
+<strong><%= ibm "#{smalltime Swap.current.deadline}" %></strong>.</p>

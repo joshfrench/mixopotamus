@@ -1,6 +1,3 @@
-<%= error_message_on :invite, :to_email -%>
-<%= show_flash :confirm -%>
-<%= show_flash :error -%>
 <%= content_tag 'p', ibm("You have #{pluralize current_user.invite_count, 'invite'} left. Go ahead and send one!") %>
 <% remote_form_for Invite.new, :url => invites_url(current_user) do |f| -%>
 	<%= f.text_field :to, :class => :textinput %>
@@ -9,3 +6,6 @@
                  :with => "Form.serialize('#{dom_id(Invite.new)}')" },
                :class => :button %>
 <% end %>
+<%= error_message_on :invite, :to_email -%>
+<%= show_flash :confirm -%>
+<%= show_flash :error -%>

@@ -42,7 +42,7 @@ class RegistrationTest < Test::Unit::TestCase
     end
   end
   
-  def test_should_flunk_nonparticipant
+  def test_should_flunk_moocher
     @swap = Swap.create(:deadline => 12.weeks.from_now)
     assert_no_difference(Registration, :count) do
       r = Registration.create(:user_id => @quentin.id, :swap_id => @swap.id, :double => false)

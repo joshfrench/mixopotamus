@@ -1,0 +1,10 @@
+<p><%= ibm "You are signed up for the next swap." %><br/>
+<%= ibm "You can click here to " -%>
+<%= link_to_remote ibm("change your mind"),
+                   :url => registration_url(current_user,
+                              current_user.registrations.find_by_swap(Swap.current)),
+                   :method => :delete %>
+<%= ibm " any time before " %>
+<%= ibm smalltime Swap.current.deadline %>.
+<%= show_flash :confirm -%>
+<%= show_flash :error %>

@@ -24,11 +24,7 @@ class Registration < ActiveRecord::Base
     else
       errors.add_to_base "Registration closed" if Swap.find_by_id(swap_id).registration_deadline < Time.now
     end
-    errors.add :user, "Did not complete last swap" unless check_user_confirmations(User.find(user_id))
-  end
-  
-  def check_user_confirmations(user)
-    user.swaps.last.nil? ? true : user.confirmed_for?(user.swaps.last)
+    errors.add :user, "Did not complete last swap" unless User.find_by_id(user_id).ok_to_play?
   end
   
 end

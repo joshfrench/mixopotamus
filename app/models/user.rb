@@ -4,7 +4,11 @@ class User < AuthenticatedUser
   has_many  :assignments
   has_many  :swapsets,
             :through => :assignments
-  has_many  :registrations
+  has_many  :registrations do
+              def find_by_swap(swap)
+                find_by_swap_id(swap.id)
+              end
+            end
   has_many  :swaps,
             :through => :registrations
   has_many  :invites, :foreign_key => "from_user"
@@ -29,7 +33,7 @@ class User < AuthenticatedUser
   def send_invite(invite)
     if self == invite.user && 'pending' == invite.status
       invite.deliver
-      update_attribute(:invite_count, invite_count-1)
+      update_attribute(:invite_count, invite_count-1) # unless 1 == id
     else
       raise "Unable to send invite"
     end
@@ -37,6 +41,10 @@ class User < AuthenticatedUser
   
   def confirmed_for?(swap)
     registrations.find_by_swap_id(swap.id).confirmations > 0
+  end
+  
+  def ok_to_play?
+    (swaps.last.nil? || swaps.last == Swap.current) ? true : confirmed_for?(swaps.last)
   end
   
   def confirm_for(swap)

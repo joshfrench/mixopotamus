@@ -14,12 +14,12 @@ module ApplicationHelper
         when :error then bullet = '***'
         when :confirm then bullet = '+++'
       end
-      "<div class=\"#{key.to_s}\">" + ibm("<span class=\"bullet\">#{bullet}</span> #{flash[key]}") + "</div>" unless flash[key].nil?
+      "<div class=\"#{key.to_s}\"><span class=\"bullet\">#{bullet}</span> " + ibm(flash[key]) + "</div>" unless flash[key].nil?
     end
     
     def error_message_on(object, method, prepend_text = "", append_text = "", css_class = "error")
       if (obj = instance_variable_get("@#{object}")) && (errors = obj.errors.on(method))
-        content_tag("div", ibm("<span class=\"bullet\">***</span> #{prepend_text}#{errors.is_a?(Array) ? errors.first : errors}#{append_text}"), :class => css_class)
+        content_tag("div", "<span class=\"bullet\">***</span>  #{prepend_text}#{errors.is_a?(Array) ? ibm(errors.first) : ibm(errors)}#{append_text}", :class => css_class)
       else 
         ''
       end
@@ -37,6 +37,7 @@ module ApplicationHelper
     end
     
     def ibm(str)
+      return str if 'test' == RAILS_ENV # makes it hard to test for given strings
       ret = String.new
       str.each_byte do |b|
         m = rand(100)
@@ -48,6 +49,10 @@ module ApplicationHelper
         end
       end
       ret
+    end
+    
+    def smalltime(time)
+      time.strftime "%B %d"
     end
     
 end

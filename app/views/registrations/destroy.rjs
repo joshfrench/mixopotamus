@@ -1,0 +1,1 @@
+page.replace_html 'registration_content', registration_form_for(current_user)

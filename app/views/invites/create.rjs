@@ -1,1 +1,1 @@
-page.replace_html 'invites_content', :partial => "form"
+page.replace_html 'invites_content', do_invite_form_for(current_user)
