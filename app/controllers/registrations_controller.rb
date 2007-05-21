@@ -2,12 +2,16 @@ class RegistrationsController < ApplicationController
   before_filter :login_required, :get_current_swap
   
   def show
-    render :template => "registrations/new" unless @registration = current_user.registrations.find_by_swap(@swap)
+    render :template => "registrations/new" unless current_user.registrations.find_by_swap(@swap)
   end
   
   def create
-    @swap.register User.find_by_id(params[:user_id])
-    flash.now[:confirm] = "Thanks for signing up!"
+    if User.find_by_id(params[:user_id]) == current_user
+      @swap.register current_user
+      flash.now[:confirm] = "Thanks for signing up!"
+    else
+      raise "Got an unexpected user ID on Registration.create"
+    end
   end
   
   def destroy

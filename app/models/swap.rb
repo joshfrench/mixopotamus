@@ -30,11 +30,15 @@ class Swap < ActiveRecord::Base
   end
   
   def self.current
-    find(:all).last
+    find_by_position 1
   end
   
   def self.previous
-    find(:all).last.previous
+    find_by_position 2
+  end
+  
+  def after_create
+    move_to_top
   end
   
   def make_sets

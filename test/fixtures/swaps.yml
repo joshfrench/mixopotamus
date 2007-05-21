@@ -2,9 +2,12 @@
 registration_period:
   id: 1
   deadline: <%= 8.weeks.from_now.to_s :db %>
+  position: 1
 mix_period:
   id: 2
   deadline: <%= 4.weeks.from_now.to_s :db %>
+  position: 2
 expired:
   id: 3
   deadline: <%= 6.months.ago.to_s :db %>
+  position: 3
