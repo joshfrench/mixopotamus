@@ -36,12 +36,6 @@ class RegistrationTest < Test::Unit::TestCase
     end
   end
   
-  def test_should_add_confirmation
-    assert_difference(registrations(:one), :confirmations, 1) do
-      registrations(:one).add_confirmation
-    end
-  end
-  
   def test_should_flunk_moocher
     @swap = Swap.create(:deadline => 12.weeks.from_now)
     assert_no_difference(Registration, :count) do
@@ -52,7 +46,7 @@ class RegistrationTest < Test::Unit::TestCase
   
   def test_should_accept_past_participant
     @new_swap = Swap.create(:deadline => 12.weeks.from_now)
-    @quentin.confirm_for @swap
+    @quentin.confirm users(:aaron), @swap.swapsets.first
     assert_difference(Registration, :count, 1) do
       r = Registration.create(:user_id => @quentin.id, :swap_id => @new_swap.id, :double => false)
     end

@@ -2,6 +2,7 @@ class Swapset < ActiveRecord::Base
   has_many    :assignments, :dependent => :destroy
   has_many    :users,
               :through => :assignments
+  has_many    :confirmations
   belongs_to  :swap
   
   validates_presence_of :name

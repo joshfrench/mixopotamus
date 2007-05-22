@@ -3,7 +3,6 @@ class CreateRegistrations < ActiveRecord::Migration
     create_table :registrations do |t|
       t.column :swap_id, :int
       t.column :user_id, :int
-      t.column :confirmations, :int
       t.column :double, :boolean
       t.column :created_at, :datetime
       t.column :position, :int

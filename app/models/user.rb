@@ -12,13 +12,16 @@ class User < AuthenticatedUser
   has_many  :swaps,
             :through => :registrations
   has_many  :invites, :foreign_key => "from_user"
+  has_many  :confirmations, :foreign_key => "from_user"
             
   def <=>(other)
     self.id <=> other.id
   end
   
   def find_swapset_by_position(p)
-    self.assignments.find_by_position(p).swapset
+    if assign = self.assignments.find_by_position(p)
+      return assign.swapset
+    end
   end
             
   def favorite(user, swapset)
@@ -47,16 +50,20 @@ class User < AuthenticatedUser
     end
   end
   
-  def confirmed_for?(swap)
-    registrations.find_by_swap_id(swap.id).confirmations > 0
-  end
-  
   def ok_to_play?
     (swaps.last.nil? || swaps.last == Swap.current) ? true : confirmed_for?(swaps.last)
   end
   
-  def confirm_for(swap)
-    registrations.find_by_swap_id(swap.id).add_confirmation
+  def confirm(from, swapset)
+    confirmations.create(:from => from, :swapset_id => swapset.id)
+  end
+  
+  def give_confirmation(to_user, swapset)
+    to_user.confirm self, swapset
+  end
+  
+  def confirmed_for?(swap)
+    swapsets.find_by_swap_id(swap.id).confirmations.count > 0
   end
   
   def before_create

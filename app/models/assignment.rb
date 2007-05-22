@@ -16,6 +16,10 @@ class Assignment < ActiveRecord::Base
     move_to_top
   end
   
+  def add_confirmation(from)
+    swapset.confirmations.create(:from => from)
+  end
+  
   protected
   def validate
     errors.add_to_base "Duplicate assignment" if self.class.count(:conditions => { :swapset_id => swapset_id, :user_id => user_id }) > 0 
