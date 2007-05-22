@@ -47,10 +47,6 @@ class User < AuthenticatedUser
     favorites.find_by_swapset_id_and_to_user(swapset.id, user.id)
   end
   
-  #def confirmed(user, swapset)
-  #  confirmations.find_by_swapset_id_and_to_user(swapset.id, user.id)
-  #end
-  
   def give_invite
     update_attribute(:invite_count, invite_count+1)
   end

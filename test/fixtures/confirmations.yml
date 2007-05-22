@@ -1,5 +1,5 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
+aaron_to_quentin:
   id: 1
-two:
-  id: 2
+  from_user: 2
+  assignment_id: 1

@@ -5,14 +5,34 @@ require 'confirmations_controller'
 class ConfirmationsController; def rescue_action(e) raise e end; end
 
 class ConfirmationsControllerTest < Test::Unit::TestCase
+  
+  fixtures :users, :assignments, :swapsets, :swaps, :registrations, :confirmations
+  
   def setup
     @controller = ConfirmationsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    login_as :aaron
+    @aaron = users(:aaron)
+    @quentin = users(:quentin)
+    @set = swapsets(:alligator)
+    @set.assign @aaron
   end
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_create
+    assign = assignments(:one)
+    assert_difference(Confirmation, :count, 1) do
+      xhr :post, :create, { :user_id => @aaron.id, :confirmation => { :assignment => assign.id } }
+    end
+    assert_response :success
+    assert /mail_on.png/.match @response.body
+  end
+  
+  def test_destroy
+    assert_difference(Confirmation, :count, -1) do
+      xhr :delete, :destroy, { :user_id => @aaron.id, :id => confirmations(:aaron_to_quentin)}
+    end
+    assert_response :success
+    assert /mail_off.png/.match @response.body
   end
 end

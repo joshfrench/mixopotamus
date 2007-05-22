@@ -1,1 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+aaron_to_quentin:
+    id: 1
+    from_user: 2
+    to_user: 1
+    swapset_id: 1
