@@ -59,7 +59,17 @@ module ApplicationHelper
     
     def star_for(user)
       favorite = current_user.favorited(user,@set)
-      render :partial => (favorite.nil? ? "account/star" : "account/starred"), :object => user, :locals => { :favorite => favorite }
+      render :partial => (favorite.nil? ? "favorites/star" : "favorites/starred"), :object => user, :locals => { :favorite => favorite }
+    end
+    
+    def confirm_for(to_user)
+      assign = Assignment.find_by_swapset_id_and_user_id(@set.id, to_user.id)
+      confirmation = current_user.confirms_given.by_assignment(assign)
+      render :partial => (confirmation.nil? ? "confirmations/confirm" : "confirmations/confirmed"), :object => to_user, :locals => { :confirmation => confirmation, :assignment => assign }
+    end
+    
+    def reload_user(user)
+      page.replace dom_id(user), :partial => "account/userpoll", :object => user
     end
     
 end

@@ -136,7 +136,7 @@ textarea {
 #current .poll {
 	position: relative;
 }
-.bigstar, .bigmail, #current .bigstar, #current .bigmail { 
+#current .bigstar, #current .bigmail { 
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -144,7 +144,7 @@ textarea {
 	width: 32px;
 	height: 32px;
 }
-.bigmail {
+#current .bigmail {
 	right: 100px;
 }
 strong {

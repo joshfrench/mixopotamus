@@ -1,7 +1,0 @@
-<%  id = dom_id(mail) + "_mail"
-	img = image_tag "mail_off.png", 
-		  :class => :bigmail, 
-		  :id => id,
-		  :onmouseover => "document.#{id}.src = mail_on.src",
-		  :onmouseout => "document.#{id}.src = mail_off.src" -%>
-<%= link_to_remote img, "#" -%>

@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   session :session_key => 'c_is_for_cookie'
   
   before_filter :login_from_cookie # remember-me functionality
+  
+  protected
+  def get_current_set
+    @set = current_user.find_swapset_by_position(1)
+  end
 end

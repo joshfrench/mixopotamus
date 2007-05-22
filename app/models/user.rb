@@ -10,6 +10,16 @@ class User < AuthenticatedUser
             end
   has_many  :confirmations,
             :through => :assignments
+  has_many  :confirms_given, :class_name => "Confirmation", 
+            :foreign_key => :from_user do
+              def by_user_and_set(user,set)
+                assign = Assignment.find_by_swapset_id_and_user_id(set.id, user.id)
+                find_by_assignment_id(assign.id)
+              end
+              def by_assignment(assign)
+                find_by_assignment_id(assign.id)
+              end
+            end
   has_many  :registrations do
               def by_swap(swap)
                 find_by_swap_id(swap.id)
@@ -36,6 +46,10 @@ class User < AuthenticatedUser
   def favorited(user, swapset)
     favorites.find_by_swapset_id_and_to_user(swapset.id, user.id)
   end
+  
+  #def confirmed(user, swapset)
+  #  confirmations.find_by_swapset_id_and_to_user(swapset.id, user.id)
+  #end
   
   def give_invite
     update_attribute(:invite_count, invite_count+1)

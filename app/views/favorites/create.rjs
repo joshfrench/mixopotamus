@@ -1,1 +1,0 @@
-page.replace dom_id(@to), :partial => "account/poll", :object => @to
