@@ -1,1 +1,1 @@
-page.replace_html 'invites_content', do_invite_form_for(current_user)
+page.replace_html 'invites_content', do_form_with_last_invite_message(current_user)
