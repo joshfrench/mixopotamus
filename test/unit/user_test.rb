@@ -51,14 +51,6 @@ class UserTest < Test::Unit::TestCase
     assert_equal 0, @quentin.invite_count
   end
   
-  def test_should_add_confirmation
-    @quentin = users(:quentin)
-    @swap = swaps(:registration_period)
-    assert !(@quentin.confirmed_for? @swap)
-    @quentin.confirm_for @swap
-    assert @quentin.confirmed_for? @swap
-  end
-  
   protected
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :address => 'Quire Ave.' }.merge(options))

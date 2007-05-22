@@ -27,7 +27,4 @@ class AssignmentTest < Test::Unit::TestCase
     assert @quentin.registrations.first.update_attribute(:double, true)
   end
   
-  def test_should_add_assignment
-    flunk
-  end
 end

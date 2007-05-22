@@ -2,6 +2,6 @@
                     { :url => registrations_url(current_user) }, 
                     :class => :button %>
 <p><%= ibm "You're not signed up for the next swap yet." %><br/>
-<%= ibm "Registration ends" %> <strong><%= ibm smalltime Swap.current.deadline %></strong>.</p>
+<%= ibm "Registration ends" %> <strong><%= ibm(smalltime(Swap.current.deadline)) %></strong>.</p>
 <%= show_flash :confirm -%>
 <%= show_flash :error %>

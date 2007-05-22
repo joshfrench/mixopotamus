@@ -2,7 +2,7 @@ class RegistrationsController < ApplicationController
   before_filter :login_required, :get_current_swap
   
   def show
-    render :template => "registrations/new" unless current_user.registrations.find_by_swap(@swap)
+    render :template => "registrations/new" unless current_user.registrations.by_swap(@swap)
   end
   
   def create

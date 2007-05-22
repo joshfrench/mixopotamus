@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class RegistrationTest < Test::Unit::TestCase
-  fixtures :registrations, :users, :swaps
+  fixtures :registrations, :users, :swaps, :assignments
   
   def setup
     @swap = swaps(:registration_period)
@@ -46,7 +46,7 @@ class RegistrationTest < Test::Unit::TestCase
   
   def test_should_accept_past_participant
     @new_swap = Swap.create(:deadline => 12.weeks.from_now)
-    @quentin.confirm users(:aaron), @swap.swapsets.first
+    Confirmation.create(:from => @aaron, :assignment => assignments(:one))
     assert_difference(Registration, :count, 1) do
       r = Registration.create(:user_id => @quentin.id, :swap_id => @new_swap.id, :double => false)
     end

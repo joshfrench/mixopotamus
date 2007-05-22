@@ -3,24 +3,29 @@ class User < AuthenticatedUser
   has_many  :stars, :class_name => "Favorite", :foreign_key => "to_user"
   has_many  :assignments
   has_many  :swapsets,
+            :through => :assignments do
+              def by_swap(swap)
+                find_by_swap_id(swap.id)
+              end
+            end
+  has_many  :confirmations,
             :through => :assignments
   has_many  :registrations do
-              def find_by_swap(swap)
+              def by_swap(swap)
                 find_by_swap_id(swap.id)
               end
             end
   has_many  :swaps,
             :through => :registrations
   has_many  :invites, :foreign_key => "from_user"
-  has_many  :confirmations, :foreign_key => "from_user"
             
   def <=>(other)
     self.id <=> other.id
   end
   
   def find_swapset_by_position(p)
-    if assign = self.assignments.find_by_position(p)
-      return assign.swapset
+    if assignment = self.assignments.find_by_position(p)
+      return assignment.swapset
     end
   end
             
@@ -54,16 +59,8 @@ class User < AuthenticatedUser
     (swaps.last.nil? || swaps.last == Swap.current) ? true : confirmed_for?(swaps.last)
   end
   
-  def confirm(from, swapset)
-    confirmations.create(:from => from, :swapset_id => swapset.id)
-  end
-  
-  def give_confirmation(to_user, swapset)
-    to_user.confirm self, swapset
-  end
-  
   def confirmed_for?(swap)
-    swapsets.find_by_swap_id(swap.id).confirmations.count > 0
+    swapsets.by_swap(swap).assignments.find_by_user_id(id).confirmations.count > 0
   end
   
   def before_create

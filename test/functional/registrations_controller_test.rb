@@ -6,7 +6,7 @@ class RegistrationsController; def rescue_action(e) raise e end; end
 
 class RegistrationsControllerTest < Test::Unit::TestCase
   
-  fixtures :users, :swaps, :registrations
+  fixtures :users, :swaps, :swapsets, :registrations, :assignments
   
   def setup
     @controller = RegistrationsController.new
@@ -20,7 +20,7 @@ class RegistrationsControllerTest < Test::Unit::TestCase
     @swap = Swap.create(:deadline => 8.weeks.from_now)
     xhr :get, :new, :user_id => users(:quentin).id
     assert_response :success
-    assert /Does not play well/.match @response.body
+    assert /Sorry to make you wait/.match @response.body
     assert !(@swap.users.include? users(:quentin))
   end
   
@@ -39,7 +39,7 @@ class RegistrationsControllerTest < Test::Unit::TestCase
     login_as :quentin
     @quentin = users(:quentin)
     @swap = Swap.create(:deadline => 8.weeks.from_now)
-    @quentin.confirm_for Swap.previous
+    Confirmation.create :assignment => assignments(:one)
     xhr :post, :create, :user_id => @quentin.id
     assert_response :success
     assert /Thanks/.match @response.body
@@ -65,7 +65,6 @@ class RegistrationsControllerTest < Test::Unit::TestCase
     @swap = Swap.current
     xhr :get, :new, :user_id => users(:aaron).id
     assert_response :success
-    breakpoint
     assert /current swap is now closed/.match @response.body
   end
 end

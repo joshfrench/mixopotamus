@@ -1,6 +1,7 @@
 class Assignment < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :swapset
+  belongs_to  :user
+  belongs_to  :swapset
+  has_many    :confirmations
   
   delegate :swap, :to => :swapset
   
