@@ -6,7 +6,7 @@ class RegistrationsController; def rescue_action(e) raise e end; end
 
 class RegistrationsControllerTest < Test::Unit::TestCase
   
-  fixtures :users, :swaps, :swapsets, :registrations, :assignments
+  fixtures :users, :swaps, :swapsets, :registrations, :assignments, :confirmations
   
   def setup
     @controller = RegistrationsController.new
@@ -16,12 +16,14 @@ class RegistrationsControllerTest < Test::Unit::TestCase
 
   def test_burned
     login_as :quentin
-    # create a new swap so quentin will fail ok_to_play?
-    @swap = Swap.create(:deadline => 8.weeks.from_now)
+    # create some new swaps so quentin will fail ok_to_play?
+    @swap1 = Swap.create(:deadline => 8.weeks.from_now)
+    @swap1.register users(:quentin)
+    @swap2 = Swap.create(:deadline => 12.weeks.from_now)
     xhr :get, :new, :user_id => users(:quentin).id
     assert_response :success
     assert /Sorry to make you wait/.match @response.body
-    assert !(@swap.users.include? users(:quentin))
+    assert !(@swap2.users.include? users(:quentin))
   end
   
   def test_register_first_time
