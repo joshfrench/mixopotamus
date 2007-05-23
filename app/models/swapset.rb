@@ -10,8 +10,6 @@ class Swapset < ActiveRecord::Base
               end
   belongs_to  :swap
   
-  validates_presence_of :name
-  
   def assign(user)
     assignments.create :user_id => user.id
   end

@@ -46,10 +46,9 @@ class Swap < ActiveRecord::Base
   end
   
   def make_sets
-    list = File.read(File.expand_path(RAILS_ROOT + "/lib/vocab_list")).map { |word| word.chomp }
     initialize_set(users, SWAPSET_SIZE, Swapset.find(:all).map {|set| set.users})
     solve.each do |users|
-      swapset = swapsets.create(:name => list.slice!(rand(list.size)) )
+      swapset = swapsets.create
       users.each { |user| swapset.assign user }
     end
   end

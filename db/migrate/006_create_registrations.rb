@@ -7,6 +7,10 @@ class CreateRegistrations < ActiveRecord::Migration
       t.column :created_at, :datetime
       t.column :position, :int
     end
+    
+    (1..6).each do |i|
+      Registration.create(:swap_id => 1, :user_id => i)
+    end
   end
 
   def self.down

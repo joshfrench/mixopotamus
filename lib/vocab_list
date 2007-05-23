@@ -24,3 +24,6 @@ wallaby
 xerxes
 yodel
 zanzibar
+
+# list = File.read(File.expand_path(RAILS_ROOT + "/lib/vocab_list")).map { |word| word.chomp }
+# (:name => list.slice!(rand(list.size)) )
