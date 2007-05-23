@@ -1,3 +1,5 @@
 class SiteController < ApplicationController
-  layout false
+  
+  layout 'application', :except => [ :sidebar, :stats ]
+  
 end

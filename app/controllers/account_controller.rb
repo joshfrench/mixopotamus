@@ -37,4 +37,5 @@ class AccountController < ApplicationController
     flash[:notice] = "You have been logged out."
     redirect_back_or_default('/')
   end
+
 end

@@ -10,10 +10,8 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'account', :action => 'login'
   map.logout 'logout', :controller => 'account', :action => 'logout'
   map.signup 'register', :controller => 'account', :action => 'signup'
-  map.faq 'wtf?', :controller => "site", :action => "faq"
+  map.account 'my-account', :controller => 'users', :action => 'edit'
+  map.faq 'wtf', :controller => "site", :action => "faq"
   
-  # Install the default route as the lowest priority.
-  # map.connect ':controller/:action/:id.:format'
-  # map.connect ':controller/:action/:id'
   map.default '/', :controller => 'account', :action => 'show'
 end

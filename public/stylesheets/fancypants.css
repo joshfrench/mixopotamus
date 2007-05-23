@@ -173,6 +173,9 @@ textarea {
     right: 0;
     top: -4px;
 }
+form h3 {
+	padding-top: 13px;
+}
 strong {
 	color: #444;
 }

@@ -5,16 +5,21 @@ class AuthenticatedUser < ActiveRecord::Base
   
   attr_accessor :password
 
-  validates_presence_of     :login, :email
+  validates_presence_of     :login, :message => "Can't leave your name blank."
+  validates_presence_of     :email, :message => "That's not a valid email."
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
-  validates_presence_of     :address
+  validates_presence_of     :address, :message => "Can't leave your address blank."
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of       :login,    :within => 3..40
-  validates_length_of       :email,    :within => 3..100
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
-  validates_uniqueness_of   :login, :email, :case_sensitive => false
+  validates_length_of       :login,    :within => 3..40,
+                            :message => "Name should be within 3 and 40 characters."
+  validates_length_of       :email,    :within => 3..100,
+                            :message => "That's not a valid email."
+  validates_format_of       :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
+                            :message => "That's not a valid email."
+  validates_uniqueness_of   :email, :case_sensitive => false,
+                            :message => "That email is already in use by someone else."
   before_save :encrypt_password
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
