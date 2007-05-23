@@ -1,6 +1,10 @@
 class User < AuthenticatedUser
-  has_many  :favorites, :foreign_key => "from_user"
-  has_many  :stars, :class_name => "Favorite", :foreign_key => "to_user"
+  has_many  :favorites, :foreign_key => "from_user" do
+              def by_user_and_set(user,set)
+                find_by_assignment_id Assignment.find_by_swapset_id_and_user_id(set.id, user.id).id
+              end
+            end
+  has_many  :stars, :through => :assignments, :source => :user, :class_name => "Favorite"
   has_many  :assignments
   has_many  :swapsets,
             :through => :assignments do
@@ -44,7 +48,7 @@ class User < AuthenticatedUser
   end
   
   def favorited(user, swapset)
-    favorites.find_by_swapset_id_and_to_user(swapset.id, user.id)
+    favorites.by_user_and_set(user, swapset)
   end
   
   def give_invite

@@ -8,7 +8,7 @@ class FavoritesController < ApplicationController
   end
   
   def destroy
-    @user = User.find_by_id current_user.favorites.find_by_id(params[:id]).destroy.to_user
+    @user = User.find_by_id current_user.favorites.find_by_id(params[:id]).destroy.user_id
     render :action => "swap_star"
   end
   

@@ -1,28 +1,20 @@
 class Favorite < ActiveRecord::Base
   belongs_to :user
-  attr_accessor :from, :to
+  belongs_to :assignment
+  attr_accessor :from, :to, :swapset
   
-  validates_presence_of :swapset_id
+  delegate :swapset_id, :user_id,  :to => :assignment
+  
   validates_presence_of :from_user
-  validates_presence_of :to_user
+  validates_presence_of :assignment_id
   
   def from=(from)
     self.from_user = from.id
     @from = from
   end
   
-  def to=(to)
-    self.to_user = to.id
-    @to = to
+  def before_validation
+    self.assignment_id = Assignment.find_by_swapset_id_and_user_id(@swapset.id, @to.id).id
   end
-  
-  def swapset=(swapset)
-    self.swapset_id = swapset.id
-    @swapset = swapset
-  end
-  
-  protected 
-  def validate
-    errors.add_to_base "Users not in same set" unless @swapset.users.include?(@from) && @swapset.users.include?(@to)
-  end
+
 end
