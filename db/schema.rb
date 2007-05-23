@@ -32,12 +32,11 @@ ActiveRecord::Schema.define(:version => 8) do
   end
 
   create_table "registrations", :force => true do |t|
-    t.column "swap_id",       :integer
-    t.column "user_id",       :integer
-    t.column "confirmations", :integer
-    t.column "double",        :boolean
-    t.column "created_at",    :datetime
-    t.column "position",      :integer
+    t.column "swap_id",    :integer
+    t.column "user_id",    :integer
+    t.column "double",     :boolean
+    t.column "created_at", :datetime
+    t.column "position",   :integer
   end
 
   create_table "swaps", :force => true do |t|

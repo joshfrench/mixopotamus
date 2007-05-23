@@ -55,6 +55,10 @@ module ApplicationHelper
       time.strftime "%B %d"
     end
     
+    def microtime(time)
+      time.strftime "%B %Y"
+    end
+    
     # multiple RJS templates need access to these #
     
     def star_for(user)

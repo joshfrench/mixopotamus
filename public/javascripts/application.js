@@ -9,8 +9,8 @@ mail_on.src = "/images/mail_on.png";
 mail_off.src = "/images/mail_off.png";
 
 window.onload = function () {
-	accordion = new fx.Accordion(document.getElementsByClassName('tog'), 
-								 document.getElementsByClassName('el'), 
+	accordion = new fx.Accordion(document.getElementsByClassName('swap_title'), 
+								 document.getElementsByClassName('swap_list'), 
 								{ opacity: false,
-								  duration: 350 } );
+								  duration: 250 } );
 }

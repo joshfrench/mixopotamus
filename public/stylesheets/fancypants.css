@@ -58,6 +58,10 @@ a {
 	color: #83ACB6;
 	text-decoration: none;
 }
+#sets h3 {
+    color: #83ACB6;
+    cursor: pointer;
+}
 #sets ul {
 	margin-top: 6px;
 }

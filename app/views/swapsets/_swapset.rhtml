@@ -1,0 +1,6 @@
+<h3 class="swap_title"><%= microtime swapset.swap.deadline %></h3>
+<ul class="swap_list">
+  <%= render :partial => "account/mini", 
+             :collection => other_users_in(swapset) %>
+</ul>
+<%= separator '-' %>
