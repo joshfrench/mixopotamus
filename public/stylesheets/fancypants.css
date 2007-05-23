@@ -31,7 +31,7 @@ h3.error {
 	margin-bottom: 0;
 }
 #info {
-	clear: right;
+    clear: right;
 	font-size: 10px;
 	margin-top: 113px;
 }
@@ -150,6 +150,14 @@ textarea {
 }
 #current .bigmail {
 	right: 100px;
+}
+.swap_list li {
+    position: relative;
+}
+.ministar {
+    position: absolute;
+    right: 0;
+    top: -4px;
 }
 strong {
 	color: #444;

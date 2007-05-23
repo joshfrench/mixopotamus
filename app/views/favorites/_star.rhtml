@@ -2,7 +2,9 @@
 	img = image_tag "star_off.png", 
 					:id => id,
 					:onmouseover => "document.#{id}.src = star_on.src",
-					:onmouseout => "document.#{id}.src = star_off.src" -%>
+					:onmouseout => "document.#{id}.src = star_off.src",
+					:alt => "Star",
+					:title => "Give this a star" -%>
 <% remote_form_for Favorite.new, :url => favorites_url(current_user), 
 								 :html => { :class => :bigstar,
 									 		:id => "favorite_#{star.id}"} do |f| -%>

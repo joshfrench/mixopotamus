@@ -1,6 +1,7 @@
-<h3 class="swap_title"><%= microtime swapset.swap.deadline %></h3>
+<h3 class="swap_title"><%= ibm(microtime swapset.swap.deadline) %></h3>
 <ul class="swap_list">
   <%= render :partial => "account/mini", 
-             :collection => other_users_in(swapset) %>
+             :collection => other_users_in(swapset),
+             :locals => { :swapset => swapset } %>
 </ul>
 <%= separator '-' %>

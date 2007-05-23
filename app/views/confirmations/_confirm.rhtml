@@ -2,7 +2,9 @@
 	img = image_tag "mail_off.png", 
 					:id => id,
 					:onmouseover => "document.#{id}.src = mail_on.src",
-					:onmouseout => "document.#{id}.src = mail_off.src" -%>
+					:onmouseout => "document.#{id}.src = mail_off.src",
+					:alt => "Confirm",
+					:title => "Confirm this mix was received" -%>
 <% remote_form_for Confirmation.new, :url => confirmations_url(current_user), 
 								 :html => { :class => :bigmail,
 									 		:id => "confirm_#{confirm.id}"} do |f| -%>
