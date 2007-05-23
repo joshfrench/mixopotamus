@@ -1,8 +1,8 @@
 <div id="info">
 	<%= separator %>
-	<p><a href="#">My Account</a> <span class="bullet">*</span> <a href="#">Logout</a></p>
+	<p><%= link_to ibm('My Account'), "#" -%> <span class="bullet">*</span> <%= link_to ibm('Logout'), logout_url -%></p>
 
 	<%= separator '-' %>
-	<p><a href="#">FAQ</a> <span class="bullet">*</span> <a href="#">Contact</a></p>
+	<p><%= link_to ibm('FAQ'), faq_url -%> <span class="bullet">*</span> <%= mail_to ADMIN_EMAIL, ibm('Contact'), :encoding => "hex" %></p>
 	<%= separator %>
 </div>

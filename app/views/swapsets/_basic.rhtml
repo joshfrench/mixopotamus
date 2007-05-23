@@ -1,6 +1,6 @@
 <p><%= ibm "The mailing deadline for this swap is " -%>
 <strong><%= ibm smalltime @set.swap.deadline -%></strong>. 
-<%= ibm "If you will be unable to participate for any reason, please be kind and alert your fellow swappers along with the intrepid administrators of this site at " -%><%= mail_to ADMIN_EMAIL, ibm(ADMIN_EMAIL), :encode => "hex" %>.</p>
+<%= ibm "If you will be unable to participate for any reason, please be kind and alert your fellow swappers along with the intrepid administrators of this site at " -%><%= admin_email %>.</p>
 
 <% @users.enum_slice(2).each do |pair| -%>
 	<div class="address_container">

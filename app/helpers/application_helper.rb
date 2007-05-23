@@ -59,6 +59,10 @@ module ApplicationHelper
       time.strftime "%B %Y"
     end
     
+    def admin_email
+      mail_to ADMIN_EMAIL, ibm(ADMIN_EMAIL), :encoding => "hex"
+    end
+    
     # multiple RJS templates need access to these #
     
     def star_for(user)

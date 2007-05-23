@@ -1,3 +1,1 @@
-<p><%= ibm "You will be allowed to register once members of your last swap confirm you sent your mixes. Sorry to make you wait, but it's the only way to determine who's been participating. If you sent your mixes but still are unable to register, please email us at " -%>
-<%= mail_to ADMIN_EMAIL, ibm(ADMIN_EMAIL), :encoding => "hex" -%>
-<%= " so we can make it right." %></p>
+<p><%= ibm "You will be allowed to register once members of your last swap confirm you sent your mixes. Sorry to make you wait, but it's the only way to determine who's been participating. If you sent your mixes but still are unable to register, please email us at " -%><%= admin_email -%><%= ibm " so we can make it right." %></p>
