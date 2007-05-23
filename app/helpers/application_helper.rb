@@ -1,10 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  def separator(char='=', length=:long)
+  def separator(char='=', length=:short)
     line = lambda { |x| char*x }
     sep = case length
-      when :short then line.call 30
-      when :long then line.call 60
+      when :short then line.call 60
+      when :long then line.call 200
     end
     "<div class=\"sep\">#{ibm(sep)}</div>"
   end
