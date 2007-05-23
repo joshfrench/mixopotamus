@@ -4,7 +4,8 @@ class User < AuthenticatedUser
                 find_by_assignment_id Assignment.find_by_swapset_id_and_user_id(set.id, user.id).id
               end
             end
-  has_many  :stars, :through => :assignments, :source => :user, :class_name => "Favorite"
+  has_many  :stars, :class_name => "Favorite", 
+            :finder_sql => 'SELECT favorites.* FROM favorites INNER JOIN assignments ON assignment_id = assignments.id WHERE assignments.user_id = #{id}'
   has_many  :assignments
   has_many  :swapsets,
             :through => :assignments do

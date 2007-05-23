@@ -36,14 +36,17 @@ h3.error {
     font-size: 11px;
     letter-spacing: 3px;
 }
-#sets, #info {
+#sets, #info, #stats {
 	width: 184px;
 	margin-left: 596px;
 	margin-bottom: 0;
 }
-#sets h3, #sets ul {
+#sets h3, #sets ul, #stats * {
     clear: none;
     width: 184px;
+}
+#stats ul {
+	font-size: 11px;
 }
 #info {
 	font-size: 10px;
@@ -173,8 +176,9 @@ textarea {
     right: 0;
     top: -4px;
 }
-form h3 {
+#account h3 {
 	padding-top: 13px;
+	padding-bottom: 4px;
 }
 strong {
 	color: #444;

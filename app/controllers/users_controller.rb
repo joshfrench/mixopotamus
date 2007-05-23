@@ -17,6 +17,10 @@ class UsersController < ApplicationController
     end
   end
   
+  def stats
+    render :layout => false
+  end
+  
   protected
   def get_user
     @user = current_user
