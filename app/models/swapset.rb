@@ -14,7 +14,4 @@ class Swapset < ActiveRecord::Base
     users << user unless users.include?(user)
   end
   
-  def users=(*users)
-    users.each { |user| assign user }
-  end
 end

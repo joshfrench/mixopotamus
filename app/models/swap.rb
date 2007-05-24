@@ -30,6 +30,8 @@ class Swap < ActiveRecord::Base
     reg = Registration.find_by_user_id_and_swap_id(user.id, id)
     reg.update_attribute(:double, double)
     reg
+  rescue
+    nil
   end
   
   def cancel_registration(user)

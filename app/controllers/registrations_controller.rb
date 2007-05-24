@@ -6,17 +6,24 @@ class RegistrationsController < ApplicationController
   end
   
   def create
-    if User.find_by_id(params[:user_id]) == current_user
-      @swap.register current_user
-      flash.now[:confirm] = "Thanks for signing up!"
-    else
-      raise "Got an unexpected user ID on Registration.create"
+    respond_to do |format|
+      format.js do
+        User.find_by_id(params[:user_id]) == current_user
+        @swap.register current_user
+        flash.now[:confirm] = "Thanks for signing up!" 
+      end
     end
+  rescue
+    raise "Got an unexpected user ID on Registration.create"
   end
   
   def destroy
-    current_user.registrations.find_by_id(params[:id]).destroy
-    flash.now[:error] = "Registration cancelled."
+    respond_to do |format|
+      format.js do
+        current_user.registrations.find_by_id(params[:id]).destroy
+        flash.now[:error] = "Registration cancelled." 
+      end
+    end
   end
   
   protected

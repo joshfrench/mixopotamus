@@ -39,9 +39,9 @@ class User < AuthenticatedUser
   end
   
   def find_swapset_by_position(p)
-    if assignment = self.assignments.find_by_position(p)
-      return assignment.swapset
-    end
+    self.assignments.find_by_position(p).swapset
+  rescue
+    nil
   end
             
   def favorite(user, swapset)

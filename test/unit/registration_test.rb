@@ -14,27 +14,6 @@ class RegistrationTest < Test::Unit::TestCase
       Registration.create(:user_id => @aaron.id, :swap_id => @swap.id, :double => false)
     end
   end
-   
-  def test_should_flunk_duplicate_user
-    assert_difference(Registration, :count, 0) do
-      Registration.create(:user_id => @quentin.id, :swap_id => @swap.id, :double => false)
-    end
-  end
-  
-  def test_should_flunk_invalid_swap
-    assert_difference(Registration, :count, 0) do
-      r = Registration.create(:user_id => @aaron.id, :swap_id => 99999, :double => false)
-      assert r.errors.on :swap
-    end
-  end
-  
-  def test_should_flunk_moocher
-    @swap.register @aaron
-    @new_swap = Swap.create(:deadline => 12.weeks.from_now)
-    assert_no_difference(Registration, :count) do
-      r = Registration.create(:user_id => @aaron.id, :swap_id => @new_swap.id, :double => false)
-    end
-  end
   
   def test_should_accept_past_participant
     @new_swap = Swap.create(:deadline => 12.weeks.from_now)

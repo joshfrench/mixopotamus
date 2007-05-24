@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class SwapTest < Test::Unit::TestCase
-  fixtures :swaps, :registrations, :users, :swapsets
+  fixtures :swaps, :registrations, :users, :swapsets, :confirmations
 
   def setup
     @swap = swaps(:registration_period)
@@ -16,6 +16,14 @@ class SwapTest < Test::Unit::TestCase
   end
   
   def test_should_not_register_duplicate
+    assert_difference(@swap.users, :count, 0) do
+      @swap.register @quentin
+    end
+  end
+  
+  def test_should_not_register_moocher
+    @swap = Swap.create :deadline => 13.weeks.from_now
+    confirmations(:aaron_to_quentin).destroy
     assert_difference(@swap.users, :count, 0) do
       @swap.register @quentin
     end
