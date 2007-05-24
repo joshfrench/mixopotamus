@@ -64,13 +64,17 @@ module ApplicationHelper
     end
     
     def fancyname_for(user)
-      "<span class=\"username\" " +
-      "title=\"#{user.login.split.first}: " +
-      "#{pluralize user.swapsets.count, 'swap'}, " +
-      "#{pluralize user.stars.count, 'star'} " +
-      "\">" + 
-      ibm(h user.login) + 
-      "</span>"
+      if Swap.count > 1
+        "<span class=\"username_hover\" " +
+        "title=\"#{user.login.split.first}: " +
+        "#{pluralize user.swapsets.count, 'swap'}, " +
+        "#{pluralize user.stars.count, 'star'} " +
+        "\">" + 
+        ibm(h user.login) + 
+        "</span>"
+      else
+        "<span class=\"username\">#{ibm(h user.login)}</span>"
+      end
     end
     
     # multiple RJS templates need access to these #

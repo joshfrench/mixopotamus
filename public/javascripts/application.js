@@ -13,7 +13,7 @@ window.onload = function () {
 								 document.getElementsByClassName('swap_list'), 
 								{ opacity: false,
 								  duration: 250 } );
-	$$("span.username").each( function(link) {
+	$$("span.username_hover").each( function(link) {
 		new Tooltip(link, {mouseFollow: false});
 	});
 }

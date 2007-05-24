@@ -26,10 +26,10 @@ Tooltip.prototype = {
 	setOptions: function(options) {
 		this.options = {
 			backgroundColor: '#F8E09F', // Default background color
-			borderColor: '#FFF', // Default border color
+			borderColor: '#FFFFFF', // Default border color
 			textColor: '', // Default text color (use CSS value)
 			textShadowColor: '', // Default text shadow color (use CSS value)
-			maxWidth: 250,	// Default tooltip width
+			maxWidth: 120,	// Default tooltip width
 			align: "left", // Default align
 			delay: 250, // Default delay before tooltip appears in ms
 			mouseFollow: false, // Tooltips follows the mouse moving
