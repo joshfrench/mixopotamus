@@ -78,7 +78,7 @@ class SwapTest < Test::Unit::TestCase
     # make sure users A-F are in set, and in set only once
     assert_equal 6, @set.users.size
     ("A".."F").each do |i|
-      assert @set.users.include? User.find_by_login("user_#{i}")
+      assert @set.users.include?(User.find_by_login("user_#{i}"))
     end
   end
   
@@ -107,8 +107,8 @@ class SwapTest < Test::Unit::TestCase
     ("A".."H").each { |i| create_user(:login => "user_#{i}", :email => "#{i}@test.com") }
     @old_set_1 = @old.swapsets.create :name => "Old Set 1"
     @old_set_2 = @old.swapsets.create :name => "Old Set 2"
-    %w{ A E }.each { |i| @old_set_1.assign User.find_by_login "user_#{i}" }
-    %w{ B F }.each { |i| @old_set_2.assign User.find_by_login "user_#{i}" }
+    %w{ A E }.each { |i| @old_set_1.assign User.find_by_login("user_#{i}") }
+    %w{ B F }.each { |i| @old_set_2.assign User.find_by_login("user_#{i}") }
     @set = @swap.swapsets.create :name => "New Set"
     %w{ A B C D }.each do |i|
       user =  User.find_by_login "user_#{i}"
@@ -124,10 +124,10 @@ class SwapTest < Test::Unit::TestCase
     @set.reload
     assert_equal 6, @set.users.size
     %w{ A B C D G H}.each do |i|
-      assert @set.users.include? User.find_by_login "user_#{i}"
+      assert @set.users.include?(User.find_by_login("user_#{i}"))
     end
     %w{ E F }.each do |i|
-      assert !(@set.users.include? User.find_by_login "user_#{i}")
+      assert !(@set.users.include?(User.find_by_login("user_#{i}")))
     end
   end
   
@@ -144,19 +144,19 @@ class SwapTest < Test::Unit::TestCase
     @old_set_6 = @old.swapsets.create :name => "Old Set 6"
     @set = @swap.swapsets.create :name => "New Set"
     # old sets are constructed so that [G,H] is the best possible solution
-    %w{ A E }.each { |i| @old_set_1.assign User.find_by_login "user_#{i}" }
-    %w{ B F }.each { |i| @old_set_2.assign User.find_by_login "user_#{i}" }
-    %w{ C E }.each { |i| @old_set_3.assign User.find_by_login "user_#{i}" }
-    %w{ D F }.each { |i| @old_set_4.assign User.find_by_login "user_#{i}" }
-    %w{ A G }.each { |i| @old_set_5.assign User.find_by_login "user_#{i}" }
-    %w{ B H }.each { |i| @old_set_6.assign User.find_by_login "user_#{i}" }
+    %w{ A E }.each { |i| @old_set_1.assign(User.find_by_login("user_#{i}")) }
+    %w{ B F }.each { |i| @old_set_2.assign(User.find_by_login("user_#{i}")) }
+    %w{ C E }.each { |i| @old_set_3.assign(User.find_by_login("user_#{i}")) }
+    %w{ D F }.each { |i| @old_set_4.assign(User.find_by_login("user_#{i}")) }
+    %w{ A G }.each { |i| @old_set_5.assign(User.find_by_login("user_#{i}")) }
+    %w{ B H }.each { |i| @old_set_6.assign(User.find_by_login("user_#{i}")) }
     %w{ A B C D }.each do |i|
-      user =  User.find_by_login "user_#{i}"
+      user =  User.find_by_login("user_#{i}")
       @swap.register user
       @set.assign user
     end
      %w{ E F G H }.each do |i|
-      user =  User.find_by_login "user_#{i}"
+      user =  User.find_by_login("user_#{i}")
       @swap.register(user, true) # register as double
     end
     @swap.initialize_set(@swap.users, SWAPSET_SIZE, Swapset.find(:all).map {|set| set.users})
@@ -164,10 +164,10 @@ class SwapTest < Test::Unit::TestCase
     @set.reload
     assert_equal 6, @set.users.size
     %w{ A B C D G H}.each do |i|
-      assert @set.users.include? User.find_by_login "user_#{i}"
+      assert @set.users.include?(User.find_by_login("user_#{i}"))
     end
     %w{ E F }.each do |i|
-      assert !(@set.users.include? User.find_by_login "user_#{i}")
+      assert !(@set.users.include?(User.find_by_login("user_#{i}")))
     end
   end
   

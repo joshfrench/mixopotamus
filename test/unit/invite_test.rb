@@ -35,7 +35,7 @@ class InviteTest < Test::Unit::TestCase
   def test_should_not_invite_existing_user
     assert_no_difference(Invite, :count) do
       i = Invite.create(:from => @aaron, :to => @quentin.email)
-      assert i.errors.on :to_email
+      assert i.errors.on(:to_email)
     end
   end
   
@@ -43,11 +43,11 @@ class InviteTest < Test::Unit::TestCase
     assert_no_difference(Invite, :count) do
       i = Invite.create(:from => users(:aaron), :to => 'test@foo')
       assert !i.valid?
-      assert i.errors.on :to_email
+      assert i.errors.on(:to_email)
       
       i = Invite.create(:from => users(:aaron), :to => nil)
       assert !i.valid?
-      assert i.errors.on :to_email
+      assert i.errors.on(:to_email)
     end
   end
   

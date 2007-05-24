@@ -16,7 +16,7 @@ class ConfirmationTest < Test::Unit::TestCase
     assert_difference(Confirmation, :count, 1) do
       Confirmation.create(:from => @quentin, :to => @aaron, :swapset => @set)
     end
-    assert @aaron.confirmed_for? @set.swap
+    assert @aaron.confirmed_for?(@set.swap)
   end
   
   def test_should_destroy

@@ -70,10 +70,10 @@ module ApplicationHelper
         "#{pluralize user.swapsets.count, 'swap'}, " +
         "#{pluralize user.stars.count, 'star'} " +
         "\">" + 
-        ibm(h user.login) + 
+        ibm(h(user.login)) + 
         "</span>"
       else
-        "<span class=\"username\">#{ibm(h user.login)}</span>"
+        "<span class=\"username\">#{ibm(h(user.login))}</span>"
       end
     end
     

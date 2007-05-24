@@ -22,7 +22,7 @@ class RegistrationsControllerTest < Test::Unit::TestCase
     @swap2 = Swap.create(:deadline => 12.weeks.from_now)
     xhr :get, :new, :user_id => users(:quentin).id
     assert_response :success
-    assert /Sorry to make you wait/.match @response.body
+    assert /Sorry to make you wait/.match(@response.body)
     assert !(@swap2.users.include? users(:quentin))
   end
   
@@ -32,9 +32,9 @@ class RegistrationsControllerTest < Test::Unit::TestCase
     @swap = swaps(:registration_period)
     xhr :post, :create, :user_id => @aaron.id
     assert_response :success
-    assert /Thanks/.match @response.body
+    assert /Thanks/.match(@response.body)
     @swap.reload
-    assert @swap.users.include? @aaron
+    assert @swap.users.include?(@aaron)
   end
   
   def test_register_subsequent_time
@@ -44,19 +44,19 @@ class RegistrationsControllerTest < Test::Unit::TestCase
     Confirmation.create :assignment => assignments(:one)
     xhr :post, :create, :user_id => @quentin.id
     assert_response :success
-    assert /Thanks/.match @response.body
-    assert @swap.users.include? @quentin
+    assert /Thanks/.match(@response.body)
+    assert @swap.users.include?(@quentin)
   end
   
   def test_cancel
     login_as :quentin
     @quentin = users(:quentin)
     @swap = swaps(:registration_period)
-    assert @swap.users.include? @quentin
+    assert @swap.users.include?(@quentin)
     xhr :delete, :destroy, :user_id => @quentin.id, :id => registrations(:one)
     assert_response :success
-    assert /cancelled/.match @response.body
-    assert /SIGN UP/.match @response.body
+    assert /cancelled/.match(@response.body)
+    assert /SIGN UP/.match(@response.body)
     @swap.reload
     assert !(@swap.users.include? @quentin)    
   end
@@ -67,6 +67,6 @@ class RegistrationsControllerTest < Test::Unit::TestCase
     @swap = Swap.current
     xhr :get, :new, :user_id => users(:aaron).id
     assert_response :success
-    assert /current swap is now closed/.match @response.body
+    assert /current swap is now closed/.match(@response.body)
   end
 end

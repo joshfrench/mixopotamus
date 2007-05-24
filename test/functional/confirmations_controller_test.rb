@@ -25,7 +25,7 @@ class ConfirmationsControllerTest < Test::Unit::TestCase
       xhr :post, :create, { :user_id => @aaron.id, :confirmation => { :assignment => assign.id } }
     end
     assert_response :success
-    assert /mail_on.png/.match @response.body
+    assert /mail_on.png/.match(@response.body)
   end
   
   def test_destroy
@@ -33,6 +33,6 @@ class ConfirmationsControllerTest < Test::Unit::TestCase
       xhr :delete, :destroy, { :user_id => @aaron.id, :id => confirmations(:aaron_to_quentin)}
     end
     assert_response :success
-    assert /mail_off.png/.match @response.body
+    assert /mail_off.png/.match(@response.body)
   end
 end

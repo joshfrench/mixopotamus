@@ -24,13 +24,13 @@ class InvitesControllerTest < Test::Unit::TestCase
     invite = invites(:accepted)
     get :show, :id => invite.uuid
     assert_response :success
-    assert flash.has_key? :error
+    assert flash.has_key?(:error)
   end
   
   def test_catch_missing_invite
     get :show, :id => 'notavalidid'
     assert_response :success
-    assert flash.has_key? :error
+    assert flash.has_key?(:error)
   end
 
   def test_create_new_invite

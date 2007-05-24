@@ -13,8 +13,8 @@ class SwapsetTest < Test::Unit::TestCase
     assert_difference(@alligator.users, :count, 1) do
       @alligator.assign @aaron
     end
-    assert @alligator.users.include? @aaron
-    assert @aaron.swapsets.include? @alligator
+    assert @alligator.users.include?(@aaron)
+    assert @aaron.swapsets.include?(@alligator)
   end
   
   def test_should_not_add_duplicate_users

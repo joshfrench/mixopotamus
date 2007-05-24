@@ -25,7 +25,7 @@ class FavoritesControllerTest < Test::Unit::TestCase
                             :favorite => { :to => @quentin.id, :swapset => @swapset.id }}
     end
     assert_response :success
-    assert /star_on.png/.match @response.body
+    assert /star_on.png/.match(@response.body)
   end
   
   def test_destroy
@@ -34,6 +34,6 @@ class FavoritesControllerTest < Test::Unit::TestCase
       xhr :delete, :destroy, { :user_id => @aaron.id, :id => favorites(:aaron_to_quentin).id }
     end
     assert_response :success
-    assert /star_off.png/.match @response.body
+    assert /star_off.png/.match(@response.body)
   end
 end
