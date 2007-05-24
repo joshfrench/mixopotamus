@@ -11,6 +11,10 @@ class Swapset < ActiveRecord::Base
   belongs_to  :swap
   
   def assign(user)
-    assignments.create :user_id => user.id
+    users << user unless users.include?(user)
+  end
+  
+  def users=(*users)
+    users.each { |user| assign user }
   end
 end

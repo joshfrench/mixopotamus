@@ -15,14 +15,6 @@ class AssignmentTest < Test::Unit::TestCase
     end
   end
   
-  def test_should_flunk_duplicates
-    assert_difference(Assignment, :count, 0) do
-      # have to scope assignment through alligator
-      # because it searches through it for the swap.doubles
-      a = @alligator.assignments.create(:user_id => @quentin.id)
-    end
-  end
-  
   def test_should_pass_doubles
     assert @quentin.registrations.first.update_attribute(:double, true)
   end

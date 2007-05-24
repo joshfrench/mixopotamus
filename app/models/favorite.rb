@@ -14,7 +14,7 @@ class Favorite < ActiveRecord::Base
   end
   
   def before_validation
-    self.assignment_id = Assignment.find_by_swapset_id_and_user_id(@swapset.id, @to.id).id
+    self.assignment ||= Assignment.find_by_swapset_id_and_user_id(@swapset.id, @to.id)
   end
 
 end

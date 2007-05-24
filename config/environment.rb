@@ -58,5 +58,7 @@ end
 # Mime::Type.register "application/x-mobile", :mobile
 
 # Include your application configuration below
+
+SWAP_LENGTH = 13.weeks
 SWAPSET_SIZE = 6
 ADMIN_EMAIL = 'josh@vitamin-j.com'

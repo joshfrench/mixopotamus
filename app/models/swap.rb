@@ -26,7 +26,10 @@ class Swap < ActiveRecord::Base
   end
   
   def register(user, double=false)
-    registrations.create :user_id => user.id, :double => double
+    users << user unless (users.include?(user) || !user.ok_to_play?)
+    reg = Registration.find_by_user_id_and_swap_id(user.id, id)
+    reg.update_attribute(:double, double)
+    reg
   end
   
   def cancel_registration(user)

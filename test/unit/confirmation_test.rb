@@ -7,23 +7,23 @@ class ConfirmationTest < Test::Unit::TestCase
     @quentin = users(:quentin)
     @aaron = users(:aaron)
     @set = swapsets(:alligator)
-    @assign = @set.assign @aaron
+    @set.assign @aaron
   end
 
   def test_should_create
     
-    assert !(@aaron.confirmed_for? @assign.swap)
+    assert !(@aaron.confirmed_for? @set.swap)
     assert_difference(Confirmation, :count, 1) do
-      Confirmation.create(:from => @quentin, :assignment => @assign)
+      Confirmation.create(:from => @quentin, :to => @aaron, :swapset => @set)
     end
-    assert @aaron.confirmed_for? @assign.swap
+    assert @aaron.confirmed_for? @set.swap
   end
   
   def test_should_destroy
-    c = Confirmation.create(:from => @quentin, :assignment => @assign)
+    c = confirmations(:aaron_to_quentin)
     assert_difference(Confirmation, :count, -1) do
       c.destroy
     end
-    assert !(@aaron.confirmed_for? @assign.swap)
+    assert !(@quentin.confirmed_for? @set.swap)
   end
 end
