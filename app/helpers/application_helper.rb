@@ -63,6 +63,16 @@ module ApplicationHelper
       mail_to ADMIN_EMAIL, ibm(ADMIN_EMAIL), :encoding => "hex"
     end
     
+    def fancyname_for(user)
+      "<span class=\"username\" " +
+      "title=\"#{user.login.split.first}: " +
+      "#{pluralize user.swapsets.count, 'swap'}, " +
+      "#{pluralize user.stars.count, 'star'} " +
+      "\">" + 
+      ibm(h user.login) + 
+      "</span>"
+    end
+    
     # multiple RJS templates need access to these #
     
     def star_for(user)

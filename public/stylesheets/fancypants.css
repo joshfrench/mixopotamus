@@ -89,6 +89,7 @@ a {
 }
 .username {
 	font-weight: bold;
+    /*cursor: pointer;*/
 }
 a.button {
     background: transparent url('/images/button_right.gif') no-repeat top right;
