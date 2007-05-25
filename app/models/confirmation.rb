@@ -12,7 +12,7 @@ class Confirmation < ActiveRecord::Base
     @from = user
   end
   
-  def before_validation
+  def before_validation_on_create
     self.assignment ||= Assignment.find_by_swapset_id_and_user_id(@swapset.id, @to.id)
   end
 

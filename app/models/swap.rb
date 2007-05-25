@@ -50,6 +50,9 @@ class Swap < ActiveRecord::Base
     move_to_top
   end
   
+  # most of this functionality moved to Rake task...
+  # kept around for testing purposes
+  
   def make_sets
     initialize_set(users, SWAPSET_SIZE, Swapset.find(:all).map {|set| set.users})
     solve.each do |users|

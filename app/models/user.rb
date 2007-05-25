@@ -45,7 +45,7 @@ class User < AuthenticatedUser
   end
             
   def favorite(user, swapset)
-    Favorite.create(:from => self, :to => user, :swapset => swapset)
+    favorites << Favorite.create(:to => user, :swapset => swapset)
   end
   
   def favorited(user, swapset)
