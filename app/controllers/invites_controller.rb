@@ -3,13 +3,17 @@ class InvitesController < ApplicationController
   
   def show
     @invite = Invite.find_by_uuid(params[:id])
-    begin
-      redirect_to :controller => "account", :action => "signup", :email => @invite.to_email if @invite.accept
-    rescue
-      flash[:error] = "Sorry, that invite has already been used by someone."
-    end
+    if @invite.open?
+      session[:invite] = @invite
+      redirect_to(:controller => "account", :action => "signup", :email => @invite.to_email)
+      return
+      else
+        flash[:error] = "Sorry, that invite has already been used by someone."
+        render :layout => "application"
+      end
   rescue
     flash[:error] = "Sorry, that's not a valid invite code. Please check the link you received and try again."
+    render :layout => "application"
   end
   
   def create

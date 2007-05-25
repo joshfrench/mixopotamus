@@ -10,6 +10,10 @@
 </head>
 
 <body>
+  <div id="header">
+	<%= content_tag 'h1', ibm('UNNAMED MIX PROJECT') %>
+<%= ibm( "." * 200 ) %>
+  </div>
   <%= yield %>
   <div id="footer"><%= ibm( "." * 200 ) -%></div>
 </body>

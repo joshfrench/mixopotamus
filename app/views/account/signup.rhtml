@@ -1,16 +1,24 @@
-<%= error_messages_for :user %>
-<% form_for :user do |f| -%>
-<p><label for="login">Login</label><br/>
-<%= f.text_field :login %></p>
+<div id="register">
+<% form_for @user, :url => signup_url do |f| -%>
+<h3>Name</h3>
+<%= f.text_field :login, :class => :textinput %>
 
-<p><label for="email">Email</label><br/>
-<%= f.text_field :email, :value => params[:email] %></p>
+<h3>Email</h3>
+<%= f.text_field :email, :value => params[:email], :class => :textinput %>
 
-<p><label for="password">Password</label><br/>
-<%= f.password_field :password %></p>
+<h3>Password</h3>
+<%= f.password_field :password, :class => :textinput %>
 
-<p><label for="password_confirmation">Confirm Password</label><br/>
-<%= f.password_field :password_confirmation %></p>
+<h3>Confirm Password</h3>
+<%= f.password_field :password_confirmation, :class => :textinput %>
 
-<p><%= submit_tag 'Sign up' %></p>
+<%= link_to "<span>SIGN UP</span>", "#",
+			{ :onclick => "$('#{dom_id(@user)}').submit()",
+			  :class => :button } %>
 <% end -%>
+
+<%= error_message_on :user, :login, "Name " %>
+<%= error_message_on :user, :email, "Email " %>
+<%= error_message_on :user, :password, "Password " %>
+<%= error_message_on :user, :password_confirmation, "Password confirmation " %>
+</div>

@@ -36,6 +36,10 @@ class Invite < ActiveRecord::Base
     end
   end
   
+  def open?
+    'open' == status
+  end
+  
   def is_unique?
     self.class.count(:conditions => { :to_email => to_email, :status => 'open' }) == 0
   end

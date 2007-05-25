@@ -21,6 +21,10 @@ class Swap < ActiveRecord::Base
     deadline - 6.weeks
   end
   
+  def open?
+    registration_deadline > Time.now
+  end
+  
   def next_open
     deadline + 2.weeks
   end
@@ -49,9 +53,6 @@ class Swap < ActiveRecord::Base
   def after_create
     move_to_top
   end
-  
-  # most of this functionality moved to Rake task...
-  # kept around for testing purposes
   
   def make_sets
     initialize_set(users, SWAPSET_SIZE, Swapset.find(:all).map {|set| set.users})
