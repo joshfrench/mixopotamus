@@ -39,17 +39,6 @@ module ApplicationHelper
         content_tag :ul, error_messages, :class => :error
       end
     end
-
-    def remote_submit_link(value, object, url)
-      instance = instance_variable_get("@#{object}")
-      instance = object.to_s.capitalize.constantize.new if instance.nil?
-      method = instance.new_record? ? :post : :put
-      link_to_remote "<span>#{value}</span>",
-                   { :url => url,
-                     :with => "Form.serialize($('#{dom_id(instance)}'))",
-                     :method => method },
-                   :class => :button
-    end
     
     def ibm(str)
       return str if 'test' == RAILS_ENV # makes it hard to test for given strings
@@ -94,24 +83,24 @@ module ApplicationHelper
     
     def get_link_for_sidebar
       @link = case request.path
-        when account_path then ['My Swaps', default_url]
+        when account_path then ['Back to Main', default_url]
         else ['My Account', account_url]
       end
     end
     
-    # multiple RJS templates need access to these #
+    # multiple controllers need access to these #
     
     def star_for(user)
       favorite = current_user.favorited(user,@set)
       render :partial => (favorite.nil? ? "favorites/star" : "favorites/starred"), :object => user, :locals => { :favorite => favorite }
     end
-    
+
     def confirm_for(to_user)
       assign = Assignment.find_by_swapset_id_and_user_id(@set.id, to_user.id)
       confirmation = current_user.confirms_given.by_assignment(assign)
       render :partial => (confirmation.nil? ? "confirmations/confirm" : "confirmations/confirmed"), :object => to_user, :locals => { :confirmation => confirmation, :assignment => assign }
     end
-    
+
     def reload_user(user)
       page.replace dom_id(user), :partial => "account/userpoll", :object => user
     end

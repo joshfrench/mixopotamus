@@ -5,7 +5,7 @@
   <%= f.text_area :address %>
   <%= content_tag 'h3', ibm("Email") %>
   <%= f.text_field :email, :class => :textinput %>
-	<%= link_to_remote "<span>SAVE</span>",
+	<%= link_to_remote "<span>UPDATE</span>",
                { :url => user_url(@user),
 				 :with => "Form.serialize('#{dom_id(@user, prefix = 'edit')}')" },
                  :class => :button %>

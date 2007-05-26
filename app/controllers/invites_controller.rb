@@ -7,12 +7,14 @@ class InvitesController < ApplicationController
       session[:invite] = @invite
       redirect_to(:controller => "account", :action => "signup", :email => @invite.to_email)
       return
-      else
-        flash[:error] = "Sorry, that invite has already been used by someone."
-        render :layout => "application"
-      end
+    elsif @invite.accepted?
+      flash.now[:error] = "Sorry, that invite has already been used by someone."
+    else
+      raise "Got an invite with some other problem."
+    end
+    render :layout => "application"
   rescue
-    flash[:error] = "Sorry, that's not a valid invite code. Please check the link you received and try again."
+    flash.now[:error] = "Sorry, that's not a valid invite code. Please check the link you received and try again."
     render :layout => "application"
   end
   

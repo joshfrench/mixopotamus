@@ -1,4 +1,4 @@
-<%= content_tag 'p', ibm("You have #{pluralize current_user.invite_count, 'invite'} left. Go ahead and send one!") %>
+<%= content_tag 'p', ibm(get_string_for_invites_left) %>
 <% remote_form_for Invite.new, :url => invites_url(current_user) do |f| -%>
 	<%= f.text_field :to, :class => :textinput %>
 	<%= link_to_remote "<span>SEND</span>",

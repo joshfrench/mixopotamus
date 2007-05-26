@@ -39,6 +39,10 @@ class Invite < ActiveRecord::Base
     'open' == status
   end
   
+  def accepted?
+    'accepted' == status
+  end
+  
   def is_unique?
     self.class.count(:conditions => { :to_email => to_email, :status => 'open' }) == 0
   end
@@ -48,7 +52,7 @@ class Invite < ActiveRecord::Base
     self.status = 'pending'
   end
   
-  def validate
+  def validate_on_create
     errors.add(:to_email, "#{to_email} is already a member") if User.count(:conditions => {:email => to_email}) > 0
   end
 end
