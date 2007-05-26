@@ -25,7 +25,7 @@ class User < AuthenticatedUser
                 find_by_assignment_id(assign.id)
               end
             end
-  has_many  :registrations do
+  has_many  :registrations, :dependent => :destroy do
               def by_swap(swap)
                 find_by_swap_id(swap.id)
               end
