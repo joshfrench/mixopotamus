@@ -1,9 +1,13 @@
-<% form_tag do -%>
-<p><label for="login">Email</label><br/>
-<%= text_field_tag 'email' %></p>
+<div id="account">
+<% form_tag login_url, :id => 'login-form' do -%>
+<%= content_tag 'h3', ibm('Email') %>
+<%= text_field_tag 'email', '', :class => :textinput %></p>
+<%= content_tag 'h3', ibm('Password') %>
+<%= password_field_tag 'password', '', :class => :textinput %></p>
 
-<p><label for="password">Password</label><br/>
-<%= password_field_tag 'password' %></p>
-
-<p><%= submit_tag 'Log in' %></p>
+<%= link_to "<span>LOG IN</span>", "#",
+			{ :onclick => "$('login-form').submit()",
+			  :class => :button } %>
 <% end -%>
+<%= show_flash %>
+</div>

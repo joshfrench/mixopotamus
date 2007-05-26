@@ -4,7 +4,7 @@ class AccountController < ApplicationController
 
   # say something nice, you goof!  something sweet.
   def show
-    redirect_to('/') unless logged_in? || User.count > 0
+    redirect_to(default_url) unless logged_in? || User.count > 0
     @user = current_user
   end
 
@@ -15,6 +15,8 @@ class AccountController < ApplicationController
       self.current_user.remember_me
       cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       redirect_back_or_default(:controller => "account", :action => "show")
+    else
+      flash.now[:error] = 'Incorrect email or password.'
     end
   end
 
@@ -23,8 +25,7 @@ class AccountController < ApplicationController
     return unless request.post?
     @user.save!
     self.current_user = @user
-    flash[:confirm] = "Thanks for signing up!"
-    redirect_back_or_default('/')
+    redirect_back_or_default(default_url)
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
   end
@@ -34,7 +35,7 @@ class AccountController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:error] = "You have been logged out."
-    redirect_back_or_default('/')
+    redirect_back_or_default(default_url)
   end
 
 end

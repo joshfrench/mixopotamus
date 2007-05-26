@@ -13,5 +13,6 @@ ActionController::Routing::Routes.draw do |map|
   map.account 'my-account', :controller => 'users', :action => 'edit'
   map.faq 'wtf', :controller => "site", :action => "faq"
   
-  map.default '/', :controller => 'account', :action => 'show'
+  map.connect '/', :controller => 'account', :action => 'show'
+  map.default 'hello', :controller => 'account', :action => 'show'
 end
