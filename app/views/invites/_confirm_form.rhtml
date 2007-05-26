@@ -1,4 +1,4 @@
-<%= show_flash :error -%>
+<%= show_flash -%>
 <div style="width:175px; text-align:center; margin: 0 auto; display:block;">
 <%= link_to_remote "<span>SEND</span>", 
                    { :url => confirm_invite_url(current_user, @invite) },

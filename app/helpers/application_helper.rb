@@ -1,28 +1,26 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   def separator(char='=', length=:short)
-    line = lambda { |x| char*x }
-    sep = case length
-      when :short then line.call 60
-      when :long then line.call 200
+    length = case length
+      when :short then 60
+      when :long then 200
     end
-    "<div class=\"sep\">#{ibm(sep)}</div>"
+    "<div class=\"sep\">#{ibm(char*length)}</div>"
   end
     
-    def show_flash(key)
-      case key
-        when :error then bullet = '***'
-        when :confirm then bullet = '+++'
+    def show_flash
+      html = ''
+      flash.each do |key,msg|
+        next if msg.nil?
+        case key
+          when :error then bullet = '***'
+          when :confirm then bullet = '+++'
+        end
+        html = "<div class=\"#{key.to_s}\">"
+        html << "<span class=\"bullet\">#{bullet}</span> " if bullet
+        html << "#{ibm(msg)}</div>"
       end
-      "<div class=\"#{key.to_s}\"><span class=\"bullet\">#{bullet}</span> " + ibm(flash[key]) + "</div>" unless flash[key].nil?
-    end
-    
-    def error_message_on(object, method, prepend_text = "", append_text = "", css_class = "error")
-      if (obj = instance_variable_get("@#{object}")) && (errors = obj.errors.on(method))
-        content_tag("div", "<span class=\"bullet\">***</span>  #{prepend_text}#{errors.is_a?(Array) ? ibm(errors.first) : ibm(errors)}#{append_text}", :class => css_class)
-      else 
-        ''
-      end
+      html
     end
     
     def errors_on(obj)

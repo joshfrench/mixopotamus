@@ -22,11 +22,10 @@ class AccountController < ApplicationController
   def signup
     @user = User.new(params[:user])
     return unless request.post?
-    breakpoint
     @user.save!
     self.current_user = @user
+    flash[:confirm] = "Thanks for signing up!"
     redirect_back_or_default('/')
-    flash[:notice] = "Thanks for signing up!"
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
   end
@@ -35,7 +34,7 @@ class AccountController < ApplicationController
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
     reset_session
-    flash[:notice] = "You have been logged out."
+    flash[:error] = "You have been logged out."
     redirect_back_or_default('/')
   end
 
