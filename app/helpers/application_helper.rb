@@ -24,6 +24,22 @@ module ApplicationHelper
         ''
       end
     end
+    
+    def errors_on(obj)
+      object = instance_variable_get "@#{obj}"
+      count   = [object].inject(0) {|sum, object| sum + object.errors.count }
+      unless count.zero?
+        errors = {}
+        object.errors.each do |att,msg|
+          next if msg.nil?
+          # only grabs first error, hopefully you've ordered them
+          # to be meaningful in your model
+          errors[att] ||= msg
+        end
+        error_messages = errors.map { |e,msg| content_tag(:li, "<span class=\"bullet\">***</span> #{msg}") }.reverse.join "\n"
+        content_tag :ul, error_messages, :class => :error
+      end
+    end
 
     def remote_submit_link(value, object, url)
       instance = instance_variable_get("@#{object}")

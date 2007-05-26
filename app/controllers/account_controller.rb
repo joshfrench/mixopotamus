@@ -22,6 +22,7 @@ class AccountController < ApplicationController
   def signup
     @user = User.new(params[:user])
     return unless request.post?
+    breakpoint
     @user.save!
     self.current_user = @user
     redirect_back_or_default('/')

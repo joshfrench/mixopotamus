@@ -1,4 +1,4 @@
 <%= content_tag('p', ibm("You don't have any invites right now. You'll get more at the end of this swap.")) %>
-<%= error_message_on :invite, :to_email -%>
+<%= errors_on :invite -%>
 <%= show_flash :confirm -%>
 <%= show_flash :error -%>

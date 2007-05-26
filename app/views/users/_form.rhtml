@@ -1,17 +1,14 @@
 <% remote_form_for @user do |f| -%>
-	<%= content_tag 'h3', ibm("Name") %>
-	<%= f.text_field :login, :class => :textinput %>
-	<%= content_tag 'h3', ibm("Address") %>
-	<%= f.text_area :address %>
-	<%= content_tag 'h3', ibm("Email") %>
-	<%= f.text_field :email, :class => :textinput %>
-	<%# link_to "<span>CANCEL</span>", '/', :class => :button -%>
+  <%= content_tag 'h3', ibm("Name") %>
+  <%= f.text_field :login, :class => :textinput %>
+  <%= content_tag 'h3', ibm("Address") %>
+  <%= f.text_area :address %>
+  <%= content_tag 'h3', ibm("Email") %>
+  <%= f.text_field :email, :class => :textinput %>
 	<%= link_to_remote "<span>SAVE</span>",
                { :url => user_url(@user),
 				 :with => "Form.serialize('#{dom_id(@user, prefix = 'edit')}')" },
                  :class => :button %>
 <% end %>
-<%= error_message_on :user, :login %>
-<%= error_message_on :user, :address %>
-<%= error_message_on :user, :email %>
+<%= errors_on :user %>
 <%= show_flash :confirm -%>

@@ -5,7 +5,6 @@ class Invite < ActiveRecord::Base
   belongs_to  :user,
               :foreign_key => 'from_user'
               
-  validates_presence_of :to_email
   validates_format_of :to_email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
                       :message => "That's not a valid email."
   validates_presence_of :from_user

@@ -5,15 +5,18 @@ class AuthenticatedUser < ActiveRecord::Base
   
   attr_accessor :password
 
-  validates_presence_of     :login, :message => "Can't leave your name blank."
-  validates_presence_of     :email, :message => "That's not a valid email."
-  validates_presence_of     :password,                   :if => :password_required?
-  validates_presence_of     :password_confirmation,      :if => :password_required?
-  validates_presence_of     :address, :message => "Can't leave your address blank."
-  validates_length_of       :password, :within => 4..40, :if => :password_required?
-  validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :login,    :within => 3..40,
-                            :message => "Name should be within 3 and 40 characters."
+                            :message => "Name should be between 3 and 40 characters."
+  validates_presence_of     :login, :message => "Name is blank."
+  validates_presence_of     :password_confirmation,
+                            :message => "Password confirmation is blank."
+  validates_presence_of     :address, :message => "Address is blank."
+  validates_length_of       :password, :within => 4..40, 
+                            :message => "Password should be between 4 and 40 characters."
+  validates_presence_of     :password,  
+                            :message => "Password is blank."
+  validates_confirmation_of :password,
+                            :message => "Password doesn't match confirmation"
   validates_length_of       :email,    :within => 3..100,
                             :message => "That's not a valid email."
   validates_format_of       :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,

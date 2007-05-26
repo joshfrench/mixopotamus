@@ -6,6 +6,6 @@
                  :with => "Form.serialize('#{dom_id(Invite.new)}')" },
                :class => :button %>
 <% end %>
-<%= error_message_on :invite, :to_email -%>
+<%= errors_on :invite -%>
 <%= show_flash :confirm -%>
 <%= show_flash :error -%>

@@ -1,24 +1,20 @@
 <div id="register">
 <% form_for @user, :url => signup_url do |f| -%>
-<h3>Name</h3>
-<%= f.text_field :login, :class => :textinput %>
+  <%= content_tag 'h3', ibm("Name") %>
+  <%= f.text_field :login, :class => :textinput %>
+  <%= content_tag 'h3', ibm("Email") %>
+  <%= f.text_field :email, :value => params[:email], :class => :textinput %>
+  <%= content_tag 'h3', ibm("Address") %>
+  <%= f.text_area :address %>
+  <%= content_tag 'h3', ibm("Password") %>
+  <%= f.password_field :password, :class => :textinput %>
+  <%= content_tag 'h3', ibm("Confirm Password") %>
+  <%= f.password_field :password_confirmation, :class => :textinput %>
 
-<h3>Email</h3>
-<%= f.text_field :email, :value => params[:email], :class => :textinput %>
-
-<h3>Password</h3>
-<%= f.password_field :password, :class => :textinput %>
-
-<h3>Confirm Password</h3>
-<%= f.password_field :password_confirmation, :class => :textinput %>
-
-<%= link_to "<span>SIGN UP</span>", "#",
-			{ :onclick => "$('#{dom_id(@user)}').submit()",
-			  :class => :button } %>
+  <%= link_to "<span>SIGN UP</span>", "#",
+  			{ :onclick => "$('#{dom_id(@user)}').submit()",
+  			  :class => :button } %>
 <% end -%>
 
-<%= error_message_on :user, :login, "Name " %>
-<%= error_message_on :user, :email, "Email " %>
-<%= error_message_on :user, :password, "Password " %>
-<%= error_message_on :user, :password_confirmation, "Password confirmation " %>
+<%= errors_on :user %>
 </div>
