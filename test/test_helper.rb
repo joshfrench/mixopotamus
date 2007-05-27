@@ -5,6 +5,8 @@ require 'test_help'
 class Test::Unit::TestCase
   
     include AuthenticatedTestHelper
+    
+    fixtures :invites
   
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the
@@ -28,11 +30,7 @@ class Test::Unit::TestCase
   self.use_instantiated_fixtures  = false
 
   # Add more helper methods to be used by all tests here...
-  def populate_swapset
-    @quentin = users(:quentin)
-    @aaron = users(:aaron)
-    @alligator = swapsets(:alligator)
-    @alligator.assign @quentin
-    @alligator.assign @aaron
+  def create_user(options = {})
+    post :signup, { :user => { :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :address => "Quire Street" }.merge(options) }, :invite => invites(:open)
   end
 end

@@ -16,6 +16,7 @@ module ApplicationHelper
         case key
           when :error then bullet = '***'
           when :confirm then bullet = '+++'
+          else next # only show recognized keys
         end
         html = "<div class=\"#{key.to_s}\">"
         html << "<span class=\"bullet\">#{bullet}</span> " if bullet
@@ -70,7 +71,7 @@ module ApplicationHelper
     def fancyname_for(user)
       if Swap.count > 1
         "<span class=\"username_hover\" " +
-        "title=\"#{user.login.split.first}: " +
+        "title=\"#{user.first_name}: " +
         "#{pluralize user.swapsets.count, 'swap'}, " +
         "#{pluralize user.stars.count, 'star'} " +
         "\">" + 

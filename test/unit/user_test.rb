@@ -51,8 +51,4 @@ class UserTest < Test::Unit::TestCase
     assert_equal 0, @quentin.invite_count
   end
   
-  protected
-    def create_user(options = {})
-      User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :address => 'Quire Ave.' }.merge(options))
-    end
 end

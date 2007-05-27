@@ -1,0 +1,9 @@
+<div id="welcome">
+<%= content_tag 'h2', "Welcome, #{user.first_name}" %>
+<%= separator %>
+<%= content_tag 'p', ibm("Thanks for signing up! You can change your account details (email, address, password) by following the \"My Account\" link over on the right-hand side.") %>
+
+<%= content_tag('p', Swap.current.open? ? ibm("You are currently registered for the next swap. If you want to opt out, you can do so any time before #{smalltime Swap.current.registration_deadline}.") : ibm("Unfortunately, you missed the sign-up date for the current swap. Registration for the next swap begins on #{Swap.current.deadline}, so check back then.")) %>
+
+<%= content_tag 'p', ibm("Let us know if you have any questions: ") + admin_email + '.' %>
+</div>

@@ -60,6 +60,7 @@ class AccountControllerTest < Test::Unit::TestCase
   def test_should_require_email_on_signup
     assert_no_difference User, :count do
       create_user(:email => nil)
+      assert assigns(:user)
       assert assigns(:user).errors.on(:email)
       assert_response :success
     end
@@ -113,17 +114,12 @@ class AccountControllerTest < Test::Unit::TestCase
   
   def test_should_populate_email_if_given
     email = 'test@foobar.com'
-    get :signup, :email => email
+    get :signup, {:email => email}, :invite => invites(:open)
     assert_tag :tag => "input",
                :attributes => { :value => /#{email}/ }
   end
 
   protected
-    def create_user(options = {})
-      post :signup, :user => { :login => 'quire', :email => 'quire@example.com', 
-        :password => 'quire', :password_confirmation => 'quire', :address => "Quire Street" }.merge(options)
-    end
-    
     def auth_token(token)
       CGI::Cookie.new('name' => 'auth_token', 'value' => token)
     end

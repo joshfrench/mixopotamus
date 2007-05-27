@@ -38,6 +38,10 @@ class User < AuthenticatedUser
     self.id <=> other.id
   end
   
+  def first_name
+    login.split.first
+  end
+  
   def find_swapset_by_position(p)
     self.assignments.find_by_position(p).swapset
   rescue

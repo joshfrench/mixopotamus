@@ -10,7 +10,7 @@ class RegistrationsController < ApplicationController
       format.js do
         User.find_by_id(params[:user_id]) == current_user
         @swap.register current_user
-        flash.now[:confirm] = "Thanks for signing up!" 
+        flash.now[:confirm] = "Thanks for signing up!"
       end
     end
   rescue

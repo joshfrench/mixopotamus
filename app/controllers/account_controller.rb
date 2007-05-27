@@ -21,12 +21,13 @@ class AccountController < ApplicationController
   end
 
   def signup
-    redirect_to default_url unless session[:invite]
+    (redirect_to default_url and return) unless session[:invite]
     @user = User.new(params[:user])
     return unless request.post?
     @user.save!
     session[:invite].accept if session[:invite]
     session[:invite] = nil
+    flash[:welcome] = true
     self.current_user = @user
     redirect_to default_url
   rescue ActiveRecord::RecordInvalid

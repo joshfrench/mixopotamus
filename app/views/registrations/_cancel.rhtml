@@ -5,5 +5,5 @@
                               :id => current_user.registrations.by_swap(Swap.current)),
                    :method => :delete %>
 <%= ibm(" any time before ") %>
-<%= ibm(smalltime(Swap.current.deadline)) %>.
+<%= ibm(smalltime(Swap.current.registration_deadline)) %>.
 <%= show_flash %>
