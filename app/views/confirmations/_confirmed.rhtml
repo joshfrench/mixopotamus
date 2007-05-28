@@ -1,14 +1,11 @@
 <%  id = dom_id(confirmed) + "_mail"
 	img = image_tag "mail_on.png", 
 					:id => id,
-					:onmouseover => "document.#{id}.src = mail_off.src",
-					:onmouseout => "document.#{id}.src = mail_on.src",
 					:alt => "Confirm",
-					:title => "Remove confirmation" -%>
-<% remote_form_for @confirmed, :url => confirmation_url(current_user, confirmation),
-							  :html => { :class => :bigmail, :id => dom_id(confirmation) },
-							  :method => :delete do |f| -%>
-<%= link_to_remote img, :url => confirmation_url(current_user, confirmation),
-	 					:with => "Form.serialize('#{dom_id(confirmation)}')",
- 						:method => :delete %>
-<% end -%>
+					:title => "Remove confirmation",
+					:class => :bigmail -%>
+<%= link_to_remote img, { :url => confirmation_url(current_user, confirmation),
+ 						:method => :delete,
+ 						:loading => "Spinner.hide_element('#{dom_id(confirmed)}')",
+   					:complete => "Spinner.show_element('#{dom_id(confirmed)}')" },
+ 						:id => "confirm_for_#{confirmed.id}" %>

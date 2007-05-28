@@ -1,1 +1,1 @@
-page.reload_user(@user)
+page.replace "confirm_for_#{@user.id}", confirm_for(@user)

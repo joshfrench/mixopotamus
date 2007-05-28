@@ -3,7 +3,9 @@
 	<%= f.text_field :to, :class => :textinput %>
 	<%= link_to_remote "<span>SEND</span>",
                { :url => invites_url(current_user),
-                 :with => "Form.serialize('#{dom_id(Invite.new)}')" },
+                 :with => "Form.serialize('#{dom_id(Invite.new)}')",
+                 :loading => "Spinner.hide_element('invites_content')",
+                 :complete => "Spinner.show_element('invites_content')" },
                :class => :button %>
 <% end %>
 <%= errors_on :invite -%>

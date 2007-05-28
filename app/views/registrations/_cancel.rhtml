@@ -1,9 +1,12 @@
 <p><%= ibm "You are signed up for the next swap." %><br/>
 <%= ibm "You can click here to " -%>
 <%= link_to_remote ibm("change your mind"),
-                   :url => registration_url(:user_id => current_user,
+                   { :url => registration_url(:user_id => current_user,
                               :id => current_user.registrations.by_swap(Swap.current)),
-                   :method => :delete %>
+                      :loading => "Spinner.hide_element('registration_content')",
+                      :complete => "Spinner.show_element('registration_content')",
+                      :method => :delete         
+                    } %>
 <%= ibm(" any time before ") %>
 <%= ibm(smalltime(Swap.current.registration_deadline)) %>.
 <%= show_flash %>

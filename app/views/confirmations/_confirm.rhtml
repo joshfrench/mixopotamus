@@ -1,14 +1,10 @@
 <%  id = dom_id(confirm) + "_confirm"
 	img = image_tag "mail_off.png", 
 					:id => id,
-					:onmouseover => "document.#{id}.src = mail_on.src",
-					:onmouseout => "document.#{id}.src = mail_off.src",
 					:alt => "Confirm",
-					:title => "Confirm this mix was received" -%>
-<% remote_form_for Confirmation.new, :url => confirmations_url(current_user), 
-								 :html => { :class => :bigmail,
-									 		:id => "confirm_#{confirm.id}"} do |f| -%>
-<%= f.hidden_field :assignment, :value => assignment.id %>
-<%= link_to_remote img, :url => confirmations_url(current_user),
-	 					:with => "Form.serialize('confirm_#{confirm.id}')" %>
-<% end -%>
+					:title => "Confirm this mix was received",
+					:class => :bigmail -%>
+<%= link_to_remote img, { :url => confirmations_url(:user_id => current_user, :assign => assignment),
+          :loading => "Spinner.hide_element('#{dom_id(confirm)}')",
+ 					:complete => "Spinner.show_element('#{dom_id(confirm)}')" },
+          :id => "confirm_for_#{confirm.id}"%>

@@ -1,11 +1,15 @@
 <%= show_flash -%>
 <div style="width:175px; text-align:center; margin: 0 auto; display:block;">
 <%= link_to_remote "<span>SEND</span>", 
-                   { :url => confirm_invite_url(current_user, @invite) },
+                   { :url => confirm_invite_url(current_user, @invite),
+                     :loading => "Spinner.hide_element('invites_content')",
+                     :complete => "Spinner.show_element('invites_content')" },
 									   :class => 'button center' %>
 <%= link_to_remote "<span>CANCEL</span>", 
                    { :url => invite_url(current_user, @invite),
-                     :method => :delete },
+                     :method => :delete,
+                     :loading => "Spinner.hide_element('invites_content')",
+                     :complete => "Spinner.show_element('invites_content')" },
 									 :class => 'button center' %>
 &nbsp;
 </div>

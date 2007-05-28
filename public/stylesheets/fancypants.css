@@ -207,12 +207,14 @@ strong {
 	font-size: 1.2em;
 	top: 1px;
 }
-.down {
+.down, .up, .heavy {
     position: relative;
+    display: inline;
+}
+.down {
     top: 1px;
 }
 .up {
-    position: relative;
     top: -1px;
 }
 .heavy {

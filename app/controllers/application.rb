@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
+  include SafariUnicodeFix
   
   # Pick a unique cookie name to distinguish our session data from others'
   session :session_key => 'c_is_for_cookie'

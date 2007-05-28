@@ -1,8 +1,6 @@
 <%  id = dom_id(star) + "_star"
 	img = image_tag "star_off.png", 
 					:id => id,
-					:onmouseover => "document.#{id}.src = star_on.src",
-					:onmouseout => "document.#{id}.src = star_off.src",
 					:alt => "Star",
 					:title => "Give this a star",
 					:class => :bigstar -%>

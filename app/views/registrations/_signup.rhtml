@@ -1,5 +1,7 @@
 <%= link_to_remote "<span>SIGN UP</span>", 
-                    { :url => registrations_url(current_user) }, 
+                    { :url => registrations_url(current_user),
+                      :loading => "Spinner.hide_element('registration_content')",
+                      :complete => "Spinner.show_element('registration_content')" }, 
                     :class => :button %>
 <p><%= ibm "You're not signed up for the next swap yet." %><br/>
 <%= ibm "Registration ends" %> <strong><%= ibm(smalltime(Swap.current.registration_deadline)) %></strong>.</p>

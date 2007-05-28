@@ -4,7 +4,7 @@ class ConfirmationsController < ApplicationController
   def create
     respond_to do |format|
       format.js do
-        assignment = Assignment.find(params[:confirmation][:assignment])
+        assignment = Assignment.find(params[:assign])
         @user = assignment.user
         Confirmation.create :from => current_user, :assignment_id => assignment.id
         render :action => "swap_mail" 
