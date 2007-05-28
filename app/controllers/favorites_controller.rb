@@ -4,8 +4,9 @@ class FavoritesController < ApplicationController
  def create
    respond_to do |format|
     format.js do
-      @user = User.find(params[:favorite][:to])
-      current_user.favorite(@user, current_user.swapsets.find(params[:favorite][:swapset]))
+      assignment = Assignment.find(params[:assign])
+      @user = assignment.user
+      current_user.favorite(@user,assignment.swapset)
       render :action => "swap_star"
     end
    end

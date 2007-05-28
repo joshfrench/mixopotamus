@@ -22,7 +22,7 @@ class FavoritesControllerTest < Test::Unit::TestCase
     login_as :aaron
     assert_difference(Favorite, :count, 1) do
       xhr :post, :create, { :user_id => @aaron.id, 
-                            :favorite => { :to => @quentin.id, :swapset => @swapset.id }}
+                            :assign => assignments(:one).id }
     end
     assert_response :success
     assert /star_on.png/.match(@response.body)

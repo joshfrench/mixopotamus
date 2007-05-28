@@ -5,11 +5,10 @@
 					:onmouseover => "document.#{id}.src = star_off.src",
 					:onmouseout => "document.#{id}.src = star_on.src",
 					:alt => "Star",
-					:title => "Remove star" -%>
-<% remote_form_for @favorite, :url => favorite_url(current_user, favorite),
-							  :html => { :class => :bigstar, :id => dom_id(favorite) },
-							  :method => :delete do |f| -%>
-<%= link_to_remote img, :url => favorite_url(current_user, favorite),
-	 					:with => "Form.serialize('#{dom_id(favorite)}')",
- 						:method => :delete %>
-<% end -%>
+					:title => "Remove star",
+					:class => :bigstar -%>
+<%= link_to_remote img, { :url => favorite_url(current_user, favorite),
+ 						  :method => :delete,
+ 						  :loading => "Spinner.hide_element('#{dom_id(starred)}')",
+ 						  :complete => "Spinner.show_element('#{dom_id(starred)}')" },
+ 						  :id => "favorite_for_#{starred.id}" %>

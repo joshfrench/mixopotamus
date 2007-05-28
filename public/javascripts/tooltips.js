@@ -34,7 +34,7 @@ Tooltip.prototype = {
 			delay: 250, // Default delay before tooltip appears in ms
 			mouseFollow: false, // Tooltips follows the mouse moving
 			opacity: .85, // Default tooltips opacity
-			appearDuration: .25, // Default appear duration in sec
+			appearDuration: .4, // Default appear duration in sec
 			hideDuration: .25 // Default disappear duration in sec
 		};
 		Object.extend(this.options, options || {});

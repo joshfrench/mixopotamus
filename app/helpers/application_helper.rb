@@ -93,7 +93,8 @@ module ApplicationHelper
     
     def star_for(user)
       favorite = current_user.favorited(user,@set)
-      render :partial => (favorite.nil? ? "favorites/star" : "favorites/starred"), :object => user, :locals => { :favorite => favorite }
+      assign = @set.assignments.find_by_user_id(user)
+      render :partial => (favorite.nil? ? "favorites/star" : "favorites/starred"), :object => user, :locals => { :favorite => favorite, :assign => assign }
     end
 
     def confirm_for(to_user)
@@ -104,6 +105,14 @@ module ApplicationHelper
 
     def reload_user(user)
       page.replace dom_id(user), :partial => "account/userpoll", :object => user
+    end
+    
+    def hide_element(object)
+      page.visual_effect :fade, dom_id(object), :duration => 0.75, :queue => 'end'
+    end
+    
+    def show_element(object)
+      page.visual_effect :appear, dom_id(object), :duration => 0.75, :queue => 'end'
     end
     
 end

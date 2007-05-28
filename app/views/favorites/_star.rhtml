@@ -4,12 +4,9 @@
 					:onmouseover => "document.#{id}.src = star_on.src",
 					:onmouseout => "document.#{id}.src = star_off.src",
 					:alt => "Star",
-					:title => "Give this a star" -%>
-<% remote_form_for Favorite.new, :url => favorites_url(current_user), 
-								 :html => { :class => :bigstar,
-									 		:id => "favorite_#{star.id}"} do |f| -%>
-<%= f.hidden_field :swapset, :value => @set.id %>
-<%= f.hidden_field :to, :value => star.id %>
-<%= link_to_remote img, :url => favorites_url(current_user),
-	 					:with => "Form.serialize('favorite_#{star.id}')" %>
-<% end -%>
+					:title => "Give this a star",
+					:class => :bigstar -%>
+<%= link_to_remote img, { :url => favorites_url(:user_id => current_user, :assign => assign),
+	 					:loading => "Spinner.hide_element('#{dom_id(star)}')",
+	 					:complete => "Spinner.show_element('#{dom_id(star)}')" },
+	 					:id => "favorite_for_#{star.id}" %>

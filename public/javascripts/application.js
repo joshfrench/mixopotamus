@@ -17,3 +17,15 @@ window.onload = function () {
 		new Tooltip(link, {mouseFollow: false});
 	});
 }
+
+var Spinner = {}
+
+Spinner = {
+    hide_element: function(element) {
+        new Effect.Fade($(element), { duration:0.5, to:0.2, queue:'front' } );
+    },
+    
+    show_element: function(element) {
+       new Effect.Appear($(element), { duration:0.5, from:0.2, queue:'end' } );
+    }
+}
