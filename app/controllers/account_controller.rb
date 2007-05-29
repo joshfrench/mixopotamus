@@ -56,7 +56,7 @@ class AccountController < ApplicationController
   
   def reset_password
     if @user = User.find_by_reset(params[:reset])
-      return unless request.put?
+      return unless request.post?
       if params[:password] == params[:password_confirmation]
         self.current_user = @user
         current_user.password_confirmation = params[:password_confirmation]
