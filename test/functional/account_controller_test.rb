@@ -27,10 +27,12 @@ class AccountControllerTest < Test::Unit::TestCase
   end
 
   def test_should_allow_signup
+    deliveries = ActionMailer::Base.deliveries.size
     assert_difference User, :count do
       create_user
       assert_response :redirect
     end
+    assert_equal deliveries+1, ActionMailer::Base.deliveries.size
   end
 
   def test_should_require_login_on_signup

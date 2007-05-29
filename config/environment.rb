@@ -62,3 +62,4 @@ end
 SWAP_LENGTH = 13.weeks
 SWAPSET_SIZE = 6
 ADMIN_EMAIL = 'josh@vitamin-j.com'
+PROJECT_NAME = 'Unnamed Mix Project'
