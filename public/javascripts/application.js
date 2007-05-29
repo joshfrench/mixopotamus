@@ -22,12 +22,11 @@ var Spinner = {}
 
 Spinner = {
     hide_element: function(element) {
-        Effect.Fade($(element), { duration:0.5, to:0.2, queue:'front' } );
+		Effect.Pulsate($(element), { duration:2, pulses:2, from:0.3, queue:'front'} )
     },
     
     show_element: function(element) {
-        Effect.Appear($(element), { duration:0.4, to:0.9999999, queue:'end' } );
-        /* to: value fixes weird display issues in Safari */
-        
+        Effect.Opacity($(element), { to:1, queue:'end' } );
+        /* fixes weird display issues in Safari */
     }
 }

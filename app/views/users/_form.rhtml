@@ -7,7 +7,9 @@
   <%= f.text_field :email, :class => :textinput %>
 	<%= link_to_remote "<span>UPDATE</span>",
                { :url => user_url(@user),
-				 :with => "Form.serialize('#{dom_id(@user, prefix = 'edit')}')" },
+				 :with => "Form.serialize('#{dom_id(@user, prefix = 'edit')}')",
+				 :loading => "Spinner.hide_element('#{dom_id(@user, prefix = 'edit')}')",
+				 :complete => "Spinner.show_element('#{dom_id(@user, prefix = 'edit')}')" },
                  :class => :button %>
 <% end %>
 <%= errors_on :user %>
