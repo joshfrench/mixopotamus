@@ -84,7 +84,7 @@ module ApplicationHelper
     
     def get_link_for_sidebar
       @link = case request.path
-        when account_path then ['Back to Main', default_url]
+        when account_path, faq_path then ['Back to Main', default_url]
         else ['My Account', account_url]
       end
     end

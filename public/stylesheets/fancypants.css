@@ -21,7 +21,7 @@ h3 {
 h3.error {
     padding-bottom: 0;
 }
-#announcements, #current, #invites, #register, #account, #welcome {
+#announcements, #current, #invites, #register, #account, #welcome, #wtf {
 	width: 482px;
 	margin-bottom: 43px;
 	float: left;

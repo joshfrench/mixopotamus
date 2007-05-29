@@ -1,0 +1,10 @@
+<div id="stats">
+  <h2>Useless trivia</h2>
+  <%= separator %>
+  <ul>
+  <% get_trivia -%>
+  <%= content_tag 'li', ibm("#{pluralize @swaps, 'swap'} since #{microtime Swap.find(:all).last.deadline}") %>
+  <%= content_tag 'li', ibm(pluralize @members, 'member') %>
+  <%= content_tag 'li', ibm("#{pluralize @sent, 'mix'} sent") %>  
+  </ul>
+</div>
