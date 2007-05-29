@@ -8,11 +8,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       format.js do
-        if @user.update_attributes(params[:user])
-          flash.now[:confirm] = "Changes saved."
-        else
-          render :action => :update
-        end
+        flash.now[:confirm] = "Changes saved." if @user.update_attributes(params[:user])
       end
     end
   end

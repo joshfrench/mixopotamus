@@ -9,14 +9,18 @@ class AuthenticatedUser < ActiveRecord::Base
                             :message => "Name should be between 3 and 40 characters."
   validates_presence_of     :login, :message => "Name is blank."
   validates_presence_of     :password_confirmation,
-                            :message => "Password confirmation is blank."
+                            :message => "Password confirmation is blank.",
+                            :if => :password_required?
   validates_presence_of     :address, :message => "Address is blank."
   validates_length_of       :password, :within => 4..40, 
-                            :message => "Password should be between 4 and 40 characters."
+                            :message => "Password should be between 4 and 40 characters.",
+                            :if => :password_required?
   validates_presence_of     :password,  
-                            :message => "Password is blank."
+                            :message => "Password is blank.",
+                            :if => :password_required?
   validates_confirmation_of :password,
-                            :message => "Password doesn't match confirmation"
+                            :message => "Password doesn't match confirmation",
+                            :if => :password_required?
   validates_length_of       :email,    :within => 3..100,
                             :message => "That's not a valid email."
   validates_format_of       :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
