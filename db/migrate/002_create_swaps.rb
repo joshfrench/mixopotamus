@@ -4,8 +4,6 @@ class CreateSwaps < ActiveRecord::Migration
       t.column :deadline, :datetime
       t.column :position, :int
     end
-    
-    Swap.create(:deadline => 8.weeks.from_now)
   end
 
   def self.down

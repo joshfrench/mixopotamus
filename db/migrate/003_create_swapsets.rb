@@ -4,8 +4,6 @@ class CreateSwapsets < ActiveRecord::Migration
       t.column :name, :string
       t.column :swap_id, :int
     end
-    
-    Swapset.create(:swap_id => 1)
   end
 
   def self.down
