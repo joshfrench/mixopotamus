@@ -124,19 +124,29 @@ class AccountControllerTest < Test::Unit::TestCase
   end
   
   def test_should_forget_password
-      post :forgot_password, :email => 'quentin@example.com'
-      assert_response :redirect
-      assert flash.has_key?(:confirm), "A password reset link was sent to your email address." 
-      assert_equal 1, @emails.length
-      assert_match /Password change requested/, @emails.first.subject
-    end
+    post :forgot_password, :email => 'quentin@example.com'
+    assert_response :redirect
+    assert flash.has_key?(:confirm), "A password reset link was sent to your email address." 
+    assert_equal 1, @emails.length
+    assert_match /Password change requested/, @emails.first.subject
+  end
 
-    def test_should_not_forget_password
-      post :forgot_password, :email => 'invalid@email'
-      assert_response :success
-      assert flash.has_key?(:error), "No user was found with that email address." 
-      assert_equal 0, @emails.length
-    end
+  def test_should_not_forget_password
+    post :forgot_password, :email => 'invalid@email'
+    assert_response :success
+    assert flash.has_key?(:error), "No user was found with that email address." 
+    assert_equal 0, @emails.length
+  end
+  
+  def _test_should_reset_password
+    @quentin = users(:quentin)
+    pass = 'newpassword'
+    reset = @quentin.forgot_password
+    post :reset_password, { :reset => reset, :password => pass, :password_confirmation => pass }
+    assert_equal @quentin.encrypt(pass), @quentin.crypted_password
+    assert_equal 1, @emails.length
+    assert_match /Your password has been reset/, @emails.first.subject
+  end
 
   protected
     def auth_token(token)
