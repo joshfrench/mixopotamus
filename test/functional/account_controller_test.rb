@@ -12,6 +12,8 @@ class AccountControllerTest < Test::Unit::TestCase
     @controller = AccountController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    ActionMailer::Base.deliveries = []
+    @emails = ActionMailer::Base.deliveries 
   end
 
   def test_should_login_and_redirect
@@ -120,6 +122,21 @@ class AccountControllerTest < Test::Unit::TestCase
     assert_tag :tag => "input",
                :attributes => { :value => /#{email}/ }
   end
+  
+  def test_should_forget_password
+      post :forgot_password, :email => 'quentin@example.com'
+      assert_response :redirect
+      assert flash.has_key?(:confirm), "A password reset link was sent to your email address." 
+      assert_equal 1, @emails.length
+      assert_match /Password change requested/, @emails.first.subject
+    end
+
+    def test_should_not_forget_password
+      post :forgot_password, :email => 'invalid@email'
+      assert_response :success
+      assert flash.has_key?(:error), "No user was found with that email address." 
+      assert_equal 0, @emails.length
+    end
 
   protected
     def auth_token(token)

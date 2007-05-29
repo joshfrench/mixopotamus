@@ -12,7 +12,8 @@ class CreateUsers < ActiveRecord::Migration
       
       # add app-specific columns:
       t.column :address,                   :text, :limit => 1023
-      t.column :invite_count,                   :int
+      t.column :invite_count,              :int
+      t.column :reset,                     :string, :limit => 40
     end
   end
   

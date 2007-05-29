@@ -10,6 +10,8 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'account', :action => 'login'
   map.logout 'logout', :controller => 'account', :action => 'logout'
   map.signup 'register', :controller => 'account', :action => 'signup'
+  map.forgot 'forgot-password', :controller => 'account', :action => 'forgot_password'
+  map.reset 'reset/:reset', :controller => 'account', :action => 'reset_password'
   map.account 'my-account', :controller => 'users', :action => 'edit'
   map.faq 'wtf', :controller => "site", :action => "faq"
   

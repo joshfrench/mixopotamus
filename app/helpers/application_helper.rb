@@ -89,6 +89,10 @@ module ApplicationHelper
       end
     end
     
+    def do_global
+      render :partial => "site/global"
+    end
+    
     # multiple controllers need access to these #
     
     def star_for(user)

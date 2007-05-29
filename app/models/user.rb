@@ -84,7 +84,31 @@ class User < AuthenticatedUser
     false
   end
   
+  def forgot_password
+    @forgotten_password = true
+    make_reset
+  end
+  
+  def reset_password
+    update_attributes(:reset => nil)
+    @reset_password = true
+  end
+  
+  def recently_forgot_password?
+    @forgotten_password
+  end
+  
+  def recently_reset_password?
+    @reset_password
+  end
+  
   def before_create
     self.invite_count = 0
+  end
+  
+  protected
+  def make_reset
+    update_attribute(:reset, Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join ))
+    self.reset
   end
 end

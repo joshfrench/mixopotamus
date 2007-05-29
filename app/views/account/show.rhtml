@@ -1,4 +1,5 @@
 <%= do_welcome if flash[:welcome] %>
+<%= do_global if flash[:global] %>
 <%= render_component :controller => "swapsets", :action => "show" %>
 <%= render_component :controller => "registrations", :action => "show" %>
 <%= render_component :controller => "invites", :action => "new" %>

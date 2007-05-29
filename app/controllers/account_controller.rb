@@ -41,5 +41,36 @@ class AccountController < ApplicationController
     flash[:error] = "You have been logged out."
     redirect_to default_url
   end
+  
+  def forgot_password
+    return unless request.post?
+    if @user = User.find_by_email(params[:email])
+      @user.forgot_password
+      @user.save
+      redirect_to default_url
+      flash[:confirm] = "A password reset link was sent to your email address."
+    else
+      flash[:error] = "No user was found with that email address."
+    end
+  end
+  
+  def reset_password
+    if @user = User.find_by_reset(params[:reset])
+      return unless request.put?
+      if params[:user][:password] == params[:user][:password_confirmation]
+        self.current_user = @user
+        current_user.password_confirmation = params[:user][:password_confirmation]
+        current_user.password = params[:user][:password]
+        @user.reset_password
+        if @user.save
+          flash[:global] = "Your password has been reset."
+          redirect_to default_url
+        end
+      end
+      flash.now[:error] = "Password does not match confirmation."
+    else
+      redirect_to default_url
+    end
+  end
 
 end
