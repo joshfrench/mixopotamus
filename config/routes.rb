@@ -15,6 +15,9 @@ ActionController::Routing::Routes.draw do |map|
   map.account 'my-account', :controller => 'users', :action => 'edit'
   map.faq 'wtf', :controller => "site", :action => "faq"
   
+  map.connect 'e404', :controller => "site", :action => "e404"
+  map.connect 'e500', :controller => "site", :action => "e500"
+  
   map.connect '/', :controller => 'account', :action => 'show'
   map.default 'hello', :controller => 'account', :action => 'show'
 end
