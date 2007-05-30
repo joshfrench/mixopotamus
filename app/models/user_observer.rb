@@ -1,7 +1,7 @@
 class UserObserver < ActiveRecord::Observer
   def after_create(user)
     Swap.current.register(user) if Swap.current && Swap.current.open?
-    check_for_freebies(user)
+    give_freebies(user)
     UserNotifier.deliver_signup_notification(user)
   end
   
@@ -11,8 +11,8 @@ class UserObserver < ActiveRecord::Observer
   end
   
   protected
-  def check_for_freebies(user)
-    list = File.read(File.expand_path(RAILS_ROOT + "/lib/freebies")).map { |word| word.chomp }
+  def give_freebies(user)
+    list = File.read(File.expand_path(RAILS_ROOT + "/lib/freebies")).map &:chomp
     5.times { user.give_invite } if list.include? user.email
   end
 end
