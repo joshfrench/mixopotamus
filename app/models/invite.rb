@@ -24,7 +24,12 @@ class Invite < ActiveRecord::Base
   end
   
   def deliver
+    @just_delivered = true
     update_attribute :status, 'open'
+  end
+  
+  def recently_delivered?
+    @just_delivered
   end
   
   def accept(user)

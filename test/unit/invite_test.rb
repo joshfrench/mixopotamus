@@ -19,10 +19,11 @@ class InviteTest < Test::Unit::TestCase
   
   def test_should_create
     assert_difference(Invite, :count, 1) do
-      i = Invite.create(:from => @quentin, :to => 'josh@vitamin-j.com')
-      assert_equal 32, i.uuid.length
-      assert_equal 'pending', i.status
+      @i = Invite.create(:from => @quentin, :to => 'josh@vitamin-j.com')
     end
+    assert_equal 32, @i.uuid.length
+    assert_equal 'pending', @i.status
+    assert_equal @quentin, @i.user
   end
   
   def test_should_deliver
