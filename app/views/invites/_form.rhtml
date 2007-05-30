@@ -1,5 +1,6 @@
 <%= content_tag 'p', ibm(get_string_for_invites_left) %>
 <% remote_form_for Invite.new, :url => invites_url(current_user) do |f| -%>
+	<%= content_tag 'h3', ibm('Email address') %>
 	<%= f.text_field :to, :class => :textinput %>
 <% end %>
 <%= link_to_remote "<span>SEND</span>",
