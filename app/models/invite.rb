@@ -4,6 +4,8 @@ require 'uuidtools'
 class Invite < ActiveRecord::Base
   belongs_to  :user,
               :foreign_key => 'from_user'
+  belongs_to  :accepted_by, :class_name => "User",
+              :foreign_key => 'accepted_by'
               
   validates_format_of :to_email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
                       :message => "That's not a valid email."
@@ -25,10 +27,11 @@ class Invite < ActiveRecord::Base
     update_attribute :status, 'open'
   end
   
-  def accept
+  def accept(user)
     if 'open' == self.status
       self.status = 'accepted'
       self.accepted_at = Time.now
+      self.accepted_by = user
       save
     else
       raise "Invite #{self.uuid} already accepted."

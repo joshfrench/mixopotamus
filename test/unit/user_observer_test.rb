@@ -8,7 +8,7 @@ class UserObserverTest < Test::Unit::TestCase
     assert_difference(Registration, :count, 1) do
       @user = create_user
     end
-    assert @swap.users.include? @user
+    assert @swap.users.include?(@user)
   end
   
   def test_dont_register_user_in_closed_swap

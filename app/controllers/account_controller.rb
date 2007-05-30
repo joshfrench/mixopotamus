@@ -25,10 +25,10 @@ class AccountController < ApplicationController
     @user = User.new(params[:user])
     return unless request.post?
     @user.save!
-    session[:invite].accept if session[:invite]
-    session[:invite] = nil
     flash[:welcome] = true
     self.current_user = @user
+    session[:invite].accept(current_user)
+    session[:invite] = nil
     redirect_to default_url
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
@@ -47,8 +47,8 @@ class AccountController < ApplicationController
     if @user = User.find_by_email(params[:email])
       @user.forgot_password
       @user.save
-      redirect_to default_url
       flash[:confirm] = "A password reset link was sent to your email address."
+      redirect_to default_url
     else
       flash[:error] = "No user was found with that email address."
     end

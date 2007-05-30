@@ -124,10 +124,11 @@ class AccountControllerTest < Test::Unit::TestCase
   end
   
   def test_should_forget_password
-    post :forgot_password, :email => 'quentin@example.com'
-    assert_response :redirect
-    assert flash.has_key?(:confirm), "A password reset link was sent to your email address." 
-    assert_equal 1, @emails.length
+    assert_difference(@emails, :size, 1) do
+      post :forgot_password, :email => 'quentin@example.com'
+      assert_response :redirect
+      assert flash.has_key?(:confirm), "A password reset link was sent to your email address."
+    end
     assert_match /Password change requested/, @emails.first.subject
   end
 

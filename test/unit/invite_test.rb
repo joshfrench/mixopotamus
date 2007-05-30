@@ -53,7 +53,7 @@ class InviteTest < Test::Unit::TestCase
   
   def test_should_accept_open_invite
     i = invites(:open)
-    i.accept
+    i.accept(@aaron)
     i.reload
     assert_equal 'accepted', i.status
     assert_not_nil i.accepted_at
@@ -62,7 +62,7 @@ class InviteTest < Test::Unit::TestCase
   def test_should_not_accept_invite_twice
     i = invites(:accepted)
     assert_raises RuntimeError do
-      i.accept
+      i.accept(@quentin)
     end
   end
 

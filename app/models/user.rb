@@ -108,7 +108,6 @@ class User < AuthenticatedUser
   
   protected
   def make_reset
-    update_attribute(:reset, Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join ))
-    self.reset
+    self.reset = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
   end
 end
