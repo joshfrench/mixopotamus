@@ -1,12 +1,15 @@
 namespace :dev do
   desc "Add sample data"
   task :populate => [:environment] do
+    Swap.create(:deadline => 8.weeks.from_now)
+    
+    Swapset.create(:swap_id => 1)
+    
     User.create(:password => 'b33omber', 
-                :password_confirmation => 'b33omber',
-                :login => "Josh F", 
-                :address => "155 23rd St\nBrooklyn, NY\n11232", 
+                :password_confirmation => 'b33omber', 
+                :login => "Josh French", 
+                :address => "155 23rd St #2\nBrooklyn, NY\n11232", 
                 :email => "josh@vitamin-j.com")
-
     User.create(:password => 'b33omber', 
                 :password_confirmation => 'b33omber',
                 :login => "Anne Coperdink", 
@@ -36,10 +39,6 @@ namespace :dev do
                 :login => "Vaclav Speezl-Ganglia", 
                 :address => "777 Vunderbarlongenstreetenname 2B\nBern, Bjorn, 1KS 700\nAustria", 
                 :email => "speezl@vitamin-j.com")
-                
-    Swap.create(:deadline => 8.weeks.from_now)
-    
-    Swapset.create(:swap_id => 1)
     
     (1..6).each do |i|
       Registration.create(:swap_id => 1, :user_id => i)

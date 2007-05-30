@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   include SafariUnicodeFix
   include ExceptionNotifiable
   
+  filter_parameter_logging :password
+  
   # Pick a unique cookie name to distinguish our session data from others'
   session :session_key => 'c_is_for_cookie'
   

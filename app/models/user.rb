@@ -68,7 +68,7 @@ class User < AuthenticatedUser
   def send_invite(invite)
     if self == invite.user && 'pending' == invite.status
       invite.deliver
-      update_attribute(:invite_count, invite_count-1) # unless 1 == id
+      update_attribute(:invite_count, invite_count-1) unless 1 == id
     else
       raise "Unable to send invite"
     end

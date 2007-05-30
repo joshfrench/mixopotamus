@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 8) do
     t.column "status",      :string
     t.column "created_at",  :datetime
     t.column "accepted_at", :datetime
+    t.column "accepted_by", :integer
   end
 
   create_table "registrations", :force => true do |t|

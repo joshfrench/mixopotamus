@@ -7,6 +7,7 @@ class CreateInvites < ActiveRecord::Migration
       t.column :status, :string
       t.column :created_at, :datetime
       t.column :accepted_at, :datetime
+      t.column :accepted_by, :int
     end
   end
 
