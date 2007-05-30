@@ -1,3 +1,9 @@
+require 'net/smtp'
+require 'enumerator'
+
+BATCH_SIZE = 25
+SMTP_SERVER='localhost'
+
 namespace :app do
   desc "Make new swap"
   task :new_swap => [:environment] do
@@ -16,6 +22,11 @@ namespace :app do
     swap.swapsets.reject { |set| SWAPSET_SIZE == set.size }.each do |short_set|
       swap.fill_set short_set
     end
+  end
+  
+  desc "Mass mail swap assignments"
+  task :send_swap_assignments => [:environment] do
+    # panic; tears
   end
   
 end

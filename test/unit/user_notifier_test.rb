@@ -6,7 +6,7 @@ class UserNotifierTest < Test::Unit::TestCase
 
   include ActionMailer::Quoting
   
-  fixtures :users
+  fixtures :users, :swaps
 
   def setup
     ActionMailer::Base.delivery_method = :test
@@ -16,15 +16,42 @@ class UserNotifierTest < Test::Unit::TestCase
     @expected = TMail::Mail.new
     @expected.set_content_type "text", "plain", { "charset" => CHARSET }
     @expected.mime_version = '1.0'
+    
+    @quentin = users(:quentin)
   end
   
   def test_signup
-    @quentin = users(:quentin)
-     response = UserNotifier.create_signup_notification(@quentin)
-     assert_match /Welcome/, response.subject
-     assert_match /#{@quentin.first_name}/, response.body
-     assert_match /Thanks for joining us/, response.body
-     assert_equal @quentin.email, response.to[0]
+    response = UserNotifier.create_signup_notification(@quentin)
+    assert_match /Welcome/, response.subject
+    assert_match /#{@quentin.first_name}/, response.body
+    assert_match /Thanks for joining us/, response.body
+    assert_equal @quentin.email, response.to[0]
+  end
+  
+  def test_assignment
+    @swap = swaps(:mix_period)
+    @swap.move_to_top
+    response = UserNotifier.create_assignment_notification(@quentin)
+    assert_match /#{@quentin.first_name}/, response.body
+    assert_match /Your swap assignment is now available/, response.body
+    assert_equal @quentin.email, response.to[0]
+  end
+  
+  def test_mailing_reminder
+    @swap = swaps(:mix_period)
+    @swap.move_to_top
+    response = UserNotifier.create_mailing_reminder(@quentin)
+    assert_match /your mixes must be in the mail no later than/, response.body
+    assert_match /#{@swap.deadline.strftime "%B %d"}/, response.body
+    assert_equal @quentin.email, response.to[0]
+  end
+  
+  def test_registration_reminder
+    @swap = swaps(:registration_period)
+    response = UserNotifier.create_registration_reminder(@quentin)
+    assert_match /the last day to complete your swap surveys is/, response.body
+    assert_match /#{@swap.registration_deadline.strftime "%B %d"}/, response.body
+    assert_equal @quentin.email, response.to[0]
   end
 
   private
