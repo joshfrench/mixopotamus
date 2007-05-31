@@ -1,4 +1,4 @@
-class UserNotifier < ActionMailer::Base
+class UserNotifier < ActionMailer::ARMailer
   
   default_url_options[:host] = 'www.example.com'
   

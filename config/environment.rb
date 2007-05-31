@@ -59,6 +59,8 @@ end
 
 # Include your application configuration below
 
+require 'action_mailer/ar_mailer'
+
 SWAP_LENGTH = 13.weeks
 SWAPSET_SIZE = 6
 ADMIN_EMAIL = 'josh@vitamin-j.com'

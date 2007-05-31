@@ -1,4 +1,4 @@
-class InviteMailer < ActionMailer::Base
+class InviteMailer < ActionMailer::ARMailer
   
   default_url_options[:host] = 'www.example.com'
   
