@@ -7,6 +7,10 @@ class Confirmation < ActiveRecord::Base
   
   validates_presence_of :from_user, :assignment
   
+  def to
+    assignment.user
+  end
+  
   def from=(user)
     self.from_user = user.id
     @from = user
