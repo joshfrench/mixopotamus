@@ -79,7 +79,7 @@ class User < AuthenticatedUser
   end
   
   def confirmed_for?(swap)
-    swapsets.by_swap(swap).assignments.find_by_user_id(id).confirmations.count > 0 || false
+    swapsets.by_swap(swap).assignments.find_by_user_id(id).confirmations.count > 0
   rescue  
     false
   end

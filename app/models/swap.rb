@@ -51,7 +51,7 @@ class Swap < ActiveRecord::Base
   end
   
   def make_sets
-    initialize_set(users, SWAPSET_SIZE, Swapset.find(:all).map {|set| set.users})
+    initialize_set(users, SWAPSET_SIZE, Swapset.find(:all).map(&:users))
     solve.each do |users|
       swapset = swapsets.create
       users.each { |user| swapset.assign user }

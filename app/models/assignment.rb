@@ -17,8 +17,4 @@ class Assignment < ActiveRecord::Base
     move_to_top
   end
   
-  def add_confirmation(from)
-    swapset.confirmations.create(:from => from, :to => user, :swapset => swapset)
-  end
-  
 end
