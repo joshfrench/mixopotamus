@@ -5,10 +5,11 @@ class AddEmail < ActiveRecord::Migration
       t.column :to, :string
       t.column :last_send_attempt, :integer, :default => 0
       t.column :mail, :text
+      t.column :created_at, :datetime
     end
   end
 
   def self.down
-    drop_table :email
+    drop_table :emails
   end
 end

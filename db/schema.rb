@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(:version => 9) do
   create_table "emails", :force => true do |t|
     t.column "from",              :string
     t.column "to",                :string
-    t.column "last_send_attempt", :integer, :default => 0
+    t.column "last_send_attempt", :integer,  :default => 0
     t.column "mail",              :text
+    t.column "created_at",        :datetime
   end
 
   create_table "favorites", :force => true do |t|
