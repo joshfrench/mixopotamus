@@ -1,0 +1,15 @@
+2006-03-11 (0.1.4)
+    * Applied two bugfixes. Thanks go to Roel Harbers <roel@roelharbers.com>
+      for the report.
+    * Disabled autorequire for gem.
+2004-07-16 (0.1.3)
+    * Moved gemspec into Rakefile
+    * Cleaned up a bit.
+2004-07-16 (0.1.2)
+    * Added Permutation.for factory method for convenience.
+    * Raising ArgumentError instead of simple strings.
+2004-07-03 (0.1.1)
+    * First Rubyforge version.
+    * Supports rubygems now.
+2004-04-29 (0.1.0)
+    * Initial version
