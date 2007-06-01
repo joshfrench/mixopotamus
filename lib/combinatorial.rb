@@ -1,4 +1,3 @@
-require 'permutation'
 require 'enumerator'
 
 class Fixnum

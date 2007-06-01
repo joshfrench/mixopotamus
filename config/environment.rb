@@ -60,6 +60,8 @@ end
 # Include your application configuration below
 
 require 'action_mailer/ar_mailer'
+require 'uuidtools'
+require 'permutation'
 
 SWAP_LENGTH = 13.weeks
 SWAPSET_SIZE = 6

@@ -1,6 +1,3 @@
-gem 'uuidtools'
-require 'uuidtools'
-
 class Invite < ActiveRecord::Base
   belongs_to  :user,
               :foreign_key => 'from_user'
