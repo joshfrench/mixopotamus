@@ -1,10 +1,7 @@
-require 'net/smtp'
-require 'enumerator'
-
-BATCH_SIZE = 25
-SMTP_SERVER='localhost'
+BATCH_SIZE = 4
 
 namespace :app do
+  
   desc "Make new swap"
   task :new_swap => [:environment] do
     Swap.create :deadline => SWAP_LENGTH.from_now
@@ -24,9 +21,9 @@ namespace :app do
     end
   end
   
-  desc "Mass mail swap assignments"
-  task :send_swap_assignments => [:environment] do
-    # panic; tears
+  desc "Send mail from queue"
+  task :sendmail => [:environment] do
+    system "ruby #{RAILS_ROOT}/vendor/ar_mailer-1.1.0/bin/ar_sendmail -b #{BATCH_SIZE} -o -e development"
   end
   
 end

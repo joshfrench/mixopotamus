@@ -427,7 +427,7 @@ end
   # for instructions on how to configure ActionMailer's SMTP server.
 
   def server_settings
-    ActionMailer::Base.server_settings
+    ActionMailer::Base.smtp_settings
   end
 
 end
