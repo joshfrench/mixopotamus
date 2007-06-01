@@ -2,7 +2,7 @@ class SwapsetsController < ApplicationController
   before_filter :login_required, :get_current_set
   
   def index
-    @swapsets = current_user.swapsets - [current_user.swapsets.first]
+    @swapsets = current_user.swapsets - [current_user.swapsets.find_by_swap_id(Swap.current.id)]
     render :layout => "past_sets"
   end
   
