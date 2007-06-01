@@ -1,5 +1,6 @@
 #!/usr/local/bin/ruby
 
+# running locally -- have to explicitly require lib
 require "vendor/ar_mailer-1.1.0/lib/action_mailer/ar_sendmail"
 
 ActionMailer::ARSendmail.run
