@@ -1,6 +1,6 @@
 <div id="stats">
 <%= content_tag 'h2', "Your activity" %>
-<%= separator %>
+<%= separator '=', :short %>
 <ul>
 	<%= content_tag 'li', ibm("Joined #{microtime @user.created_at}") %>
 	<%= content_tag 'li', ibm(pluralize @user.swapsets.count, 'swap') %>
