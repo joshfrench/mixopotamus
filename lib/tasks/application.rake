@@ -23,7 +23,7 @@ namespace :app do
   
   desc "Send mail from queue"
   task :sendmail => [:environment] do
-    system "ruby #{RAILS_ROOT}/vendor/ar_mailer-1.1.0/bin/ar_sendmail -b #{BATCH_SIZE} -o -e development"
+    system "ruby #{RAILS_ROOT}/vendor/ar_mailer-1.1.0/bin/ar_sendmail -b #{BATCH_SIZE} -o"
   end
   
 end
