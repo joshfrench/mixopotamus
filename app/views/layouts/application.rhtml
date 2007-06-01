@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" version="-//W3C//DTD XHTML 1.1//EN" xml:lang="en">
 <head>
@@ -12,9 +12,9 @@
 <body>
   <div id="header">
 	<%= content_tag 'h1', ibm(PROJECT_NAME) %>
-<%= ibm( "." * 200 ) %>
+<%= ibm( "." * 80 ) %>
   </div>
   <%= yield %>
-  <div id="footer"><%= ibm( "." * 200 ) -%></div>
+  <div id="footer"><%= ibm( "." * 80 ) -%></div>
 </body>
 </html>
