@@ -3,7 +3,7 @@ class SwapsetsController < ApplicationController
   
   def index
     @swapsets = current_user.swapsets - [current_user.swapsets.find_by_swap_id(Swap.current.id)]
-    render :layout => "past_sets"
+    render @swapsets.empty? ? { :nothing => true } : { :layout => "past_sets" }
   end
   
   def show
