@@ -1,10 +1,10 @@
 body {
 	width: 780px;
-	margin: 2em auto 43px auto;
+	margin: 2em auto;
 	font-family: Courier, monospace;
 	color: #999;
-	padding: 0 0 23px 0;
-	overflow: hidden;
+	padding-bottom: 23px;
+	margin-bottom: 43px;
 }
 h2 {
 	color: #777;
@@ -21,6 +21,11 @@ h3 {
 h3.error {
     padding-bottom: 0;
 }
+#announcements, #current, #invites, #register, #account, #welcome, #wtf {
+	width: 482px;
+	margin-bottom: 43px;
+	float: left;
+}
 #footer, #header {
     margin: 0;
     padding: 23px 0 0;
@@ -33,11 +38,6 @@ h3.error {
 }
 #header h1 {
 	font-size: 22px;
-}
-#announcements, #current, #invites, #register, #account, #welcome, #wtf {
-	width: 482px;
-	margin-bottom: 43px;
-	float: left;
 }
 #sets, #info, #stats {
 	width: 184px;
@@ -63,7 +63,7 @@ h3.error {
 	text-align: right;
 }
 .sep {
-	white-space: nowrap;
+	white-space: pre;
 	overflow: hidden;
 	margin-bottom: 3px;
 	color: #777;
@@ -160,6 +160,7 @@ textarea {
 }
 #current .poll {
 	position: relative;
+	min-height: 0;
 }
 #current .bigstar, #current .bigmail { 
 	position: absolute;
