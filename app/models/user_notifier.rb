@@ -21,21 +21,21 @@ class UserNotifier < ActionMailer::ARMailer
   def assignment_notification(user)
     setup_email(user)
     @subject += 'Your swap assignment is ready'
-    @body[:url] = default_url
+    @body[:url] = login_url
     @body[:deadline] = Swap.current.deadline.strftime "%B %d"
   end
   
   def registration_reminder(user)
     setup_email(user)
     @subject += 'Last week to complete your swap surveys'
-    @body[:url] = default_url
+    @body[:url] = login_url
     @body[:deadline] = Swap.current.registration_deadline.strftime "%B %d"
   end
   
   def mailing_reminder(user)
     setup_email(user)
     @subject += 'Last week to mail your mixes'
-    @body[:url] = default_url
+    @body[:url] = login_url
     @body[:deadline] = Swap.current.deadline.strftime "%B %d"
   end
   
