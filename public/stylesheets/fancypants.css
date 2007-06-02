@@ -21,10 +21,16 @@ h3 {
 h3.error {
     padding-bottom: 0;
 }
-#announcements, #current, #invites, #register, #account, #welcome, #wtf {
+#left {
 	width: 482px;
+	float: left;    
+}
+#right {
+	width: 184px;
+	margin-left: 596px;    
+}
+#announcements, #current, #invites, #register, #account, #welcome, #wtf {
 	margin-bottom: 43px;
-	float: left;
 }
 #footer, #header {
     margin: 0;
@@ -40,20 +46,18 @@ h3.error {
 	font-size: 22px;
 }
 #sets, #info, #stats {
-	width: 184px;
-	margin-left: 596px;
-	margin-bottom: 0;
+	margin-bottom: 92px;
 }
-#sets h3, #sets ul, #stats * {
+/*#sets h3, #sets ul, #stats * {
     clear: none;
     width: 184px;
-}
+}*/
 #stats ul {
 	font-size: 11px;
 }
 #info {
+    margin-top: 21px;
 	font-size: 10px;
-	margin-top: 113px;
 }
 #info p, #info .sep {
 	color: #BBB;
@@ -149,10 +153,6 @@ textarea {
 	width: 241px;
 	float: left;
 	margin-top: 14px;
-	font-size: 14px;
-	line-height: 17px;
-	color: #484848;
-	white-space: pre;
 }
 #current .poll p {
 	width: 100%;

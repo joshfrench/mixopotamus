@@ -1,15 +1,19 @@
-<div id="account">
-<% form_tag login_url, :id => 'login-form' do -%>
-<%= content_tag 'h3', ibm('Email') %>
-<%= text_field_tag 'email', '', :class => :textinput %></p>
-<%= content_tag 'h3', ibm('Password') %>
-<%= password_field_tag 'password', '', :class => :textinput %></p>
+<div id="left">
+  <div id="account">
+  <% form_tag login_url, :id => 'login-form' do -%>
+  <%= content_tag 'h3', ibm('Email') %>
+  <%= text_field_tag 'email', '', :class => :textinput %></p>
+  <%= content_tag 'h3', ibm('Password') %>
+  <%= password_field_tag 'password', '', :class => :textinput %></p>
 
-<%= link_to "<span>LOG IN</span>", "#",
-			{ :onclick => "$('login-form').submit()",
-			  :class => :button } %>
-<% end -%>
-<%= show_flash %>
+  <%= link_to "<span>LOG IN</span>", "#",
+  			{ :onclick => "$('login-form').submit()",
+  			  :class => :button } %>
+  <% end -%>
+  <%= show_flash %>
+  </div>
 </div>
 
-<%= render :partial => "site/login_aux" %>
+<div id="right">
+  <%= render :partial => "site/login_aux" %>
+</div>

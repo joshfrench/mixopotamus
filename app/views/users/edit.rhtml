@@ -1,10 +1,14 @@
-<div id="account">
-  <h2><%= ibm 'Your Account' -%></h2>
-  <%= separator %>
-  <div id="account_content">
-    <%= render :partial => "form" %>
+<div id="left">
+  <div id="account">
+    <h2><%= ibm 'Your Account' -%></h2>
+    <%= separator %>
+    <div id="account_content">
+      <%= render :partial => "form" %>
+    </div>
   </div>
 </div>
 
-<%= render :partial => "show" %>
-<%= render_component :controller => "site", :action => "sidebar" %>
+<div id="right">
+  <%= render :partial => "show" %>
+  <%= render_component :controller => "site", :action => "sidebar" %>
+</div>
