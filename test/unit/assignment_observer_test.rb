@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class AssignmentObserverTest < Test::Unit::TestCase
-  fixtures :assignments, :users, :swapsets
+  fixtures :assignments, :users, :swapsets, :swaps
 
   def setup
     ActionMailer::Base.deliveries = []

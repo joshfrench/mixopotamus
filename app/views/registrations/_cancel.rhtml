@@ -8,5 +8,5 @@
                       :method => :delete         
                     } %>
 <%= ibm(" any time before ") %>
-<%= ibm(smalltime(Swap.current.registration_deadline)) %>.
+<%= ibm(Swap.current.registration_deadline.to_s(:small)) %>.
 <%= show_flash %>

@@ -3,9 +3,9 @@ Welcome, <%= @user.first_name %>!
 Thanks for joining us. You can log in and view your account using your email (<%= @user.email %>) and the password you created.
 
 <% if Swap.current.open? -%>
-You have been registered for the upcoming swap. If you decide to opt out, you can do so any time before <%= Swap.current.registration_deadline.strftime "%B %d" %>. Otherwise, we'll send out your group assignments at that time.
+You have been registered for the upcoming swap. If you decide to opt out, you can do so any time before <%= Swap.current.registration_deadline.to_s(:small) %>. Otherwise, we'll send out your group assignments at that time.
 <% else -%>
-Unfortunately, you missed the signup deadline for the current swap. Please check back after <%= Swap.current.deadline.strftime "%B %d" %> to sign up for the next round.
+Unfortunately, you missed the signup deadline for the current swap. Please check back after <%= Swap.current.deadline.to_s(:small) %> to sign up for the next round.
 <% end -%>
 
 Thanks again. Happy mixing!

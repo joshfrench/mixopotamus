@@ -56,10 +56,6 @@ module ApplicationHelper
       ret
     end
     
-    def smalltime(time)
-      time.strftime "%B %d"
-    end
-    
     def microtime(time)
       time.strftime "%B %Y"
     end

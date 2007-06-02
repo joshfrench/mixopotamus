@@ -6,6 +6,9 @@ body {
 	padding-bottom: 23px;
 	margin-bottom: 43px;
 }
+#content {
+    position: relative;
+}
 h2 {
 	color: #777;
 }
@@ -31,6 +34,9 @@ h3.error {
 }
 #announcements, #current, #invites, #register, #account, #welcome, #wtf {
 	margin-bottom: 43px;
+	width: 482px;
+	clear: left;
+	float: none;
 }
 #footer, #header {
     margin: 0;
@@ -143,6 +149,13 @@ textarea {
 #current .address_container {
 	clear: both;
 	margin-top: 14px;
+}
+#current_content:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
 }
 #current .address, #current .poll p {
 	font-size: 14px;
