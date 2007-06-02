@@ -211,6 +211,7 @@ strong {
 .down, .up, .heavy {
     position: relative;
     display: inline;
+    opacity: inherit;
 }
 .down {
     top: 1px;
