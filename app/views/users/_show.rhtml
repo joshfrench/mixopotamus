@@ -2,7 +2,7 @@
 <%= content_tag 'h2', "Your activity" %>
 <%= separator '=', :short %>
 <ul>
-	<%= content_tag 'li', ibm("Joined #{microtime @user.created_at}") %>
+	<%= content_tag 'li', ibm("Joined #{@user.created_at.to_s(:micro)}") %>
 	<%= content_tag 'li', ibm(pluralize @user.swapsets.count, 'swap') %>
 	<%= content_tag 'li', ibm("#{pluralize @user.favorites.count, 'star'} given") %>
 	<%= content_tag 'li', ibm("#{pluralize @user.stars.count, 'star'} received") %>

@@ -56,10 +56,6 @@ module ApplicationHelper
       ret
     end
     
-    def microtime(time)
-      time.strftime "%B %Y"
-    end
-    
     def admin_email
       mail_to ADMIN_EMAIL, ibm(ADMIN_EMAIL), :encoding => "hex"
     end
