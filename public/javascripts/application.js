@@ -32,11 +32,10 @@ Spinner = {
     
     show_element: function(element) {
         new Effect.Parallel(
-            [ new Effect.Appear($(element), { to:0.999999 } ) ],
+            [ new Effect.Appear($(element), { to:0.9999999 }) ],
             [ new Effect.Fade($(spinner)) ],
             { queue:'end' }
-            )
+            ); 
         /* to: fixes weird display issues in Safari */
-        Effect.Opacity($(element), { to:1, queue:'end' } );
     }
 }
