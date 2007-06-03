@@ -67,8 +67,8 @@ class Swap < ActiveRecord::Base
   end
   
   def fill_set(set)
-    raise "No doubles in swap" if self.doubles.empty? 
     return set if SWAPSET_SIZE == set.users.size
+    raise "No doubles in swap" if self.doubles.empty? 
     combinations = self.doubles.combinations(SWAPSET_SIZE - set.users.size)
     # random stroll through combinations,
     # in case there is an absurd number of them
