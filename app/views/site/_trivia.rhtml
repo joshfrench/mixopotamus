@@ -4,7 +4,7 @@
   <ul>
   <% get_trivia -%>
   <%= content_tag 'li', ibm("#{pluralize @swaps, 'swap'} since #{Swap.find(:all).last.deadline.to_s(:micro)}") %>
-  <%= content_tag 'li', ibm(pluralize @members, 'member') %>
+  <%= content_tag 'li', ibm("#{pluralize @members, 'member'}") %>
   <%= content_tag 'li', ibm("#{pluralize @sent, 'mix'} sent") %>  
   </ul>
 </div>

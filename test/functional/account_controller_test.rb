@@ -15,6 +15,12 @@ class AccountControllerTest < Test::Unit::TestCase
     ActionMailer::Base.deliveries = []
     @emails = ActionMailer::Base.deliveries 
   end
+  
+  def test_markup
+    login_as :quentin
+    get :show
+    assert_valid_markup
+  end
 
   def test_should_login_and_redirect
     post :login, :email => 'quentin@example.com', :password => 'test'
@@ -26,6 +32,7 @@ class AccountControllerTest < Test::Unit::TestCase
     post :login, :email => 'quentin@example.com', :password => 'bad password'
     assert_nil session[:user]
     assert_response :success
+    assert_valid_markup
   end
 
   def test_should_allow_signup
@@ -42,6 +49,7 @@ class AccountControllerTest < Test::Unit::TestCase
       create_user(:login => nil)
       assert assigns(:user).errors.on(:login)
       assert_response :success
+      assert_valid_markup
     end
   end
 
