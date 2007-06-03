@@ -18,7 +18,15 @@ class Swap < ActiveRecord::Base
   alias_method :previous, :higher_item
   
   def registration_deadline
-    deadline - 6.weeks
+    deadline - (SWAP_LENGTH - REGISTRATION_LENGTH)
+  end
+  
+  def mailing_reminder
+    deadline - 1.week
+  end
+  
+  def registration_reminder
+    registration_deadline - 1.week
   end
   
   def open?

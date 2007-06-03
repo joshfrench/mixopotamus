@@ -48,6 +48,7 @@ require 'uuidtools'
 require 'permutation'
 
 SWAP_LENGTH = 13.weeks
+REGISTRATION_LENGTH = 7.weeks
 SWAPSET_SIZE = 6
 ADMIN_EMAIL = 'josh@vitamin-j.com'
 PROJECT_NAME = 'UNNAMED MIX PROJECT'
