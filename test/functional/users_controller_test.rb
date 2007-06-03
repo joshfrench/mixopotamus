@@ -26,11 +26,32 @@ class UsersControllerTest < Test::Unit::TestCase
     new_name = "Seymour Butts"
     new_address = "123 Anytown Lane, USA 12345"
     new_email = 'foo@bar.com'
-    xhr :post, :edit, :user => { :login => new_name, :address => new_address, :email => 'new_email' }
+    xhr :put, :update, { :id => @quentin.id, 
+                          :user => { :login => new_name, :email => new_email,
+                                     :address => new_address } }
     assert_response :success
     @quentin.reload
     assert_equal new_name, @quentin.login
     assert_equal new_address, @quentin.address
     assert_equal new_email, @quentin.email
+  end
+  
+  def test_catch_bad_params
+    login_as :quentin
+    old_name = @quentin.login
+    old_email = @quentin.email
+    old_address = @quentin.address
+    new_name = ''
+    new_address = ''
+    new_email = ''
+    xhr :put, :update, { :id => @quentin.id, 
+                          :user => { :login => new_name, :email => new_email,
+                                     :address => new_address } }
+    assert_response :success
+    @quentin.reload
+    assert_equal old_name, @quentin.login
+    assert_equal old_address, @quentin.address
+    assert_equal old_email, @quentin.email
+    
   end
 end
