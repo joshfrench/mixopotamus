@@ -4,6 +4,6 @@
 	<p><%= link_to ibm(@link.shift), @link.shift -%> <span class="bullet">*</span> <%= link_to ibm('Logout'), logout_url -%></p>
 
 	<%= separator '-', :short %>
-	<p><%= link_to ibm('FAQ'), faq_url + '?' -%> <span class="bullet">*</span> <%= mail_to ADMIN_EMAIL, ibm('Contact'), :encoding => "hex" %></p>
+	<p><%= link_to ibm('FAQ'), faq_url + '?' -%> <span class="bullet">*</span> <%= mail_to ADMIN_EMAIL, ibm('Contact'), :encode => "javascript" %></p>
 	<%= separator '=', :short %>
 </div>

@@ -2,19 +2,19 @@
   <div id="register">
   <% form_for @user, :url => signup_url do |f| -%>
     <%= content_tag 'h3', ibm("Name") %>
-    <%= f.text_field :login, :class => :textinput %>
+    <div><%= f.text_field :login, :class => :textinput %></div>
     <%= content_tag 'h3', ibm("Email") %>
-    <%= f.text_field :email, :value => params[:email], :class => :textinput %>
+    <div><%= f.text_field :email, :value => params[:email], :class => :textinput %></div>
     <%= content_tag 'h3', ibm("Address") %>
-    <%= f.text_area :address %>
+    <div><%= f.text_area :address %></div>
     <%= content_tag 'h3', ibm("Password") %>
-    <%= f.password_field :password, :class => :textinput %>
+    <div><%= f.password_field :password, :class => :textinput %></div>
     <%= content_tag 'h3', ibm("Confirm Password") %>
-    <%= f.password_field :password_confirmation, :class => :textinput %>
+    <div><%= f.password_field :password_confirmation, :class => :textinput %></div>
 
-    <%= link_to "<span>SIGN UP</span>", "#",
+    <div><%= link_to "<span>SIGN UP</span>", "#",
     			{ :onclick => "$('#{dom_id(@user)}').submit()",
-    			  :class => :button } %>
+    			  :class => :button } %></div>
   <% end -%>
 
   <%= errors_on :user %>

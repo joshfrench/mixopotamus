@@ -224,7 +224,6 @@ strong {
 .down, .up, .heavy {
     position: relative;
     display: inline;
-    opacity: inherit;
 }
 .down {
     top: 1px;
@@ -242,5 +241,4 @@ strong {
     padding: 2px;
     background-color:#7C0000;
     color: #FFF;
-    opacity: 1;
 }

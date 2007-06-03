@@ -47,9 +47,9 @@ module ApplicationHelper
       str.each_byte do |b|
         m = rand(100)
           ret << case m
-          when 0..2: "<span class=up>#{b.chr}</span>"
-          when 3..4: "<span class=down>#{b.chr}</span>"
-          when 5: "<span class=heavy>#{b.chr}</span>"
+          when 0..2: "<span class=\"up\">#{b.chr}</span>"
+          when 3..4: "<span class=\"down\">#{b.chr}</span>"
+          when 5: "<span class=\"heavy\">#{b.chr}</span>"
           else b.chr
         end
       end
@@ -57,7 +57,7 @@ module ApplicationHelper
     end
     
     def admin_email
-      mail_to ADMIN_EMAIL, ibm(ADMIN_EMAIL), :encoding => "hex"
+      mail_to ADMIN_EMAIL, ibm(ADMIN_EMAIL), :encode => "javascript"
     end
     
     def fancyname_for(user)

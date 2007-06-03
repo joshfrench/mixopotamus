@@ -1,16 +1,16 @@
 <% remote_form_for @user do |f| -%>
   <%= content_tag 'h3', ibm("Name") %>
-  <%= f.text_field :login, :class => :textinput %>
+  <div><%= f.text_field :login, :class => :textinput %></div>
   <%= content_tag 'h3', ibm("Address") %>
-  <%= f.text_area :address %>
+  <div><%= f.text_area :address %></div>
   <%= content_tag 'h3', ibm("Email") %>
-  <%= f.text_field :email, :class => :textinput %>
-	<%= link_to_remote "<span>UPDATE</span>",
+  <div><%= f.text_field :email, :class => :textinput %></div>
+	<div><%= link_to_remote "<span>UPDATE</span>",
                { :url => user_url(@user),
 				 :with => "Form.serialize('#{dom_id(@user, prefix = 'edit')}')",
 				 :loading => "Spinner.hide_element('#{dom_id(@user, prefix = 'edit')}')",
 				 :complete => "Spinner.show_element('#{dom_id(@user, prefix = 'edit')}')" },
-                 :class => :button %>
+                 :class => :button %></div>
 <% end %>
 <%= errors_on :user %>
 <%= show_flash -%>

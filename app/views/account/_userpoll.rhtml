@@ -1,5 +1,5 @@
 <%# whitespace:pre on this partial %>
 <div class="poll" id="<%= dom_id(userpoll) %>"><p><%= fancyname_for userpoll %>
 <%= ibm h(userpoll.address) %>
-<%= mail_to userpoll.email, ibm(userpoll.email), :encode => "hex" -%></a></p><%= star_for(userpoll) -%><%= confirm_for(userpoll) -%>
+<%= mail_to userpoll.email, ibm(userpoll.email), :encode => "hex" -%></p><%= star_for(userpoll) -%><%= confirm_for(userpoll) -%>
 </div>
