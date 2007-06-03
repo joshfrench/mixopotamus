@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <span id="spinner" class="spinner" style="display:none"><%= ibm 'Loading...' %></span>
   <div id="header">
 	<%= content_tag 'h1', ibm(PROJECT_NAME) %>
 <%= ibm( "." * 80 ) %>

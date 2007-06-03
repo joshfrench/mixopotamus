@@ -54,10 +54,10 @@ h3.error {
 #sets, #info, #stats {
 	margin-bottom: 92px;
 }
-/*#sets h3, #sets ul, #stats * {
+#sets h3, #sets ul, #stats * {
     clear: none;
     width: 184px;
-}*/
+}
 #stats ul {
 	font-size: 11px;
 }
@@ -234,4 +234,13 @@ strong {
 }
 .heavy {
     font-weight: bold !important;
+}
+.spinner {
+    position: fixed;
+    top: 2px;
+    right: 2px;
+    padding: 2px;
+    background-color:#7C0000;
+    color: #FFF;
+    opacity: 1;
 }

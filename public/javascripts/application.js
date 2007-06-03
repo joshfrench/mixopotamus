@@ -22,11 +22,20 @@ var Spinner = {}
 
 Spinner = {
     hide_element: function(element) {
-        Effect.Fade($(element), { duration:0.3, to:0.2, queue:'front'})
+        
+        new Effect.Parallel(
+            [ new Effect.Fade($(element), { to:0.2 }) ],
+            [ new Effect.Appear($(spinner), { to:0.999999 }) ],
+            { queue:'front' }
+            )
     },
     
     show_element: function(element) {
-        Effect.Appear($(element), { duration:0.3, to:0.999999, queue:'end' } );
+        new Effect.Parallel(
+            [ new Effect.Appear($(element), { to:0.999999 } ) ],
+            [ new Effect.Fade($(spinner)) ],
+            { queue:'end' }
+            )
         /* to: fixes weird display issues in Safari */
         Effect.Opacity($(element), { to:1, queue:'end' } );
     }
