@@ -19,12 +19,13 @@ class InvitesController < ApplicationController
   end
   
   def create
+    @user = User.find(params[:id])
     respond_to do |format|
       format.js do
-        @invite = current_user.create_invite(params[:invite][:to])
+        @invite = @user.create_invite(params[:invite][:to])
         if @invite.valid?
           if @invite.is_unique?
-            current_user.send_invite(@invite)
+            @user.send_invite(@invite)
             flash.now[:confirm] = "Invitation sent to #{@invite.to_email}!"
           else
             flash.now[:error] = "Someone already sent an invite to #{@invite.to_email}. Send anyway?"
@@ -36,10 +37,11 @@ class InvitesController < ApplicationController
   end
   
   def confirm
+    @user = User.find(params[:user_id])
     respond_to do |format|
       format.js do
-        @invite = current_user.invites.find_by_id(params[:id])
-        current_user.send_invite @invite
+        @invite = @user.invites.find_by_id(params[:id])
+        @user.send_invite @invite
         flash.now[:confirm] = "Invitation sent to #{@invite.to_email}!"
         render :action => "create" 
       end
@@ -47,9 +49,10 @@ class InvitesController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:user_id])
     respond_to do |format|
       format.js do
-        current_user.invites.find_by_id(params[:id]).destroy
+        @user.invites.find_by_id(params[:id]).destroy
         flash.now[:error] = "Invite cancelled."
         @invite = Invite.new 
       end
@@ -58,6 +61,14 @@ class InvitesController < ApplicationController
   
   def new
     @invite = Invite.new
+  end
+  
+  def authorized?
+    case action_name
+      when 'confirm', 'destroy' then current_user==User.find(params[:user_id])
+      when 'create' then current_user==User.find(params[:id])
+      else true
+    end
   end
   
 end

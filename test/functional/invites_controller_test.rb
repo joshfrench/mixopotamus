@@ -37,20 +37,20 @@ class InvitesControllerTest < Test::Unit::TestCase
     login_as :aaron
     assert users(:aaron).invite_count > 0
     assert_difference(Invite, :count, 1) do
-      xhr :post, :create, :invite => { :to => 'new@invite.com' }
+      xhr :post, :create, :invite => { :to => 'new@invite.com' }, :id => users(:aaron).id
     end
   end
   
   def test_dont_invite_existing_member
     login_as :aaron
     assert_difference(Invite, :count, 0) do
-      xhr :post, :create, :invite => { :to => users(:quentin).email }
+      xhr :post, :create, :invite => { :to => users(:quentin).email }, :id => users(:aaron).id
     end
   end
   
   def test_catch_open_invite
     login_as :aaron
-    xhr :post, :create, :invite => { :to => invites(:open).to_email }
+    xhr :post, :create, :invite => { :to => invites(:open).to_email }, :id => users(:aaron).id
     assert_template "invites/confirm"
   end
   
@@ -71,6 +71,30 @@ class InvitesControllerTest < Test::Unit::TestCase
     xhr :post, :confirm, :id => @invite.id, :user_id => @quentin.id
     @invite.reload
     assert_equal "open", @invite.status
+  end
+  
+  def test_authorize_create
+    @invite = invites(:pending)
+    login_as :quentin
+    assert_no_difference(Invite, :count) do
+      xhr :post, :create, :id => users(:aaron).id, :invite => { :to => 'whatever@vitamin-j.com' }
+    end
+  end
+  
+  def test_authorize_confirm
+    login_as :aaron
+    @invite = invites(:pending)
+    xhr :post, :confirm, :id => @invite.id, :user_id => users(:quentin).id
+    @invite.reload
+    assert_equal 'pending', @invite.status
+  end
+  
+  def test_authorize_destroy
+    login_as :aaron
+    @invite = invites(:pending)
+    assert_no_difference(Invite, :count) do
+      xhr :delete, :destroy, :id => @invite.id, :user_id => users(:quentin).id
+    end
   end
   
 end

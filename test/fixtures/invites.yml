@@ -16,7 +16,7 @@ accepted:
 pending:
     id: 3
     from_user: 1
-    to_email: 'foo@bar.com'
+    to_email: 'foo@vitamin-j.com'
     created_at: <%= 3.week.ago.to_s :db %>
     uuid: AAABBBCCCDDDEEEFFFGGGHHHIIIJJJKK
     status: 'pending'
