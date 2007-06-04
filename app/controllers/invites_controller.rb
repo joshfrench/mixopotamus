@@ -19,7 +19,7 @@ class InvitesController < ApplicationController
   end
   
   def create
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     respond_to do |format|
       format.js do
         @invite = @user.create_invite(params[:invite][:to])
@@ -64,11 +64,7 @@ class InvitesController < ApplicationController
   end
   
   def authorized?
-    case action_name
-      when 'confirm', 'destroy' then current_user==User.find(params[:user_id])
-      when 'create' then current_user==User.find(params[:id])
-      else true
-    end
+    %w{ create confirm destroy }.include?(action_name) ? current_user==User.find(params[:user_id]) : true
   end
   
 end
