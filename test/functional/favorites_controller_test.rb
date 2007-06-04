@@ -36,4 +36,20 @@ class FavoritesControllerTest < Test::Unit::TestCase
     assert_response :success
     assert /star_off.png/.match(@response.body)
   end
+  
+  def test_unauthorized_create
+    login_as :quentin
+    assert_no_difference(Favorite, :count) do
+      xhr :post, :create, { :user_id => @aaron.id,
+                            :assign => assignments(:one).id }
+    end
+  end
+  
+  def test_unauthorized_destroy
+    login_as :quentin
+    assert_no_difference(Favorite, :count) do
+      xhr :delete, :destroy, { :user_id => @aaron.id, 
+                               :id => favorites(:aaron_to_quentin).id }
+    end
+  end
 end

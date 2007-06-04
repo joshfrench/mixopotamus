@@ -73,7 +73,7 @@ class InvitesControllerTest < Test::Unit::TestCase
     assert_equal "open", @invite.status
   end
   
-  def test_authorize_create
+  def test_unauthorized_create
     @invite = invites(:pending)
     login_as :quentin
     assert_no_difference(Invite, :count) do
@@ -81,7 +81,7 @@ class InvitesControllerTest < Test::Unit::TestCase
     end
   end
   
-  def test_authorize_confirm
+  def test_unauthorized_confirm
     login_as :aaron
     @invite = invites(:pending)
     xhr :post, :confirm, :id => @invite.id, :user_id => users(:quentin).id
@@ -89,7 +89,7 @@ class InvitesControllerTest < Test::Unit::TestCase
     assert_equal 'pending', @invite.status
   end
   
-  def test_authorize_destroy
+  def test_unauthorized_destroy
     login_as :aaron
     @invite = invites(:pending)
     assert_no_difference(Invite, :count) do
