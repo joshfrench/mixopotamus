@@ -1,7 +1,7 @@
 class Favorite < ActiveRecord::Base
   belongs_to :user, :foreign_key => "from_user"
   belongs_to :assignment 
-  delegate :swapset_id, :user_id,  :to => :assignment
+  delegate :swapset_id, :to => :assignment
   
   attr_accessor :from, :to, :swapset
   
@@ -11,6 +11,10 @@ class Favorite < ActiveRecord::Base
   def from=(from)
     self.from_user = from.id
     @from = from
+  end
+  
+  def to_user
+    assignment.user
   end
   
   def before_validation_on_create

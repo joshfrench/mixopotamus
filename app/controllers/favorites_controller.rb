@@ -16,8 +16,9 @@ class FavoritesController < ApplicationController
   def destroy
     respond_to do |format|
       format.js do
-        @user = User.find(params[:user_id])
-        @user.favorites.find_by_id(params[:id]).destroy.user_id
+        favorite = User.find(params[:user_id]).favorites.find(params[:id])
+        @user = favorite.to_user
+        favorite.destroy
         render :action => "swap_star" 
       end
     end

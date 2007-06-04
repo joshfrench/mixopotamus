@@ -69,4 +69,18 @@ class RegistrationsControllerTest < Test::Unit::TestCase
     assert_response :success
     assert /current swap is now closed/.match(@response.body)
   end
+  
+  def test_unauthorized_create
+    login_as :quentin
+    assert_no_difference(Registration, :count) do
+      xhr :post, :create, :user_id => users(:aaron).id
+    end
+  end
+  
+  def test_unauthorized_destroy
+    login_as :aaron
+    assert_no_difference(Registration, :count) do
+      xhr :delete, :destroy, :user_id => users(:quentin).id, :id => registrations(:one)
+    end
+  end
 end

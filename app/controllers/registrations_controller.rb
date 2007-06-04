@@ -8,8 +8,7 @@ class RegistrationsController < ApplicationController
   def create
     respond_to do |format|
       format.js do
-        User.find_by_id(params[:user_id]) == current_user
-        @swap.register current_user
+        @swap.register User.find_by_id(params[:user_id])
         flash.now[:confirm] = "Thanks for signing up!"
       end
     end
@@ -20,7 +19,7 @@ class RegistrationsController < ApplicationController
   def destroy
     respond_to do |format|
       format.js do
-        current_user.registrations.find_by_id(params[:id]).destroy
+        User.find(params[:user_id]).registrations.find(params[:id]).destroy
         flash.now[:error] = "Registration cancelled." 
       end
     end
@@ -29,5 +28,9 @@ class RegistrationsController < ApplicationController
   protected
   def get_current_swap
     @swap = Swap.current
+  end
+  
+  def authorized?
+    %w{ create destroy }.include?(action_name) ? current_user == User.find(params[:user_id]) : true
   end
 end
