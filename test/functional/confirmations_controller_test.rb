@@ -12,7 +12,6 @@ class ConfirmationsControllerTest < Test::Unit::TestCase
     @controller = ConfirmationsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    login_as :aaron
     @aaron = users(:aaron)
     @quentin = users(:quentin)
     @set = swapsets(:alligator)
@@ -20,6 +19,7 @@ class ConfirmationsControllerTest < Test::Unit::TestCase
   end
 
   def test_create
+    login_as :aaron
     assign = assignments(:one)
     assert_difference(Confirmation, :count, 1) do
       xhr :post, :create, { :user_id => @aaron.id, :assign => assign.id }
@@ -29,10 +29,26 @@ class ConfirmationsControllerTest < Test::Unit::TestCase
   end
   
   def test_destroy
+    login_as :aaron
     assert_difference(Confirmation, :count, -1) do
-      xhr :delete, :destroy, { :user_id => @aaron.id, :id => confirmations(:aaron_to_quentin)}
+      xhr :delete, :destroy, { :user_id => @aaron.id, :id => confirmations(:aaron_to_quentin) }
     end
     assert_response :success
     assert /mail_off.png/.match(@response.body)
+  end
+  
+  def test_unauthorized_create
+    login_as :quentin
+    assign = assignments(:one)
+    assert_no_difference(Confirmation, :count) do
+      xhr :post, :create, { :user_id => @aaron.id, :assign => assign.id }
+    end
+  end
+  
+  def test_unauthorized_destroy
+    login_as :quentin
+    assert_no_difference(Confirmation, :count) do
+      xhr :delete, :destroy, { :user_id => @aaron.id, :id => confirmations(:aaron_to_quentin) }
+    end
   end
 end
