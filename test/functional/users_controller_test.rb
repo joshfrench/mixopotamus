@@ -54,4 +54,13 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_equal old_email, @quentin.email
     
   end
+  
+  def test_unauthorized_update
+    login_as :aaron
+    new_name = "Seymour Butts"
+    xhr :put, :update, { :id => @quentin.id, 
+                          :user => { :login => new_name } }
+    @quentin.reload
+    assert_equal 'quentin', @quentin.login
+  end
 end

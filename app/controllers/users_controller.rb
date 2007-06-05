@@ -22,4 +22,8 @@ class UsersController < ApplicationController
     @user = current_user
   end
   
+  def authorized?
+    %w{ update }.include?(action_name) ? current_user == User.find(params[:id]) : true
+  end
+  
 end
