@@ -2,8 +2,30 @@
   <div id="wtf">
   <%= content_tag 'h2', ibm('WTF?') %>
   <%= separator %>
-  <%= content_tag 'h3', ibm('Lorem ipsum') %>
-  <%= content_tag 'p', ibm('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.') %>
+  
+  <%= content_tag 'h3', ibm('So how does this work?') %>
+  <%= content_tag 'p', ibm('It\'s dead simple. We do one swap every quarter. Everyone who signs up gets assigned to a group of six people. Everyone within a group sends a mix to each member of that group.') %>
+  <%= content_tag 'h3', ibm('Spell it out for me.') %>
+  <%= content_tag 'p', ibm('At the end of each registration period, everyone who signed up for that round is assigned to a group with five others.') %>
+  <%= content_tag 'p', ibm('Everyone in a group gets the names and addresses of the other members of that group.') %>
+  <%= content_tag 'p', ibm('Everyone makes a mix and sends one copy to the other five members of their group. This means everyone also gets five mixes, one from each of the other group members.') %>
+  <%= content_tag 'p', ibm('Once each swap is said and done, you tell us who stood out with an awesome mix and who fell down and didn\'t complete the swap. People who fail to send out a mix will earn the enmity and ill will of their fellow swappers, and will be barred from participating again.') %>
+  
+  <%= content_tag 'h3', ibm('What about all my personal info?') %>
+  <%= content_tag 'p', ibm('Obviously this won\'t work unless we have your name, address, and email, so you do have to provide some personal details. The site is password protected, and only members of your group will have access to your information.') %>
+  <%= content_tag 'p', ibm('If you\'re not comfortable sharing that info, maybe this project isn\'t for you. But we\'re not going to validate your real address or anything, so if you prefer to provide an alternate name and/or address that will still allow the mixes to reach you, it should be fine.') %>
+  <%= content_tag 'p', ibm('We hate spam as much as you do--your email address will never be shared with anyone else.') %>
+  
+  <%= content_tag 'h3', ibm('So what kind of mix should I make?') %>
+  <%= content_tag 'p', ibm('The point of all of this is to expose others to music which might be new to them. As long as you bear that in mind, anything goes. Be as plain or as fancy as you want.') %>
+  <%= content_tag 'p', ibm('Do include a track listing so people can figure out what they\'re listening to. Also, label your discs--a handful of unlabeled CDs is no fun for anyone.') %>
+    <%= content_tag 'p', ibm('Equally unfun is an envelope full of CD shards. Mark your mailers "Fragile" or "Do not bend."') %>
+  <%= content_tag 'p', ibm('If there\'s any language or content on your mix that might be unsuitable for work or other situations, be kind and make a note of it somewhere.') %>
+  
+  <%= content_tag 'h3', ibm('Is that all?') %>
+  <p><%= ibm('Is it? If you have any other questions, feel free to ask at ') << admin_email << ibm('. Happy mixing!') %></p>
+    
+    <%= content_tag 'p', "- josh @ #{PROJECT_NAME}" %>
   </div>
 </div>
 

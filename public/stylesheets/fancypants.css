@@ -221,6 +221,10 @@ strong {
 	font-size: 1.2em;
 	top: 1px;
 }
+#wtf h3 {
+    color: #666;
+    margin-top: 12px;
+}
 .down, .up, .heavy {
     position: relative;
     display: inline;
@@ -233,6 +237,9 @@ strong {
 }
 .heavy {
     font-weight: bold !important;
+}
+.mouse {
+    font-size: 11px;
 }
 .spinner {
     position: fixed;

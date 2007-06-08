@@ -3,7 +3,7 @@
   <% form_for @user, :url => signup_url do |f| -%>
     <%= content_tag 'h3', ibm("Name") %>
     <div><%= f.text_field :login, :class => :textinput %></div>
-    <%= content_tag 'h3', ibm("Email") %>
+    <%= content_tag 'h3', ibm("Email") << " <span class=\"mouse\">#{ibm '(Never shared, never spammed)'}</span>" %>
     <div><%= f.text_field :email, :value => params[:email], :class => :textinput %></div>
     <%= content_tag 'h3', ibm("Address") %>
     <div><%= f.text_area :address %></div>
