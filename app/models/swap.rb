@@ -34,7 +34,7 @@ class Swap < ActiveRecord::Base
   end
   
   def register(user, double=false)
-    users << user unless (users.include?(user) || !user.ok_to_play?)
+    users << user unless (self.users.include?(user) || !user.ok_to_play?)
     reg = Registration.find_by_user_id_and_swap_id(user.id, id)
     reg.update_attribute(:double, double)
     reg

@@ -46,6 +46,7 @@ ActionMailer::Base.smtp_settings = {
 require 'action_mailer/ar_mailer'
 require 'uuidtools'
 require 'permutation'
+require 'rake_helper'
 
 SWAP_LENGTH = 13.weeks
 REGISTRATION_LENGTH = 7.weeks
