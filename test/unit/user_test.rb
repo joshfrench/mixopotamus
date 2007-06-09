@@ -30,18 +30,6 @@ class UserTest < Test::Unit::TestCase
       i = @aaron.create_invite 'test@foo'
     end
   end
-
-  def test_should_detect_favorites
-    @set = swapsets(:alligator)
-    @quentin = users(:quentin)
-    @aaron = users(:aaron)
-    @set.assign @aaron
-    assert @quentin.favorited(@aaron, @set).nil?
-    assert @quentin.favorite(@aaron, @set)
-    @quentin.reload
-    @set.reload
-    assert !(@quentin.favorited(@aaron, @set).nil?)
-  end
   
   def test_should_not_allow_zero_invites_to_send
     @quentin = users(:quentin)

@@ -2,6 +2,7 @@ class Assignment < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :swapset
   has_many    :confirmations
+  has_many    :favorites
   
   delegate :swap, :to => :swapset
   

@@ -7,7 +7,7 @@ class Favorite < ActiveRecord::Base
   
   validates_presence_of :from_user
   validates_presence_of :assignment_id
-  
+
   def from=(from)
     self.from_user = from.id
     @from = from

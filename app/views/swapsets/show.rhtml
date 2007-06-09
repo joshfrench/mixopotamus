@@ -1,2 +1,1 @@
-<%# show_set determines which view (basic|poll) to display -%>
-<%= show_set @set %>
+<%= render :partial => (Swap.current.deadline < Time.now) ? "poll" : "basic" %>

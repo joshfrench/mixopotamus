@@ -1,9 +1,6 @@
 class User < AuthenticatedUser
-  has_many  :favorites, :foreign_key => "from_user" do
-              def by_user_and_set(user,set)
-                find_by_assignment_id Assignment.find_by_swapset_id_and_user_id(set.id, user.id).id
-              end
-            end
+  has_many  :favorites, :foreign_key => 'from_user'
+  has_many  :favorite_mixes, :through => :favorites, :source => :assignment
   has_many  :stars, :class_name => "Favorite", 
             :finder_sql => 'SELECT favorites.* FROM favorites INNER JOIN assignments ON assignment_id = assignments.id WHERE assignments.user_id = #{id}'
   has_many  :assignments
@@ -48,12 +45,12 @@ class User < AuthenticatedUser
     nil
   end
             
-  def favorite(user, swapset)
-    favorites << Favorite.create(:to => user, :swapset => swapset)
+  def favorite(assignment)
+    favorite_mixes << assignment unless favorite_mixes.include?(assignment)
   end
   
-  def favorited(user, swapset)
-    favorites.by_user_and_set(user, swapset)
+  def favorited?(assignment)
+    favorite_mixes.include? assignment
   end
   
   def give_invite

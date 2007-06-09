@@ -87,10 +87,9 @@ module ApplicationHelper
     
     # multiple controllers need access to these #
     
-    def star_for(user)
-      favorite = current_user.favorited(user,@set)
-      assign = @set.assignments.find_by_user_id(user)
-      render :partial => (favorite.nil? ? "favorites/star" : "favorites/starred"), :object => user, :locals => { :favorite => favorite, :assign => assign }
+    def star_for(assignment)
+      favorite = current_user.favorites.find_by_assignment_id(assignment.id)
+      render :partial => (favorite.nil? ? "favorites/star" : "favorites/starred"), :object => assignment, :locals => { :favorite => favorite }
     end
 
     def confirm_for(to_user)
@@ -99,8 +98,8 @@ module ApplicationHelper
       render :partial => (confirmation.nil? ? "confirmations/confirm" : "confirmations/confirmed"), :object => to_user, :locals => { :confirmation => confirmation, :assignment => assign }
     end
 
-    def reload_user(user)
-      page.replace dom_id(user), :partial => "account/userpoll", :object => user
+    def reload_assignment(assignment)
+      page.replace dom_id(assignment), :partial => "account/assignment_poll", :object => assignment
     end
     
     def hide_element(object)

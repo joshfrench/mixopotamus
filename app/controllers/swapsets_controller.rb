@@ -8,15 +8,13 @@ class SwapsetsController < ApplicationController
   
   def show
     sets = current_user.swapsets.find_all_by_swap_id(Swap.current)
-    @set = sets.first
-    # get all users of all sets into single array
-    users = sets.inject([]) { |s,u| s.concat u.users }
+    assignments = sets.inject([]) { |s,a| s.concat a.assignments }
     # hackity hack: move an obnoxious address length 
-    # to last position where it won't overlap another
-    @users = (users - [current_user]).sort_by { |u| u.address.length }
-  rescue
+    # to position 5 where it won't overlap another
+    @assignments = (assignments - current_user.assignments).sort_by { |a| a.user.address.length }
+#  rescue
     # no sets yet? ok, skip this component
-    render :nothing => true
+#    render :nothing => true
   end
 
 end

@@ -1,1 +1,1 @@
-page.replace "favorite_for_#{@user.id}", star_for(@user)
+page.replace "favorite_for_#{@assignment.id}", star_for(@assignment)

@@ -20,4 +20,5 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect '/', :controller => 'account', :action => 'show'
   map.default 'hello', :controller => 'account', :action => 'show'
+
 end
