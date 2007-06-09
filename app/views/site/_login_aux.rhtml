@@ -1,3 +1,7 @@
 <div id="info">
-	<%= link_to "I forgot my password", forgot_url -%>
+  <%= separator '=', :short %>
+	<%= content_tag 'p', link_to("I forgot my password", forgot_url) %>
+	<%= separator '-', :short %>
+	<%= content_tag 'p', (link_to "What's the deal here?", faq_url+'?') %>
+	<%= separator '=', :short %>
 </div>

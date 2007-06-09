@@ -56,8 +56,8 @@ module ApplicationHelper
       ret
     end
     
-    def admin_email
-      mail_to ADMIN_EMAIL, ibm(ADMIN_EMAIL), :encode => "javascript"
+    def admin_email(text=ADMIN_EMAIL)
+      mail_to ADMIN_EMAIL, ibm(text), :encode => "javascript"
     end
     
     def fancyname_for(user)

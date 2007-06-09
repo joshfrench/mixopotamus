@@ -1,0 +1,22 @@
+<div id="left">
+  <div id="wtf">
+  <%= content_tag 'h2', ibm('WTF?') %>
+  <%= separator %>
+  
+  <%= content_tag 'h3', ibm('What\'s the deal here?') %>
+  <%= content_tag 'p', ibm('It\'s pretty simple. We run a swap every quarter. Everyone who signs up for a swap gets assigned to a group with 5 other people. You make a mix and share it with the people in your group; in return, you get a mix from each of them. If all goes well, everyone hears some awesome new stuff.') %>
+  
+  <%= content_tag 'h3', ibm('Neat. Can I play?') %>
+  <%= content_tag 'p', ibm('Oh, man, this is awkward... we\'re just starting out, so the site is invite-only until we get all the kinks worked out. If you received an invite by email, use that link to sign up. If not, check back later. Sorry!') %>
+  
+  </div>
+</div>
+
+<div id="right">
+  <div id="info">
+    <%= separator '=', :short %>
+    <p><%= link_to ibm("Log In"), login_path %> <span class="bullet">*</span> 
+       <%= admin_email 'Contact Us' %></p>
+    <%= separator '=', :short %>
+  </div>
+</div>
