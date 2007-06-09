@@ -12,9 +12,9 @@ class SwapsetsController < ApplicationController
     # hackity hack: move an obnoxious address length 
     # to position 5 where it won't overlap another
     @assignments = (assignments - current_user.assignments).sort_by { |a| a.user.address.length }
-#  rescue
+  rescue
     # no sets yet? ok, skip this component
-#    render :nothing => true
+    render :nothing => true
   end
 
 end

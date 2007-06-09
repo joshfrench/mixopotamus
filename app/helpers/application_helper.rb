@@ -92,10 +92,9 @@ module ApplicationHelper
       render :partial => (favorite.nil? ? "favorites/star" : "favorites/starred"), :object => assignment, :locals => { :favorite => favorite }
     end
 
-    def confirm_for(to_user)
-      assign = Assignment.find_by_swapset_id_and_user_id(@set.id, to_user.id)
-      confirmation = current_user.confirms_given.by_assignment(assign)
-      render :partial => (confirmation.nil? ? "confirmations/confirm" : "confirmations/confirmed"), :object => to_user, :locals => { :confirmation => confirmation, :assignment => assign }
+    def confirm_for(assignment)
+      confirmation = current_user.confirmations.find_by_assignment_id(assignment.id)
+      render :partial => (confirmation.nil? ? "confirmations/confirm" : "confirmations/confirmed"), :object => assignment, :locals => { :confirmation => confirmation }
     end
 
     def reload_assignment(assignment)

@@ -2,5 +2,5 @@
 <%- assignment = assignment_poll -%>
 <div class="poll" id="<%= dom_id(assignment) %>"><p><%= fancyname_for assignment.user %>
 <%= ibm h(assignment.user.address) %>
-<%= mail_to assignment.user.email, ibm(assignment.user.email), :encode => "hex" -%></p><%= star_for(assignment) -%><%# confirm_for(userpoll) -%>
+<%= mail_to assignment.user.email, ibm(assignment.user.email), :encode => "hex" -%></p><%= star_for(assignment) -%><%= confirm_for(assignment) -%>
 </div>

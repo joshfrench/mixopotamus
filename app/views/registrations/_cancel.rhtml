@@ -2,7 +2,7 @@
 <%= ibm "You can click here to " -%>
 <%= link_to_remote ibm("change your mind"),
                    { :url => registration_url(:user_id => current_user,
-                              :id => current_user.registrations.by_swap(Swap.current)),
+                              :id => current_user.registrations.find_by_swap_id(Swap.current)),
                       :loading => "Spinner.hide_element('registration_content')",
                       :complete => "Spinner.show_element('registration_content')",
                       :method => :delete         

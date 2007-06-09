@@ -1,35 +1,27 @@
 class User < AuthenticatedUser
-  has_many  :favorites, :foreign_key => 'from_user'
-  has_many  :favorite_mixes, :through => :favorites, :source => :assignment
+  has_many  :favorites, 
+            :foreign_key => 'from_user'
+  has_many  :favorite_mixes, 
+            :through => :favorites, 
+            :source => :assignment
   has_many  :stars, :class_name => "Favorite", 
-            :finder_sql => 'SELECT favorites.* FROM favorites INNER JOIN assignments ON assignment_id = assignments.id WHERE assignments.user_id = #{id}'
+            :finder_sql => 'SELECT favorites.* ' +
+            'FROM favorites INNER JOIN assignments ' +
+            'ON assignment_id = assignments.id WHERE assignments.user_id = #{id}'
   has_many  :assignments
   has_many  :swapsets,
-            :through => :assignments do
-              def by_swap(swap)
-                find_by_swap_id(swap.id)
-              end
-            end
-  has_many  :confirmations,
             :through => :assignments
-  has_many  :confirms_given, :class_name => "Confirmation", 
-            :foreign_key => :from_user do
-              def by_user_and_set(user,set)
-                assign = Assignment.find_by_swapset_id_and_user_id(set.id, user.id)
-                find_by_assignment_id(assign.id)
-              end
-              def by_assignment(assign)
-                find_by_assignment_id(assign.id)
-              end
-            end
-  has_many  :registrations, :dependent => :destroy do
-              def by_swap(swap)
-                find_by_swap_id(swap.id)
-              end
-            end
+  has_many  :confirmations, 
+            :foreign_key => :from_user
+  # mixes_confirmed = other people's mixes you've confirmed receipt of
+  has_many  :mixes_confirmed, 
+            :through => :confirmations, 
+            :source => :assignment
+  has_many  :registrations, :dependent => :destroy
   has_many  :swaps,
             :through => :registrations
-  has_many  :invites, :foreign_key => "from_user"
+  has_many  :invites, 
+            :foreign_key => "from_user"
             
   def <=>(other)
     self.id <=> other.id
@@ -51,6 +43,10 @@ class User < AuthenticatedUser
   
   def favorited?(assignment)
     favorite_mixes.include? assignment
+  end
+  
+  def confirm(assignment)
+    mixes_confirmed << assignment unless mixes_confirmed.include?(assignment)
   end
   
   def give_invite
@@ -76,7 +72,7 @@ class User < AuthenticatedUser
   end
   
   def confirmed_for?(swap)
-    swapsets.by_swap(swap).assignments.find_by_user_id(id).confirmations.count > 0
+    swapsets.find_by_swap_id(swap).assignments.find_by_user_id(id).confirmations.count > 0
   rescue  
     false
   end

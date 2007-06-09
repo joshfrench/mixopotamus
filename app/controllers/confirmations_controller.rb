@@ -4,9 +4,9 @@ class ConfirmationsController < ApplicationController
   def create
     respond_to do |format|
       format.js do
-        assignment = Assignment.find(params[:assign])
-        @user = assignment.user
-        Confirmation.create :from => User.find(params[:user_id]), :assignment_id => assignment.id
+        @assignment = Assignment.find(params[:assign])
+        current_user = User.find(params[:user_id])
+        current_user.confirm(@assignment)
         render :action => "swap_mail" 
       end
     end
@@ -15,8 +15,8 @@ class ConfirmationsController < ApplicationController
    def destroy
      respond_to do |format|
        format.js do
-         confirmation = User.find(params[:user_id]).confirms_given.find_by_id(params[:id])
-         @user = confirmation.assignment.user
+         confirmation = User.find(params[:user_id]).confirmations.find(params[:id])
+         @assignment = confirmation.assignment
          confirmation.destroy
          render :action => "swap_mail"
        end

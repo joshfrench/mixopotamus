@@ -19,10 +19,10 @@ class ConfirmationsControllerTest < Test::Unit::TestCase
   end
 
   def test_create
-    login_as :aaron
-    assign = assignments(:one)
+    login_as :quentin
+    assign = Assignment.find_by_user_id(@aaron.id)
     assert_difference(Confirmation, :count, 1) do
-      xhr :post, :create, { :user_id => @aaron.id, :assign => assign.id }
+      xhr :post, :create, { :user_id => @quentin.id, :assign => assign.id }
     end
     assert_response :success
     assert /mail_on.png/.match(@response.body)
