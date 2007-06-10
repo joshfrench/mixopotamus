@@ -54,7 +54,7 @@ SWAPSET_SIZE = 6
 ADMIN_EMAIL = 'josh@vitamin-j.com'
 PROJECT_NAME = 'UNNAMED MIX PROJECT'
 ExceptionNotifier.exception_recipients = %w(josh@vitamin-j.com)
-SENDMAIL_BATCH_SIZE = 4
+SENDMAIL_BATCH_SIZE = 20
 
 Time::DATE_FORMATS[:small] = "%B %d"
 Time::DATE_FORMATS[:medium] = "%B %d %H:%M"
