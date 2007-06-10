@@ -8,4 +8,8 @@ class Registration < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :swap_id
   
+  def set_as_double
+    update_attribute(:double, true)
+  end
+  
 end

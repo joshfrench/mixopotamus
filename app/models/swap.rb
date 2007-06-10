@@ -2,13 +2,19 @@ class Swap < ActiveRecord::Base
   include Combinatorial
   
   has_many  :swapsets, :dependent => :destroy
-  has_many :registrations, :dependent => :destroy
+  has_many  :registrations, :dependent => :destroy
+  has_many  :assignments, :through => :swapsets
+  #has_many  :confirmed_mixes, :through => :confirmations
   has_many  :users,
             :through => :registrations
   has_many  :doubles,
             :through => :registrations,
             :source => :user,
-            :conditions => ["double = ?", true]
+            :conditions => ["double = ?", true] do
+              def <<(user)
+                Registration.with_scope(:create => {:double => true}) {self.concat user}
+              end
+            end
             
   validates_presence_of :deadline
   
@@ -34,16 +40,15 @@ class Swap < ActiveRecord::Base
   end
   
   def register(user, double=false)
-    users << user unless (self.users.include?(user) || !user.ok_to_play?)
-    reg = Registration.find_by_user_id_and_swap_id(user.id, id)
-    reg.update_attribute(:double, double)
-    reg
+    unless (self.users.include?(user) || !user.ok_to_play?)
+      double ? doubles << user : users << user
+    end
   rescue
     nil
   end
   
   def cancel_registration(user)
-    registrations.find_by_user_id(user.id).destroy
+    users.delete user
   end
   
   def self.current

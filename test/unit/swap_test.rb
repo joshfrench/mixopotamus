@@ -30,10 +30,10 @@ class SwapTest < Test::Unit::TestCase
   end
   
   def test_should_map_double_correctly
-    rt = @swap.register(@aaron, true)
-    rf = @swap.register(@quentin)
-    assert rt.double?
-    assert !rf.double?
+    @swap.register(@aaron, true)
+    @swap.register(@quentin)
+    assert @swap.doubles.include?(@aaron)
+    assert !(@swap.doubles.include? @quentin)
   end
   
   def test_should_cancel_registration
@@ -46,7 +46,6 @@ class SwapTest < Test::Unit::TestCase
     @swap = Swap.create(:deadline => 11.weeks.from_now)
     12.times do |i|
       u = create_user :login => "user#{i}", :email => "email#{i}@test.com", :address => "#{i} Test Street"
-      @swap.register u
     end
     assert_equal 12, @swap.users.size
     @swap.make_sets
@@ -62,11 +61,9 @@ class SwapTest < Test::Unit::TestCase
   def test_should_fill_short_set
     @swap = swaps(:registration_period)
     ("A".."F").each { |i| create_user(:login => "user_#{i}", :email => "#{i}@test.com") }
-    %w{ A B C }.each do |i|
-      @swap.register(User.find_by_login("user_#{i}"))
-    end
     %w{ D E F }.each do |i|
-      @swap.register(User.find_by_login("user_#{i}"), true)
+      @user = User.find_by_login("user_#{i}")
+      @user.registrations.first.set_as_double
     end
     @set = @swap.swapsets.create(:name => "set1")
     ("A".."D").each do |i|
@@ -86,10 +83,9 @@ class SwapTest < Test::Unit::TestCase
      @swap = swaps(:registration_period)
       ("A".."F").each { |i| create_user(:login => "user_#{i}", :email => "#{i}@test.com") }
       %w{ C D E }.each do |i|
-        @swap.register(User.find_by_login("user_#{i}"))
       end
       %w{ A B F }.each do |i|
-        @swap.register(User.find_by_login("user_#{i}"), :double => true)
+        User.find_by_login("user_#{i}").registrations.first.set_as_double
       end
       @set = @swap.swapsets.create(:name => "set1")
       ("A".."D").each do |i|
@@ -112,12 +108,11 @@ class SwapTest < Test::Unit::TestCase
     @set = @swap.swapsets.create :name => "New Set"
     %w{ A B C D }.each do |i|
       user =  User.find_by_login "user_#{i}"
-      @swap.register user
       @set.assign user
     end
     %w{ E F G H }.each do |i|
       user =  User.find_by_login "user_#{i}"
-      @swap.register(user, true) # register as double
+      user.registrations.first.set_as_double
     end
     @swap.initialize_set(@swap.users, SWAPSET_SIZE, Swapset.find(:all).map {|set| set.users})
     @swap.fill_set(@set)
@@ -152,12 +147,11 @@ class SwapTest < Test::Unit::TestCase
     %w{ B H }.each { |i| @old_set_6.assign(User.find_by_login("user_#{i}")) }
     %w{ A B C D }.each do |i|
       user =  User.find_by_login("user_#{i}")
-      @swap.register user
       @set.assign user
     end
      %w{ E F G H }.each do |i|
       user =  User.find_by_login("user_#{i}")
-      @swap.register(user, true) # register as double
+      user.registrations.find_by_swap_id(@swap).set_as_double
     end
     @swap.initialize_set(@swap.users, SWAPSET_SIZE, Swapset.find(:all).map {|set| set.users})
     @swap.fill_set(@set)
