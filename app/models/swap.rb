@@ -4,7 +4,11 @@ class Swap < ActiveRecord::Base
   has_many  :swapsets, :dependent => :destroy
   has_many  :registrations, :dependent => :destroy
   has_many  :assignments, :through => :swapsets
-  #has_many  :confirmed_mixes, :through => :confirmations
+  has_many  :confirmations, 
+            :finder_sql => 'SELECT confirmations.* 
+              FROM confirmations  INNER JOIN assignments 
+              ON confirmations.assignment_id = assignments.id    
+              WHERE (assignments.swapset_id IN (#{self.swapsets.map(&:id).join(\',\')}))'
   has_many  :users,
             :through => :registrations
   has_many  :doubles,

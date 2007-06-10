@@ -5,9 +5,8 @@ class User < AuthenticatedUser
             :through => :favorites, 
             :source => :assignment
   has_many  :stars, :class_name => "Favorite", 
-            :finder_sql => 'SELECT favorites.* ' +
-            'FROM favorites INNER JOIN assignments ' +
-            'ON assignment_id = assignments.id WHERE assignments.user_id = #{id}'
+            :through => :assignments,
+            :source => :favorites
   has_many  :assignments
   has_many  :swapsets,
             :through => :assignments
@@ -17,6 +16,9 @@ class User < AuthenticatedUser
   has_many  :mixes_confirmed, 
             :through => :confirmations, 
             :source => :assignment
+  has_many  :received_confirmations,
+            :through => :assignments,
+            :source => :confirmations
   has_many  :registrations, :dependent => :destroy
   has_many  :swaps,
             :through => :registrations
@@ -75,7 +77,7 @@ class User < AuthenticatedUser
   end
   
   def confirmed_for?(swap)
-    swapsets.find_by_swap_id(swap).assignments.find_by_user_id(id).confirmations.count > 0
+    !((swap.confirmations & received_confirmations).empty?)
   rescue  
     false
   end
