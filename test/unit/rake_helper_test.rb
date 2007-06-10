@@ -3,7 +3,7 @@ require 'rake_helper'
 
 class RakeHelperTest < Test::Unit::TestCase
   
-  fixtures :users, :swaps, :swapsets
+  fixtures :users, :swaps, :swapsets, :invites
 
   def setup
     @swap = swaps(:registration_period)
@@ -84,6 +84,13 @@ class RakeHelperTest < Test::Unit::TestCase
     end
   end
   
+  def test_signup_notifier
+    assert User.recent_signups.size > 0
+    assert_difference(@emails, :size, 1) do
+      RakeHelper.send_signup_report
+    end
+  end
+  
   protected
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire', :address => 'Quire Ave.' }.merge(options))
@@ -93,6 +100,7 @@ class RakeHelperTest < Test::Unit::TestCase
        ('A'..'E').to_a.each do |i|
           user = create_user(:email => "user#{i}@vitamin-j.com", :login => "user#{i}")
           # duh... users are auto-registered on create during an open swap
+          # so don't register them again here
         end
     end
   

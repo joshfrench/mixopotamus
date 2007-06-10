@@ -13,3 +13,8 @@ desc "Send mail from queue"
 task :sendmail => [:environment] do
   system "ruby #{RAILS_ROOT}/vendor/ar_mailer-1.1.0/bin/ar_sendmail -b #{SENDMAIL_BATCH_SIZE} -o"
 end
+
+desc "Report new users"
+task :send_signup_report => [:environment] do
+  RakeHelper.send_signup_report if User.recent_signups.size > 0
+end

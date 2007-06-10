@@ -20,6 +20,10 @@ class RakeHelper
     Swap.current.users.each { |user| UserNotifier.deliver_registration_reminder(user) }
   end
   
+  def self.send_signup_report
+    AdminNotifier.deliver_new_users
+  end
+  
 end
 
 class Time

@@ -22,6 +22,9 @@ class User < AuthenticatedUser
             :through => :registrations
   has_many  :invites, 
             :foreign_key => "from_user"
+  has_one   :accepted_invite, 
+            :class_name => 'Invite',
+            :foreign_key => 'accepted_by'
             
   def <=>(other)
     self.id <=> other.id
@@ -97,6 +100,12 @@ class User < AuthenticatedUser
   
   def before_create
     self.invite_count = 0
+  end
+  
+  def self.recent_signups
+    find(:all, 
+         :conditions => ["created_at > ?", 1.week.ago-1.hour.ago], 
+         :order => :created_at)
   end
   
   protected
