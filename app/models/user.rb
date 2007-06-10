@@ -77,7 +77,7 @@ class User < AuthenticatedUser
   end
   
   def confirmed_for?(swap)
-    !((swap.confirmations & received_confirmations).empty?)
+    !(swap.confirmations & received_confirmations).empty?
   rescue  
     false
   end
