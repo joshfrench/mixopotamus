@@ -9,7 +9,8 @@ class User < AuthenticatedUser
             :source => :favorites
   has_many  :assignments
   has_many  :swapsets,
-            :through => :assignments
+            :through => :assignments,
+            :conditions => ['swap_id NOT null']
   has_many  :confirmations, 
             :foreign_key => :from_user
   # mixes_confirmed = other people's mixes you've confirmed receipt of
