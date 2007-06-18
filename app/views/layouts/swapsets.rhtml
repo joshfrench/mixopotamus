@@ -1,5 +1,5 @@
 <div id="current">
-  <h2><%= ibm 'Current Swap' -%> <%= content_tag 'span', "(#{Swap.current.deadline.to_s(:small)})", :class => 'hdate' %></h2>
+  <h2><%= ibm 'Current Swap' -%> <%= content_tag 'span', ibm("(#{Swap.current.deadline.to_s(:small)})"), :class => 'hdate' %></h2>
   <%= separator %>
   <div id="current_content">
   <%= yield %>

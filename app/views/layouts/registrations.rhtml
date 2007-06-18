@@ -1,5 +1,5 @@
 <div id="register">
-  <h2><%= ibm 'Upcoming Swaps' -%></h2>
+  <h2><%= ibm 'Next Swap' -%> <%= content_tag 'span', ibm("(#{(Swap.current.deadline + SWAP_LENGTH).to_s(:small)})"), :class => 'hdate' %></h2>
   <%= separator '=', :long %>
   <div id="registration_content">
   <%= yield %>

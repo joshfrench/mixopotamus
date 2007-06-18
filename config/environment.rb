@@ -75,5 +75,7 @@ end
 Time::DATE_FORMATS[:small] = Proc.new do |date|
   date.strftime "%B " << date.strftime("%d").gsub(/^0/, '')
 end
-Time::DATE_FORMATS[:medium] = "%B %d %H:%M"
+Time::DATE_FORMATS[:medium] = Proc.new do |date|
+  date.strftime "%B " << date.strftime("%d").gsub(/^0/, '') << date.strftime " %H:%M"
+end
 Time::DATE_FORMATS[:micro] = "%B %Y"
