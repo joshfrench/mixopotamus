@@ -25,9 +25,3 @@ class RakeHelper
   end
   
 end
-
-class Time
-  def just_passed?
-    (Time.now-self).between?(0, 24.hours)
-  end
-end

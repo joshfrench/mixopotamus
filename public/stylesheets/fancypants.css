@@ -17,6 +17,10 @@ h2, h3 {
 	text-transform: uppercase;
 	margin-bottom: 3px;
 }
+.hdate {
+    font-size: 14px;
+    color: #999;
+}
 h3 {
 	font-size: 14px;
 	clear: left;

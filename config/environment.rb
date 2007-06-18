@@ -56,6 +56,24 @@ PROJECT_NAME = 'UNNAMED MIX PROJECT'
 ExceptionNotifier.exception_recipients = %w(josh@vitamin-j.com)
 SENDMAIL_BATCH_SIZE = 20
 
-Time::DATE_FORMATS[:small] = "%B %d"
+require 'date'
+require 'time'
+
+class Time
+  def to_s(format = :default)
+    case DATE_FORMATS[format]
+    when Proc   then DATE_FORMATS[format].call(self)
+    when String then strftime(DATE_FORMATS[format]).strip
+    else to_default_s
+    end
+  end
+  def just_passed?
+    (Time.now-self).between?(0, 24.hours)
+  end
+end
+
+Time::DATE_FORMATS[:small] = Proc.new do |date|
+  date.strftime "%B " << date.strftime("%d").gsub(/^0/, '')
+end
 Time::DATE_FORMATS[:medium] = "%B %d %H:%M"
 Time::DATE_FORMATS[:micro] = "%B %Y"
