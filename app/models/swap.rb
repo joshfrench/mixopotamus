@@ -22,6 +22,8 @@ class Swap < ActiveRecord::Base
             
   validates_presence_of :deadline
   
+  attr_protected :position
+  
   acts_as_list
   
   alias_method :next, :lower_item

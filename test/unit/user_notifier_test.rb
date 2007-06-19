@@ -50,7 +50,7 @@ class UserNotifierTest < Test::Unit::TestCase
     @swap = swaps(:registration_period)
     response = UserNotifier.create_registration_reminder(@quentin)
     assert_match /the last day to complete your swap surveys is/, response.body
-    assert_match /#{@swap.registration_deadline.strftime "%B %d"}/, response.body
+    assert_match /#{@swap.registration_deadline.to_s :small}/, response.body
     assert_equal @quentin.email, response.to[0]
   end
 

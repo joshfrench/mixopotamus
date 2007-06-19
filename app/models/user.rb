@@ -29,6 +29,8 @@ class User < AuthenticatedUser
             :class_name => 'Invite',
             :foreign_key => 'accepted_by'
             
+  attr_protected  :invite_count, :reset
+            
   def <=>(other)
     self.id <=> other.id
   end
