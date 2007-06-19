@@ -28,7 +28,7 @@ Rails::Initializer.run do |config|
 
 
   # Activate observers that should always be running
-  config.active_record.observers = :user_observer, :invite_observer, :confirmation_observer, :assignment_observer
+  config.active_record.observers = :user_observer, :invite_observer, :confirmation_observer, :assignment_observer, :favorite_observer
 
 
 end
