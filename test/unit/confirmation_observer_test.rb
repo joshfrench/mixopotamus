@@ -24,4 +24,14 @@ class ConfirmationObserverTest < Test::Unit::TestCase
     end
   end
   
+  def test_destroy_favorite_with_confirmation
+    @confirmation = confirmations(:aaron_to_quentin)
+    @aaron = users(:aaron)
+    assert @aaron.favorited?(@confirmation.assignment)
+    assert_difference Favorite, :count, -1 do
+      @confirmation.destroy
+    end
+    assert !(@aaron.reload.favorited? @confirmation.assignment)
+  end
+  
 end
