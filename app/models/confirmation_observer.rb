@@ -5,8 +5,7 @@ class ConfirmationObserver < ActiveRecord::Observer
   end
   
   def after_destroy(confirmation)
-    if favorite = confirmation.assignment.favorites.find_by_from_user(confirmation.user.id)
-      favorite.destroy
-    end
+    confirmation.assignment.favorites.find_by_from_user(confirmation.user.id).destroy
+  rescue
   end
 end

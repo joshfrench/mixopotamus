@@ -34,4 +34,15 @@ class ConfirmationObserverTest < Test::Unit::TestCase
     assert !(@aaron.reload.favorited? @confirmation.assignment)
   end
   
+  def test_destroy_confirmation_without_favorite
+    @quentin = users(:quentin)
+    @aaron = users(:aaron)
+    swapsets(:alligator).assign users(:aaron)
+    @quentin.confirm @aaron.assignments.first
+    @confirmation = @quentin.confirmations.first
+    assert_difference Confirmation, :count, -1 do
+      @confirmation.destroy
+    end
+  end
+  
 end
