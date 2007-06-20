@@ -1,1 +1,1 @@
-page.replace "confirm_for_#{@assignment.id}", confirm_for(@assignment)
+page.replace dom_id(@assignment, 'icons'), :partial => "account/icons", :locals => { :assignment => @assignment }
