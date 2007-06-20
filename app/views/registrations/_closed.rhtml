@@ -2,4 +2,4 @@
 <%= ibm "#{Swap.current.users.include?(current_user) ? 'are signed up' : 'did not sign up' }" %>
 <%= ibm " for this round." %></p>
 <p><%= ibm "Registration for the next swap will begin on " %>
-<strong><%= ibm "#{Swap.current.deadline.to_s(:small)}" %></strong>.</p>
+<strong><%= ibm "#{@swap.deadline.to_s(:small)}" %></strong>.</p>
