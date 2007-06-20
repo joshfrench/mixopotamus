@@ -7,7 +7,8 @@ class SwapsetsController < ApplicationController
   end
   
   def show
-    sets = current_user.swapsets.find_all_by_swap_id(Swap.current)
+    @swap = Swap.current.registration_deadline < Time.now ? Swap.previous : Swap.current
+    sets = current_user.swapsets.find_all_by_swap_id(@swap.id)
     if sets.size > 0
       assignments = sets.inject([]) { |s,a| s.concat a.assignments }
       # hackity hack: move an obnoxious address length 
@@ -17,6 +18,8 @@ class SwapsetsController < ApplicationController
       # no sets yet? ok, skip this component
       render :nothing => true
     end
+  rescue
+    render :nothing => true
   end
 
 end

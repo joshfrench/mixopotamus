@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class ConfirmationObserverTest < Test::Unit::TestCase
-  fixtures :confirmations, :users, :assignments, :swaps, :swapsets
+  fixtures :confirmations, :users, :assignments, :swaps, :swapsets, :favorites
   
   def setup
     @quentin = users(:quentin)

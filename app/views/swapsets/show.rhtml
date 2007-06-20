@@ -1,1 +1,1 @@
-<%= render :partial => (Swap.current.deadline < Time.now) ? "poll" : "basic" %>
+<%= render :partial => (@swap.deadline < Time.now) ? "poll" : "basic" %>
