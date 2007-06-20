@@ -8,6 +8,7 @@ class SwapsetsController < ApplicationController
   
   def show
     @swap = Swap.current.registration_deadline < Time.now ? Swap.previous : Swap.current
+    begin
     sets = current_user.swapsets.find_all_by_swap_id(@swap.id)
     if sets.size > 0
       assignments = sets.inject([]) { |s,a| s.concat a.assignments }
@@ -18,8 +19,10 @@ class SwapsetsController < ApplicationController
       # no sets yet? ok, skip this component
       render :nothing => true
     end
-  rescue
-    render :nothing => true
+    rescue ### if this is the first swap, things blow up if you don't rescue here:
+      @swap = Swap.current
+      retry
+    end
   end
 
 end

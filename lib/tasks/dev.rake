@@ -43,7 +43,7 @@ namespace :dev do
   
   desc "Move timeline to post-registration"
   task :advance_timeline => [:environment] do
-    Swap.current.update_attribute(:deadline, 1.hour.ago)
+    Swap.current.update_attribute(:deadline, 6.weeks.from_now)
     %x{#{RAILS_ROOT}/script/daily}
   end 
   
