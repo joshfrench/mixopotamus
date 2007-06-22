@@ -2,7 +2,9 @@ class SwapsetsController < ApplicationController
   before_filter :login_required, :get_current_set
   
   def index
-    @swapsets = current_user.swapsets - Swap.current.swapsets
+    @swap = Swap.current.registration_deadline < Time.now ? Swap.current : Swap.previous
+    raise "SO UNTESTED" if 'test' == RAILS_ENV
+    @swapsets = current_user.swapsets - @swap.swapsets
     render @swapsets.empty? ? { :nothing => true } : { :layout => "past_sets" }
   end
   

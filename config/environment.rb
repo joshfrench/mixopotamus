@@ -47,6 +47,7 @@ require 'action_mailer/ar_mailer'
 require 'uuidtools'
 require 'permutation'
 require 'rake_helper'
+require 'redgreen' unless ENV['TM_RUBY']
 
 SWAP_LENGTH = 13.weeks
 REGISTRATION_LENGTH = 7.weeks
