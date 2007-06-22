@@ -2,8 +2,8 @@ class RegistrationsController < ApplicationController
   before_filter :login_required, :get_current_swap
   
   def show
-    if @swap.registration_deadline > Time.now
-      render :template => "registrations/new"
+    if Time.now < @swap.registration_deadline
+      render :template => current_user.registered_for?(@swap) ? "registrations/show" : "registrations/new"
     else
       render :nothing => true
     end

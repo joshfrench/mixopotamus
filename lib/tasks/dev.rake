@@ -1,7 +1,7 @@
 namespace :dev do
   desc "Add sample data"
   task :populate => [:environment] do
-    Swap.create(:deadline => 8.weeks.from_now)
+    Swap.create(:deadline => 10.weeks.from_now)
     
     User.create(:password => 'b33omber', 
                 :password_confirmation => 'b33omber', 

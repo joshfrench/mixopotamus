@@ -7,7 +7,7 @@ class SwapsetsController < ApplicationController
   end
   
   def show
-    @swap = Swap.current.registration_deadline < Time.now ? Swap.previous : Swap.current
+    @swap = Swap.current.registration_deadline > Time.now ? Swap.previous : Swap.current
     begin
     sets = current_user.swapsets.find_all_by_swap_id(@swap.id)
     if sets.size > 0

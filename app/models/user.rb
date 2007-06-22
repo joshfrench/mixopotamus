@@ -85,6 +85,10 @@ class User < AuthenticatedUser
     false
   end
   
+  def registered_for?(swap)
+    swaps.include? swap
+  end
+  
   def forgot_password
     @forgotten_password = true
     make_reset
