@@ -20,6 +20,7 @@ class AccountControllerTest < Test::Unit::TestCase
     login_as :quentin
     get :show
     assert_valid_markup
+    ###
   end
 
   def test_should_login_and_redirect

@@ -61,9 +61,9 @@ class User < AuthenticatedUser
     update_attribute(:invite_count, invite_count+1)
   end
   
-  def create_invite(email)
+  def create_invite(email, message)
     raise "Out of invites" if self.invite_count < 1
-    Invite.create(:from => self, :to => email)
+    Invite.create(:from => self, :to => email, :message => message)
   end
   
   def send_invite(invite)

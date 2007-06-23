@@ -7,6 +7,7 @@ class Invite < ActiveRecord::Base
   validates_format_of     :to_email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
                           :message => "That's not a valid email."
   validates_presence_of   :from_user
+  validates_presence_of   :message
   
   attr_protected  :uuid, :status, :accepted_by
   

@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 9) do
     t.column "uuid",        :string
     t.column "from_user",   :integer
     t.column "to_email",    :string
+    t.column "message",     :text
     t.column "status",      :string
     t.column "created_at",  :datetime
     t.column "accepted_at", :datetime

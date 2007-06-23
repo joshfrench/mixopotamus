@@ -4,6 +4,7 @@ class CreateInvites < ActiveRecord::Migration
       t.column :uuid, :string, :length => 32
       t.column :from_user, :int
       t.column :to_email, :string, :length => 255
+      t.column :message, :text, :length => 500
       t.column :status, :string
       t.column :created_at, :datetime
       t.column :accepted_at, :datetime

@@ -19,7 +19,7 @@ class InviteTest < Test::Unit::TestCase
   
   def test_should_create
     assert_difference(Invite, :count, 1) do
-      @i = Invite.create(:from => @quentin, :to => 'josh@vitamin-j.com')
+      @i = Invite.create(:from => @quentin, :to => 'josh@vitamin-j.com', :message => "Hi,  think you should check this out.")
     end
     assert_equal 32, @i.uuid.length
     assert_equal 'pending', @i.status
@@ -35,7 +35,7 @@ class InviteTest < Test::Unit::TestCase
   
   def test_should_not_invite_existing_user
     assert_no_difference(Invite, :count) do
-      i = Invite.create(:from => @aaron, :to => @quentin.email)
+      i = Invite.create(:from => @aaron, :to => @quentin.email, :message => "Foo")
       assert i.errors.on(:to_email)
     end
   end
