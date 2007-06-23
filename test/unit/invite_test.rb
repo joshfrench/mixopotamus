@@ -24,6 +24,7 @@ class InviteTest < Test::Unit::TestCase
     assert_equal 32, @i.uuid.length
     assert_equal 'pending', @i.status
     assert_equal @quentin, @i.user
+    assert_equal 'Hi,  think you should check this out.', @i.reload.message
   end
   
   def test_should_deliver
@@ -42,11 +43,11 @@ class InviteTest < Test::Unit::TestCase
   
   def test_should_not_invite_bad_email
     assert_no_difference(Invite, :count) do
-      i = Invite.create(:from => users(:aaron), :to => 'test@foo')
+      i = Invite.create(:from => users(:aaron), :to => 'test@foo', :message => "Foo")
       assert !i.valid?
       assert i.errors.on(:to_email)
       
-      i = Invite.create(:from => users(:aaron), :to => nil)
+      i = Invite.create(:from => users(:aaron), :to => nil, :message => "Foo")
       assert !i.valid?
       assert i.errors.on(:to_email)
     end

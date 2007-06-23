@@ -22,7 +22,7 @@ class InvitesController < ApplicationController
     @user = User.find(params[:user_id])
     respond_to do |format|
       format.js do
-        @invite = @user.create_invite(params[:invite][:to])
+        @invite = @user.create_invite(params[:invite][:to], params[:invite][:message])
         if @invite.valid?
           if @invite.is_unique?
             @user.send_invite(@invite)

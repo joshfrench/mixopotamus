@@ -37,7 +37,7 @@ class InvitesControllerTest < Test::Unit::TestCase
     login_as :aaron
     assert users(:aaron).invite_count > 0
     assert_difference(Invite, :count, 1) do
-      xhr :post, :create, :invite => { :to => 'new@invite.com' }, :user_id => users(:aaron).id
+      xhr :post, :create, :invite => { :to => 'new@invite.com', :message => "Foo" }, :user_id => users(:aaron).id
     end
     assert_match /have #{users(:aaron).reload.invite_count} invites/, @response.body
   end
@@ -45,13 +45,13 @@ class InvitesControllerTest < Test::Unit::TestCase
   def test_dont_invite_existing_member
     login_as :aaron
     assert_difference(Invite, :count, 0) do
-      xhr :post, :create, :invite => { :to => users(:quentin).email }, :user_id => users(:aaron).id
+      xhr :post, :create, :invite => { :to => users(:quentin).email, :message => "Foo" }, :user_id => users(:aaron).id
     end
   end
   
   def test_catch_open_invite
     login_as :aaron
-    xhr :post, :create, :invite => { :to => invites(:open).to_email }, :user_id => users(:aaron).id
+    xhr :post, :create, :invite => { :to => invites(:open).to_email, :message => "Foo" }, :user_id => users(:aaron).id
     assert_template "invites/confirm"
   end
   
@@ -78,7 +78,7 @@ class InvitesControllerTest < Test::Unit::TestCase
     @invite = invites(:pending)
     login_as :quentin
     assert_no_difference(Invite, :count) do
-      xhr :post, :create, :user_id => users(:aaron).id, :invite => { :to => 'whatever@vitamin-j.com' }
+      xhr :post, :create, :user_id => users(:aaron).id, :invite => { :to => 'whatever@vitamin-j.com', :message => "Foo" }
     end
   end
   
