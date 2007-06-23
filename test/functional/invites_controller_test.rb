@@ -39,6 +39,7 @@ class InvitesControllerTest < Test::Unit::TestCase
     assert_difference(Invite, :count, 1) do
       xhr :post, :create, :invite => { :to => 'new@invite.com' }, :user_id => users(:aaron).id
     end
+    assert_match /have #{users(:aaron).reload.invite_count} invites/, @response.body
   end
   
   def test_dont_invite_existing_member

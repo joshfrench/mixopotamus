@@ -3,7 +3,7 @@
 <%= separator %>
 <%= content_tag 'p', ibm("Thanks for signing up! You can change your details (email, address, password) by following the \"My Account\" link over on the right-hand side.") %>
 
-<%= content_tag('p', Swap.current.open? ? ibm("You are currently registered for the next swap. If you want to opt out, you can do so any time before #{Swap.current.registration_deadline[:small]}.") : ibm("Unfortunately, you missed the sign-up date for the current swap. Registration for the next swap begins on #{Swap.current.deadline.to_s[:small]}, so check back then.")) %>
+<%= content_tag('p', Swap.current.open? ? ibm("You are currently registered for the next swap. If you want to opt out, you can do so any time before #{Swap.current.registration_deadline.to_s :small}.") : ibm("Unfortunately, you missed the sign-up date for the current swap. Registration for the next swap begins on #{Swap.current.deadline.to_s :small}, so check back then.")) %>
 
 <%= content_tag 'p', ibm("If you have any questions, feel free: ") + admin_email + '.' %>
 </div>

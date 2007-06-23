@@ -14,7 +14,7 @@ class UserTest < Test::Unit::TestCase
   def test_should_decrement_successful_invite
     @aaron = users(:aaron)
     assert_difference(Invite, :count, 1) do
-      @invite = @aaron.create_invite 'test@foo.com'
+      @invite = @aaron.create_invite :to => 'test@foo.com'
     end
     assert_difference(@aaron, :invite_count, -1) do
       @aaron.send_invite @invite
