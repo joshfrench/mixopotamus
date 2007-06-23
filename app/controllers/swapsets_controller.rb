@@ -3,9 +3,10 @@ class SwapsetsController < ApplicationController
   
   def index
     @swap = Swap.current.registration_deadline < Time.now ? Swap.current : Swap.previous
-    raise "SO UNTESTED" if 'test' == RAILS_ENV
     @swapsets = current_user.swapsets - @swap.swapsets
     render @swapsets.empty? ? { :nothing => true } : { :layout => "past_sets" }
+  rescue ### if this is the first swap, you won't find any previous sets
+    render :nothing => true
   end
   
   def show
