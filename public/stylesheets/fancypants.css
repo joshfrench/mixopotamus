@@ -94,6 +94,7 @@ p {
 a {
 	color: #83ACB6;
 	text-decoration: none;
+	outline: none;
 }
 #sets h3 {
     color: #83ACB6;
@@ -262,4 +263,7 @@ strong {
     background-color:#7C0000;
     color: #FFF;
     font-size: 11px;
+}
+:focus {
+  -moz-outline-style: none;
 }
