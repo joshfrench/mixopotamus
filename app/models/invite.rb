@@ -62,5 +62,6 @@ class Invite < ActiveRecord::Base
   
   def validate_on_create
     errors.add(:to_email, "#{to_email} is already a member") if User.count(:conditions => {:email => to_email}) > 0
+    errors.add(:to_email, "That's just a sample email address.") if 'myfriend@mixopotamus.com' == to_email
   end
 end
