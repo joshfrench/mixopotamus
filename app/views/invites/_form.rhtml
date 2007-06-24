@@ -1,5 +1,10 @@
-<%= content_tag 'p', ibm(get_string_for_invites_left) %>
-<div id="invite_form">
+<% invite_string = get_string_for_invites_left %>
+<p><%= invite_string.shift -%>
+<%= link_to_function invite_string.shift do |page|
+      page[:new_invite].reset
+      page.visual_effect :toggle_blind, :invite_form
+    end %>?</p>
+<div id="invite_form"<%= ' style="display:none"' unless flash[:had_error] %>>
 <% remote_form_for @invite, :url => invites_url(current_user) do |f| -%>
 	<%= content_tag 'h3', ibm('Send this to') %>
 	<p><%= f.text_field :to, :class => :textinput, 
@@ -15,7 +20,7 @@
              :complete => "Spinner.show_element('invites_content'); Form.reset($(#{dom_id @invite}))" },
            :class => 'button center' %>
 <%= link_to_function("<span>CANCEL</span>", :class => :button) do |page|
-    page[:invite_form].visual_effect :toggle_blind
+    page.visual_effect :toggle_blind, :invite_form
   end %>
 &nbsp;
 </div>

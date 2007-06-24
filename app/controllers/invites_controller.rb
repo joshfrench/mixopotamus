@@ -27,10 +27,13 @@ class InvitesController < ApplicationController
           if @invite.is_unique?
             @user.send_invite(@invite)
             flash.now[:confirm] = "Invitation sent to #{@invite.to_email}!"
+            make_new_invite
           else
             flash.now[:error] = "Someone already sent an invite to #{@invite.to_email}. Send anyway?"
             render :action => "confirm"
           end
+        else
+          flash[:had_error] = true
         end 
       end
     end
@@ -43,6 +46,7 @@ class InvitesController < ApplicationController
         @invite = @user.invites.find_by_id(params[:id])
         @user.send_invite @invite
         flash.now[:confirm] = "Invitation sent to #{@invite.to_email}!"
+        make_new_invite
         render :action => "create" 
       end
     end
@@ -54,25 +58,30 @@ class InvitesController < ApplicationController
       format.js do
         @user.invites.find_by_id(params[:id]).destroy
         flash.now[:error] = "Invite cancelled."
-        @invite = Invite.new 
+        make_new_invite 
       end
     end
   end
   
   def new
-    @invite = Invite.new :to => 'myfriend@mixopotamus.com',
-                         :message => "Hi friend,
-
-Have you ever received a great mix from a friend? How about a total stranger? You can get both if you join me at Mixopotamus, a simple mix swapping project. You'll receive 5 original mix CDs in return for sending out 5 copies of your own mix.
-
-What will your mix say about you? And to whom? Who knows. But I know you've got great taste in music; why not share it with some other people and discover some great new stuff while you're at it?
-
-Happy mixing!
-#{current_user.first_name}"
+    make_new_invite
   end
   
   def authorized?
     %w{ create confirm destroy }.include?(action_name) ? current_user==User.find(params[:user_id]) : true
+  end
+  
+  protected
+  def make_new_invite
+        @invite = Invite.new :to => 'myfriend@mixopotamus.com',
+                             :message => "Hi friend,
+
+Have you ever received a great mix from a friend? How about a total stranger? You can get both if you join me at Mixopotamus, a simple mix swapping project. You'll exchange an original mix CD with 5 other people, selected at random.
+
+What will your mix say about you? And to whom? Who knows. But I know you've got great taste in music--why not share it with some other people and discover some great new stuff while you're at it?
+
+Happy mixing!
+#{current_user.first_name}"
   end
   
 end

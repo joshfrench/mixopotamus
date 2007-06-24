@@ -12,7 +12,9 @@ module InvitesHelper
   end
   
   def get_string_for_invites_left
-    sprintf("You have #{pluralize current_user.reload.invite_count, 'invite'} left. %s", 1 == current_user.invite_count ? 'Why not send it now?' : "Go ahead and send one!")
+    string = Array.new.push ibm("You have #{pluralize current_user.reload.invite_count, 'invite'} left. Why not ")
+    string << (1 == current_user.invite_count ? ibm('send it now') : ibm('send one now'))
+    string
   end
   
 end
