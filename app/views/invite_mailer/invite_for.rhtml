@@ -1,11 +1,7 @@
-Greetings!
+<%= @invite.user.login %> has invited you to take part in the Mixopotamus project.
+. . . . . . . . . . . . . . . . . . . . . . . .
 
-<%= @invite.user.login %> has invited you to take part in <%= PROJECT_NAME %>. Four times a year, participants make a mix and swap it with five other members, chosen at random -- could be your friends, could be total strangers. 
+<%= h @invite.message %>
 
-You don't have to get fancy (unless you want to) and you choose when to participate and when to sit out a round -- no obligations here. Since <%= @invite.user.first_name %> thinks you've got good taste in music, why not share it with a few others and discover some great new stuff in return?
-
-The whole thing is easy and free. To get started, just visit this link: <%= @url %>
-
-Thanks, and happy mixing!
-
-josh @ <%= PROJECT_NAME %>
+. . . . . . . . . . . . . . . . . . . . . . . .
+For more information and to get started, just visit this link: <%= @url %>

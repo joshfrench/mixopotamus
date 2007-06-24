@@ -27,6 +27,7 @@ class InviteMailerTest < Test::Unit::TestCase
     assert_match /#{@user.login}/, response.body
     assert_match /#{@invite.uuid}/, response.body
     assert_equal @invite.to_email, response.to[0]
+    assert_match /#{@invite.message}/, response.body
   end
 
   private

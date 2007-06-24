@@ -150,6 +150,12 @@ a.button:active span {
 textarea {
 	height: 193px;
 }
+.inv {
+    height: 184px;
+    width: 100%;
+    font-size: 1em;
+    line-height: 1.2em;
+}
 #current .address_container {
 	clear: both;
 	margin-top: 14px;

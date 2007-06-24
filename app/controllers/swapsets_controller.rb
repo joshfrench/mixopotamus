@@ -2,11 +2,10 @@ class SwapsetsController < ApplicationController
   before_filter :login_required, :get_current_set
   
   def index
-    @swap = Swap.current.registration_deadline < Time.now ? Swap.current : Swap.previous
+    #@swap = Swap.current.registration_deadline < Time.now ? Swap.current : Swap.previous
+    @swap = Swap.current
     @swapsets = current_user.swapsets - @swap.swapsets
     render @swapsets.empty? ? { :nothing => true } : { :layout => "past_sets" }
-  rescue ### if this is the first swap, you won't find any previous sets
-    render :nothing => true
   end
   
   def show

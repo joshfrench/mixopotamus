@@ -1,6 +1,6 @@
-Welcome, <%= @user.first_name %>!
+Welcome, <%= h @user.first_name %>!
 
-Thanks for joining us. You can log in and view your account using your email (<%= @user.email %>) and the password you created.
+Thanks for joining us. You can log in and view your account using your email (<%= h @user.email %>) and the password you created.
 
 <% if Swap.current.open? -%>
 You have been registered for the upcoming swap. If you decide to opt out, you can do so any time before <%= Swap.current.registration_deadline.to_s(:small) %>. Otherwise, we'll send out your group assignments at that time.

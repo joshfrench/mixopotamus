@@ -5,7 +5,7 @@ require 'swapsets_controller'
 class SwapsetsController; def rescue_action(e) raise e end; end
 
 class SwapsetsControllerTest < Test::Unit::TestCase
-  fixtures :swapsets
+  fixtures :swapsets, :users, :swaps
 
   def setup
     @controller = SwapsetsController.new
@@ -14,7 +14,9 @@ class SwapsetsControllerTest < Test::Unit::TestCase
   end
 
   # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_index
+    login_as :quentin
+    get :index
+    
   end
 end

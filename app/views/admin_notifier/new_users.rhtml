@@ -1,9 +1,9 @@
 <%= pluralize @new_users.size, 'user' %> joined since <%= (1.week.ago-1.hour).to_s(:small) -%>:
 
 <%- @new_users.each do |new_user| -%>
-  <%= new_user.login.upcase %> <<%= new_user.email %>>
+  <%= h new_user.login.upcase %> <<%= new_user.email %>>
   Joined <%= new_user.created_at.to_s(:medium) %>
-  <%= "Invited by #{new_user.accepted_invite.user.login} <#{new_user.accepted_invite.user.email}>" if new_user.accepted_invite -%>
+  <%= "Invited by #{h new_user.accepted_invite.user.login} <#{h new_user.accepted_invite.user.email}>" if new_user.accepted_invite -%>
 
 <%- end -%>
 

@@ -6,7 +6,7 @@ open:
     created_at: <%= 1.week.ago.to_s :db %>
     uuid: 00001111222233334444555566667777
     status: 'open'
-    message: "This is an open invite."
+    message: "Foo bar invite for you."
 accepted:
     id: 2
     from_user: 1

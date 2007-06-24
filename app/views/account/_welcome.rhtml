@@ -1,5 +1,5 @@
 <div id="welcome">
-<%= content_tag 'h2', "Welcome, #{user.first_name}" %>
+<%= content_tag 'h2', "Welcome, #{h user.first_name}" %>
 <%= separator %>
 <%= content_tag 'p', ibm("Thanks for signing up! You can change your details (email, address, password) by following the \"My Info\" link over on the right-hand side.") %>
 

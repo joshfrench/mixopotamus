@@ -20,9 +20,9 @@ class InvitesController < ApplicationController
   
   def create
     @user = User.find(params[:user_id])
+    @invite = @user.create_invite(params[:invite][:to], params[:invite][:message])
     respond_to do |format|
       format.js do
-        @invite = @user.create_invite(params[:invite][:to], params[:invite][:message])
         if @invite.valid?
           if @invite.is_unique?
             @user.send_invite(@invite)
@@ -60,7 +60,15 @@ class InvitesController < ApplicationController
   end
   
   def new
-    @invite = Invite.new
+    @invite = Invite.new :to => 'myfriend@mixopotamus.com',
+                         :message => "Hi friend,
+
+Have you ever received a great mix from a friend? How about a total stranger? You can get both if you join me at Mixopotamus, a simple mix swapping project. You'll receive 5 original mix CDs in return for sending out 5 copies of your own mix.
+
+What will your mix say about you? And to whom? Who knows. But I know you've got great taste in music; why not share it with some other people and discover some great new stuff while you're at it?
+
+Happy mixing!
+#{current_user.first_name}"
   end
   
   def authorized?
