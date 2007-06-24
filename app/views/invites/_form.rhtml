@@ -1,10 +1,14 @@
 <% invite_string = get_string_for_invites_left %>
+
 <p><%= invite_string.shift -%>
 <%= link_to_function "#{invite_string.shift}" do |page|
-      page.rf.resetform()
+      page.rf.resetform("#{current_user.first_name}")
       page.visual_effect :toggle_blind, :invite_form
-      #page.select('#invites_content ul').each { |ul| page.remove ul }
+      page.select('#invites_content ul').each { |list| page.remove list }
+      page.select('#invites_content .confirm').each { |list| page.remove list }
+      page.select('#invites_content .error').each { |list| page.remove list }
     end %>?</p>
+    
 <div id="invite_form"<%= ' style="display:none"' unless flash[:had_error] %>>
   <% remote_form_for @invite, :url => invites_url(current_user) do |f| -%>
   	<%= content_tag 'h3', ibm('Send this to') %>
@@ -13,6 +17,7 @@
   	<%= content_tag 'h3', ibm('Write an invitation') << "<span class=\"mouse\">#{ibm ' (Or use ours)'}</span>" %>
   	<p><%= f.text_area :message, :class => :inv  %></p>
   <% end %>
+  
   <div style="width:175px; text-align:center; margin: 0 auto; display:block;">
   <%= link_to_remote "<span>SEND</span>",
              { :url => invites_url(current_user),
@@ -26,5 +31,6 @@
   &nbsp;
   </div>
 </div>
+
 <%= errors_on :invite -%>
 <%= show_flash -%>
