@@ -1,7 +1,5 @@
 class UserNotifier < ActionMailer::ARMailer
-  
-  default_url_options[:host] = 'www.example.com'
-  
+
   def signup_notification(user)
     setup_email(user)
     @subject    += "Welcome to #{PROJECT_NAME}!"

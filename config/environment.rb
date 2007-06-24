@@ -52,8 +52,9 @@ require 'redgreen' unless ENV['TM_RUBY']
 SWAP_LENGTH = 13.weeks
 REGISTRATION_LENGTH = 7.weeks
 SWAPSET_SIZE = 6
-ADMIN_EMAIL = 'josh@vitamin-j.com'
-PROJECT_NAME = 'UNNAMED MIX PROJECT'
+ADMIN_EMAIL = 'josh@mixopotamus.com'
+PROJECT_NAME = 'mixopotamus'
+ActionMailer::Base.default_url_options[:host] = 'www.mixopotamus.com'
 ExceptionNotifier.exception_recipients = %w(josh@vitamin-j.com)
 SENDMAIL_BATCH_SIZE = 20
 

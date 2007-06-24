@@ -1,7 +1,5 @@
 class InviteMailer < ActionMailer::ARMailer
-  
-  default_url_options[:host] = 'www.example.com'
-  
+    
   def invite_for(invite)
     @recipients     = "#{invite.to_email}"
     @from           = ADMIN_EMAIL
