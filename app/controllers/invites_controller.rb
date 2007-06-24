@@ -73,8 +73,8 @@ class InvitesController < ApplicationController
   
   protected
   def make_new_invite
-        @invite = Invite.new :to => 'myfriend@mixopotamus.com',
-                             :message => "Hi friend,
+        @default_email = 'myfriend@mixopotamus.com'
+        @default_message = "Hi friend,
 
 Have you ever received a great mix from a friend? How about a total stranger? You can get both if you join me at Mixopotamus, a simple mix swapping project. You'll exchange an original mix CD with 5 other people, selected at random.
 
@@ -82,6 +82,8 @@ What will your mix say about you? And to whom? Who knows. But I know you've got 
 
 Happy mixing!
 #{current_user.first_name}"
+        @invite = Invite.new :to => @default_email,
+                             :message => @default_message
   end
   
 end

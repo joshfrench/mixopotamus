@@ -1,29 +1,30 @@
 <% invite_string = get_string_for_invites_left %>
 <p><%= invite_string.shift -%>
-<%= link_to_function invite_string.shift do |page|
-      page[:new_invite].reset
+<%= link_to_function "#{invite_string.shift}" do |page|
+      page.rf.resetform()
       page.visual_effect :toggle_blind, :invite_form
+      #page.select('#invites_content ul').each { |ul| page.remove ul }
     end %>?</p>
 <div id="invite_form"<%= ' style="display:none"' unless flash[:had_error] %>>
-<% remote_form_for @invite, :url => invites_url(current_user) do |f| -%>
-	<%= content_tag 'h3', ibm('Send this to') %>
-	<p><%= f.text_field :to, :class => :textinput, 
-	                    :onfocus => "if ('myfriend@mixopotamus.com' == this.value) { this.value=''; }" %></p>
-	<%= content_tag 'h3', ibm('Write an invitation') << "<span class=\"mouse\">#{ibm ' (Or use ours)'}</span>" %>
-	<p><%= f.text_area :message, :class => :inv  %></p>
-<% end %>
-<div style="width:175px; text-align:center; margin: 0 auto; display:block;">
-<%= link_to_remote "<span>SEND</span>",
-           { :url => invites_url(current_user),
-             :with => "Form.serialize('#{dom_id(@invite)}')",
-             :loading => "Spinner.hide_element('invites_content')",
-             :complete => "Spinner.show_element('invites_content'); Form.reset($(#{dom_id @invite}))" },
-           :class => 'button center' %>
-<%= link_to_function("<span>CANCEL</span>", :class => :button) do |page|
-    page.visual_effect :toggle_blind, :invite_form
-  end %>
-&nbsp;
-</div>
+  <% remote_form_for @invite, :url => invites_url(current_user) do |f| -%>
+  	<%= content_tag 'h3', ibm('Send this to') %>
+  	<p><%= f.text_field :to, :class => :textinput, 
+  	                    :onfocus => "if ('myfriend@mixopotamus.com' == this.value) { this.value=''; }" %></p>
+  	<%= content_tag 'h3', ibm('Write an invitation') << "<span class=\"mouse\">#{ibm ' (Or use ours)'}</span>" %>
+  	<p><%= f.text_area :message, :class => :inv  %></p>
+  <% end %>
+  <div style="width:175px; text-align:center; margin: 0 auto; display:block;">
+  <%= link_to_remote "<span>SEND</span>",
+             { :url => invites_url(current_user),
+               :with => "Form.serialize('#{dom_id(@invite)}')",
+               :loading => "Spinner.hide_element('invites_content')",
+               :complete => "Spinner.show_element('invites_content'); Form.reset($(#{dom_id @invite}))" },
+             :class => 'button center' %>
+  <%= link_to_function("<span>CANCEL</span>", :class => :button) do |page|
+      page.visual_effect :toggle_blind, :invite_form
+    end %>
+  &nbsp;
+  </div>
 </div>
 <%= errors_on :invite -%>
 <%= show_flash -%>
