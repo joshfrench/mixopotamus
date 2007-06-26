@@ -11,6 +11,16 @@ class UserTest < Test::Unit::TestCase
     end
   end
   
+  def test_find_swapset_by_position
+    assert_equal swapsets(:alligator), users(:quentin).find_swapset_by_position(1)
+  end
+  
+  def test_registered_for?
+    @user = users(:quentin)
+    assert @user.registered_for? swaps(:registration_period)
+    assert !(@user.registered_for? swaps(:expired))
+  end
+  
   def test_should_decrement_successful_invite
     @aaron = users(:aaron)
     assert_difference(Invite, :count, 1) do
@@ -37,6 +47,13 @@ class UserTest < Test::Unit::TestCase
       i = @quentin.create_invite 'test@foo.com', "Foo"
     end
     assert_equal 0, @quentin.invite_count
+  end
+  
+  def test_forgot_password
+    @user = users(:aaron)
+    @user.forgot_password
+    @user.save
+    assert_not_nil @user.reset
   end
   
 end

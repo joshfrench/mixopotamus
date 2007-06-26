@@ -8,6 +8,32 @@ class InviteTest < Test::Unit::TestCase
     @quentin = users(:quentin)
   end
   
+  def test_to
+    assert_equal 'jed@vitamin-j.com', invites(:open).to
+  end
+  
+  def test_open?
+    assert invites(:open).open?
+    assert !invites(:accepted).open?
+  end
+  
+  def test_accepted?
+    assert invites(:accepted).accepted?
+    assert !invites(:open).accepted?
+  end
+  
+  def test_is_unique?
+    @user = users(:aaron)
+    @invite = @user.create_invite('jed@vitamin-j.com', 'Hi this is a duplicate invite.')
+    assert !(@invite.is_unique?)
+  end
+  
+  def test_is_not_unique
+    @user = users(:aaron)
+    @invite = @user.create_invite('unique@vitamin-j.com', 'Hi this is a duplicate invite.')
+    assert @invite.is_unique?
+  end
+  
   def test_should_reject_bad_email
     assert_no_difference(Invite, :count) do
       Invite.create(:from => @quentin, :to => 'not an email')

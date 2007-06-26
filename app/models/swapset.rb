@@ -3,11 +3,7 @@ class Swapset < ActiveRecord::Base
   has_many    :users,
               :through => :assignments
   has_many    :confirmations,
-              :through => :assignments do
-                def by_giver(user)
-                  find_by_from_user(user.id)
-                end
-              end
+              :through => :assignments
   belongs_to  :swap
   
   def assign(user)

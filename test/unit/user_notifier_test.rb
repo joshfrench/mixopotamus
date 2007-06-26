@@ -53,6 +53,22 @@ class UserNotifierTest < Test::Unit::TestCase
     assert_match /#{@swap.registration_deadline.to_s :small}/, response.body
     assert_equal @quentin.email, response.to[0]
   end
+  
+  def test_forgot_password
+    @quentin.forgot_password
+    @quentin.save
+    response = UserNotifier.create_forgot_password(@quentin)
+    assert_match /quentin/, response.body
+    assert_match /#{@quentin.reset}/, response.body
+  end
+  
+  def test_reset_password
+    @quentin.reset_password
+    @quentin.save
+    response = UserNotifier.create_reset_password(@quentin)
+    assert_match /quentin/, response.body
+    assert_match /password has been reset/, response.body
+  end
 
   private
     def read_fixture(action)

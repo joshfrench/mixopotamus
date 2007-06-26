@@ -19,4 +19,8 @@ class FavoriteTest < Test::Unit::TestCase
     assert_equal 1, @aaron.favorites.size # ...aaron gave it to him; same deal
   end
   
+  def test_to_user
+    assert_equal favorites(:aaron_to_quentin).to_user, users(:quentin)
+  end
+  
 end

@@ -1,7 +1,7 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
-ire File.expand_path(File.dirname(__FILE__) + '/helper_testcase')
+require File.expand_path(File.dirname(__FILE__) + '/helper_testcase')
 
 class Test::Unit::TestCase
   
