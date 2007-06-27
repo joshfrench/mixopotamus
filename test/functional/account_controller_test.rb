@@ -147,14 +147,16 @@ class AccountControllerTest < Test::Unit::TestCase
     assert_equal 0, @emails.length
   end
   
-  def _test_should_reset_password
+  def test_should_reset_password
     @quentin = users(:quentin)
     pass = 'newpassword'
     reset = @quentin.forgot_password
+    @quentin.save
     post :reset_password, { :reset => reset, :password => pass, :password_confirmation => pass }
+    @quentin.reload
     assert_equal @quentin.encrypt(pass), @quentin.crypted_password
-    assert_equal 1, @emails.length
-    assert_match /Your password has been reset/, @emails.first.subject
+    assert_equal 2, @emails.length #both forgot & reset are sent
+    assert_match /Your password has been reset/, @emails.last.subject
   end
 
   protected

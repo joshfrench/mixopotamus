@@ -58,9 +58,8 @@ class AccountController < ApplicationController
     if @user = User.find_by_reset(params[:reset])
       return unless request.post?
       if params[:password] == params[:password_confirmation]
-        self.current_user = @user
-        current_user.password_confirmation = params[:password_confirmation]
-        current_user.password = params[:password]
+        @user.password_confirmation = params[:password_confirmation]
+        @user.password = params[:password]
         @user.reset_password
         if @user.save
           flash[:global] = "Your password has been reset."
