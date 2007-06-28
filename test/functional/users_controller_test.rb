@@ -63,4 +63,5 @@ class UsersControllerTest < Test::Unit::TestCase
     @quentin.reload
     assert_equal 'quentin', @quentin.login
   end
+
 end
