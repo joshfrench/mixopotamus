@@ -82,7 +82,8 @@ class AccountControllerTest < Test::Unit::TestCase
     login_as :quentin
     get :logout
     assert_nil session[:user]
-    assert_response :redirect
+    assert_response :success
+    assert_template "account/login"
   end
 
   def test_should_remember_me

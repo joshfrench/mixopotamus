@@ -39,7 +39,7 @@ class AccountController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:error] = "You have been logged out."
-    redirect_to default_url
+    render :template => 'account/login'
   end
   
   def forgot_password
