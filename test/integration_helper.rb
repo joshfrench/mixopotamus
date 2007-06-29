@@ -9,6 +9,7 @@ module IntegrationHelper
                        :password => "foobar", :password_confirmation => "foobar",
                        :email => "josh@vitamin-j.com", 
                        :address => "155 23rd St\nBrooklyn, NY\n11232"
+    Swap.current.register josh
     5.times { josh.give_invite }
   end
   
@@ -18,6 +19,12 @@ module IntegrationHelper
     open_session do |sess|
       sess.extend(AppDSL)
       yield sess if block_given?
+    end
+  end
+  
+  def advance_timeline_by(time = 7.weeks)
+    Swap.find(:all).each do |swap|
+      swap.update_attribute(:deadline, swap.deadline-time)
     end
   end
 

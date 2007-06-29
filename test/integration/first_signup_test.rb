@@ -1,7 +1,7 @@
 require "#{File.dirname(__FILE__)}/../test_helper"
 require "#{File.dirname(__FILE__)}/../integration_helper"
 
-class FirstRoundTest < ActionController::IntegrationTest
+class FirstSignupTest < ActionController::IntegrationTest
   include IntegrationHelper
   
   def test_first_round
@@ -50,6 +50,9 @@ class FirstRoundTest < ActionController::IntegrationTest
     furry.registers
     furry.logs_out
     vaclav.logs_out
+    
+    josh.logs_out
+    assert_equal 6, Swap.current.users.count
   end
   
 end

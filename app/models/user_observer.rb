@@ -1,6 +1,6 @@
 class UserObserver < ActiveRecord::Observer
   def after_create(user)
-    Swap.current.register(user) if Swap.current && Swap.current.open?
+    Swap.current.register(user) if (Swap.current && Swap.current.open?)
     give_freebies(user)
     UserNotifier.deliver_signup_notification(user)
   end
