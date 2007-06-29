@@ -44,9 +44,11 @@ module IntegrationHelper
       get default_url
       assert_response :success
       assert_tag 'h2', :content => /current swap/i
+      assert_tag 'p', :content => /mailing deadline for this swap/i
       user = (Swap.current.users - [current_user])[rand(5)]
       assert_tag 'span', :content => /#{user.login}/i
       assert_no_tag 'h2', :content => /next swap/i
+      assert_no_tag :h2, :content => /past swaps/i
     end
   end
 end

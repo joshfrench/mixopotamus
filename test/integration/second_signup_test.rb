@@ -38,6 +38,7 @@ class SecondSignupTest < ActionController::IntegrationTest
     morgan = new_session
     morgan.goes_to_login
     morgan.logs_in_as 'morgan'
+    morgan.views_homepage
     morgan.feels_the_burn
     morgan.logs_out
     
@@ -62,6 +63,7 @@ class SecondSignupTest < ActionController::IntegrationTest
     vaclav = new_session
     vaclav.goes_to_login
     vaclav.logs_in_as 'vaclav'
+    vaclav.views_homepage
     vaclav.feels_the_burn
     vaclav.logs_out
     
@@ -71,7 +73,7 @@ class SecondSignupTest < ActionController::IntegrationTest
     anne.checks_confirmations
     anne.sends_invite :to => "herboyfriend@vitamin-j.com", :message => "What an excellent hippo"
     anne.registers
-    
+    anne.views_homepage
     anne.logs_out
     
   end
@@ -84,6 +86,7 @@ module IntegrationHelper
       get default_url
       assert_response :success
       assert_tag 'h2', :content => /current swap/i
+      assert_tag 'p', :content => /get something especially awesome/i
       assert_tag 'span', :content => /furry/i
       assert_tag 'h2', :content => /next swap/i
     end
