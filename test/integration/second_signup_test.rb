@@ -5,7 +5,7 @@ class SecondSignupTest < ActionController::IntegrationTest
   include IntegrationHelper
   
   def setup
-    super
+    initial_setup
      %w{ jed furry vaclav anne morgan }.each do |user|
         create_user user
       end
@@ -21,16 +21,17 @@ class SecondSignupTest < ActionController::IntegrationTest
     josh = new_session
     josh.goes_to_login
     josh.logs_in_as 'josh'
-    josh.views_swapsets
+    josh.views_homepage
     
-    josh.confirms Assignment.find_by_swapset_id_and_user_id(User.find(1).swapsets.first.id, User.find_by_login('jed'))
+    josh.confirms 'jed'
     
-    josh.confirms Assignment.find_by_swapset_id_and_user_id(User.find(1).swapsets.first.id, User.find_by_login('anne'))
+    josh.confirms 'anne'
     
     jed = new_session
     jed.goes_to_login
     jed.logs_in_as 'jed'
     jed.checks_confirmations
+    jed.registers
     jed.sends_invite :to => 'jim@vitamin-j.com', :message => "This is a great hippo"
     jed.logs_out
     
@@ -44,13 +45,15 @@ class SecondSignupTest < ActionController::IntegrationTest
     furry.goes_to_login
     furry.logs_in_as 'furry'
     
-    josh.stars Assignment.find_by_swapset_id_and_user_id(User.find(1).swapsets.first.id, User.find_by_login('furry'))
+    josh.stars 'furry'
     
     furry.checks_confirmations
     
-    josh.confirms Assignment.find_by_swapset_id_and_user_id(User.find(1).swapsets.first.id, User.find_by_login('morgan'))
+    josh.confirms 'morgan'
     
-    josh.stars Assignment.find_by_swapset_id_and_user_id(User.find(1).swapsets.first.id, User.find_by_login('morgan'))
+    josh.stars 'morgan'
+    
+    furry.registers
     
     morgan.logs_in_as 'morgan'
     morgan.checks_confirmations
@@ -67,6 +70,9 @@ class SecondSignupTest < ActionController::IntegrationTest
     anne.logs_in_as 'anne'
     anne.checks_confirmations
     anne.sends_invite :to => "herboyfriend@vitamin-j.com", :message => "What an excellent hippo"
+    anne.registers
+    
+    anne.logs_out
     
   end
   
@@ -74,7 +80,7 @@ end
 
 module IntegrationHelper
   module AppDSL
-    def views_swapsets
+    def views_homepage
       get default_url
       assert_response :success
       assert_tag 'h2', :content => /current swap/i

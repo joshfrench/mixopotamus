@@ -1,6 +1,8 @@
 module IntegrationHelper
   
-  def setup
+  private
+  
+  def initial_setup
     [User, Swap, Registration, Swapset, Assignment, Favorite, Confirmation, Invite].each do |klass|
       klass.delete_all
     end
@@ -12,8 +14,6 @@ module IntegrationHelper
     Swap.current.register josh
     5.times { josh.give_invite }
   end
-  
-  private
 
   def new_session
     open_session do |sess|
@@ -88,8 +88,6 @@ module IntegrationHelper
       assert_response :success
       assert_tag 'h2', :content => /Welcome/
       assert_tag 'p', :content => /you are signed up/i
-      assert_no_tag 'h2', :content => /past swaps/i 
-      assert_no_tag 'h2', :content => /current_swap/i
     end
   
     def registers
@@ -111,22 +109,24 @@ module IntegrationHelper
       assert_match /registration cancelled/i, @response.body
     end
   
-    def confirms(assignment)
+    def confirms(user)
+      assignment = Assignment.find_by_swapset_id_and_user_id(current_user.swapsets.first.id, User.find_by_login(user))
       xhr :post, confirmations_path(:user_id => current_user, :assign => assignment)
       assert_response :success
       assert_match /mail_on/, @response.body
     end
   
-    def unconfirms(assignment)
+    def unconfirms(user)
     end
   
-    def stars(assignment)
+    def stars(user)
+      assignment = Assignment.find_by_swapset_id_and_user_id(current_user.swapsets.first.id, User.find_by_login(user))
       xhr :post, favorites_path(:user_id => current_user, :assign => assignment)
       assert_response :success
       assert /star_on/.match @response.body
     end
   
-    def unstars(assignment)
+    def unstars(user)
     end
   
     def current_user
