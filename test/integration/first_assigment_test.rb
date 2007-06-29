@@ -10,7 +10,7 @@ class FirstSignupTest < ActionController::IntegrationTest
       create_user user
     end
     assert_equal 6, Swap.current.users.size
-    advance_timeline_by
+    advance_timeline
     RakeHelper.make_sets
   end
   
@@ -18,21 +18,14 @@ class FirstSignupTest < ActionController::IntegrationTest
     josh = new_session
     josh.goes_to_login
     josh.logs_in_as 'josh'
-    josh.get_my_set
-  end
-  
-  def create_user(name)
-    User.create :login => name, 
-                       :password => "foobar", :password_confirmation => "foobar",
-                       :email => "#{name}@vitamin-j.com", 
-                       :address => "155 23rd St\nBrooklyn, NY\n11232"
+    josh.views_swapsets
   end
     
 end
 
 module IntegrationHelper
   module AppDSL
-    def get_my_set
+    def views_swapsets
       get default_url
       assert_response :success
       assert_tag 'h2', :content => /current swap/i

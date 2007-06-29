@@ -22,10 +22,18 @@ module IntegrationHelper
     end
   end
   
-  def advance_timeline_by(time = 7.weeks)
+  def advance_timeline(options={})
+    options[:by] ||= 7.weeks
     Swap.find(:all).each do |swap|
-      swap.update_attribute(:deadline, swap.deadline-time)
+      swap.update_attribute(:deadline, swap.deadline-options[:by])
     end
+  end
+  
+  def create_user(name)
+    User.create :login => name, 
+                       :password => "foobar", :password_confirmation => "foobar",
+                       :email => "#{name}@vitamin-j.com", 
+                       :address => "155 23rd St\nBrooklyn, NY\n11232"
   end
 
   module AppDSL
@@ -55,11 +63,12 @@ module IntegrationHelper
       assert_difference current_user, :invite_count, (current_user.id == 1 ? 0 : -1) do
         xhr :post, invites_path(current_user), { :user_id => current_user.id, :invite => options }
         assert_response :success
+        current_user.reload
       end
     end
   
     def redeems_invite(person)
-      get redeem_invite_url(:id => Invite.find_by_to_email("#{person}@vitamin-j.com").uuid)
+      get redeem_invite_path(:id => Invite.find_by_to_email("#{person}@vitamin-j.com").uuid)
       assert_response :redirect
       follow_redirect!
       assert_template "account/signup"
@@ -103,12 +112,18 @@ module IntegrationHelper
     end
   
     def confirms(assignment)
+      xhr :post, confirmations_path(:user_id => current_user, :assign => assignment)
+      assert_response :success
+      assert_match /mail_on/, @response.body
     end
   
     def unconfirms(assignment)
     end
   
     def stars(assignment)
+      xhr :post, favorites_path(:user_id => current_user, :assign => assignment)
+      assert_response :success
+      assert /star_on/.match @response.body
     end
   
     def unstars(assignment)

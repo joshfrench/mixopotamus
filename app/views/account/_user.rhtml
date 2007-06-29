@@ -1,4 +1,4 @@
 <%# white-space:pre on this partial %>
 <p class="address"><%= fancyname_for user %>
-<%= ibm h user.address %>
+<%= ibm (h user.address) %>
 <%= mail_to user.email, ibm(user.email), :encode => "hex" -%></p>
