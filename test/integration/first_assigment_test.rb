@@ -18,10 +18,12 @@ class FirstAssignmentTest < ActionController::IntegrationTest
     josh.goes_to_login
     josh.logs_in_as 'josh'
     josh.views_swapsets
+    josh.does_not_see_past_sets
     
     furry = new_session
     furry.goes_to_login
     furry.logs_in_as 'furry'
+    furry.does_not_see_past_sets
     
     josh.logs_out
     
@@ -32,6 +34,7 @@ class FirstAssignmentTest < ActionController::IntegrationTest
     furry.views_swapsets
     furry.logs_out
     
+    morgan.does_not_see_past_sets
     morgan.views_swapsets
     morgan.logs_out
   end

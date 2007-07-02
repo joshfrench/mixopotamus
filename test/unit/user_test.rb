@@ -17,7 +17,7 @@ class UserTest < Test::Unit::TestCase
   
   def test_registered_for?
     @user = users(:quentin)
-    assert @user.registered_for? swaps(:registration_period)
+    assert @user.registered_for?(swaps(:registration_period))
     assert !(@user.registered_for? swaps(:expired))
   end
   

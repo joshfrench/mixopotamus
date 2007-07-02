@@ -17,6 +17,7 @@ class SecondAssignmentTest < ActionController::IntegrationTest
     josh = new_session
     josh.goes_to_login
     josh.logs_in_as 'josh'
+    josh.does_not_see_past_sets
     josh.confirms 'jed'
     josh.confirms 'morgan'
     josh.confirms 'anne'
@@ -25,6 +26,7 @@ class SecondAssignmentTest < ActionController::IntegrationTest
     anne = new_session
     anne.goes_to_login
     anne.logs_in_as 'anne'
+    anne.does_not_see_past_sets
     
     josh.logs_out
     
@@ -75,9 +77,11 @@ class SecondAssignmentTest < ActionController::IntegrationTest
     
     jed.logs_in_as 'jed'
     jed.views_swapset
+    jed.sees_past_sets
     
     jim.logs_in_as 'jim'
     jim.views_swapset
+    jim.does_not_see_past_sets  ### jim just got invited
     jim.logs_out
     
     jed.logs_out
@@ -87,10 +91,25 @@ class SecondAssignmentTest < ActionController::IntegrationTest
     josh.logs_in_as 'josh'
     
     anne.views_swapset
+    anne.sees_past_sets
     anne.logs_out
     
+    josh.sees_past_sets
     josh.sees_closed_registration
     josh.logs_out
+    
+    advance_timeline :by => (6.weeks + 1.hour)
+    RakeHelper.new_swap
+    
+    josh.logs_in_as 'josh'
+    josh.sees_past_sets
+    
+    jim.logs_in_as 'jim'
+    jim.does_not_see_past_sets
+    jim.confirms 'anne'
+    
+    anne.logs_in_as 'anne'
+    anne.registers
     
   end
   

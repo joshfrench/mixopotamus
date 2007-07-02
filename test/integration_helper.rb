@@ -116,17 +116,21 @@ module IntegrationHelper
       assert_match /mail_on/, @response.body
     end
   
-    def unconfirms(user)
-    end
-  
     def stars(user)
       assignment = Assignment.find_by_swapset_id_and_user_id(current_user.swapsets.first.id, User.find_by_login(user))
       xhr :post, favorites_path(:user_id => current_user, :assign => assignment)
       assert_response :success
-      assert /star_on/.match @response.body
+      assert /star_on/.match(@response.body)
     end
-  
-    def unstars(user)
+    
+    def sees_past_sets
+      get default_url
+      assert_tag :h2, :content => /past swaps/i
+    end
+    
+    def does_not_see_past_sets
+      get default_url
+      assert_no_tag :h2, :content => /past swaps/i
     end
   
     def current_user

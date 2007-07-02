@@ -24,7 +24,7 @@ class ConfirmationTest < Test::Unit::TestCase
   
   def test_should_destroy
     c = confirmations(:aaron_to_quentin)
-    assert @quentin.confirmed_for? @swap
+    assert @quentin.confirmed_for?(@swap)
     assert_difference(Confirmation, :count, -1) do
       c.destroy
     end
