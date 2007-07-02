@@ -24,6 +24,7 @@ class FirstSignupTest < ActionController::IntegrationTest
     jed = new_session
     jed.redeems_invite 'jed'
     jed.signs_up
+    assert_equal 5, User.find_by_login('jed').invite_count
     jed.logs_out
     
     anne = new_session
@@ -33,6 +34,7 @@ class FirstSignupTest < ActionController::IntegrationTest
     morgan.redeems_invite 'morgan'
     
     anne.signs_up
+    assert_equal 0, User.find_by_login('anne').invite_count
     morgan.signs_up
     
     anne.views_account
