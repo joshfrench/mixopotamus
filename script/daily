@@ -1,3 +1,4 @@
 #!/bin/sh
 cd /Users/slim/webroot/mix
 /usr/local/bin/rake check_expire
+/usr/local/bin/rake prune_sessions

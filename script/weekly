@@ -1,3 +1,4 @@
 #!/bin/sh
 cd /Users/slim/webroot/mix
 /usr/local/bin/rake send_signup_report
+/usr/local/bin/rake trim_logs
