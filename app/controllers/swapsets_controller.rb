@@ -4,7 +4,7 @@ class SwapsetsController < ApplicationController
   def index
     #@swap = Time.now < Swap.current.registration_deadline ? Swap.current : Swap.previous
     @swapsets = current_user.swapsets - Swap.current.swapsets
-    @swapsets -= Swap.previous.swapsets if Time.now < Swap.current.registration_deadline
+    @swapsets -= Swap.previous.swapsets if (Time.now < Swap.current.registration_deadline && Swap.previous)
     render @swapsets.empty? ? { :nothing => true } : { :layout => "past_sets" }
   end
   

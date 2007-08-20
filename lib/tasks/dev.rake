@@ -3,14 +3,14 @@ namespace :dev do
   task :populate => [:environment] do
     Swap.create(:deadline => 10.weeks.from_now)
     
-    User.create(:password => 'b33omber', 
-                :password_confirmation => 'b33omber', 
+    User.create(:password => 'foobar', 
+                :password_confirmation => 'foobar', 
                 :login => "Josh French", 
                 :address => "155 23rd St #2\nBrooklyn, NY\n11232", 
                 :email => "josh@vitamin-j.com")
                 
-    User.create(:password => 'b33omber', 
-                :password_confirmation => 'b33omber',
+    User.create(:password => 'foobar', 
+                :password_confirmation => 'foobar',
                 :login => "Anne Coperdink", 
                 :address => "15 Whitestone Dr.\nSyracuse, NY\n11235", 
                 :email => "anne@vitamin-j.com")

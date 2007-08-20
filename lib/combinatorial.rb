@@ -2,7 +2,7 @@ require 'enumerator'
 
 class Fixnum
   def factorial
-    (1..self).inject(1) { |n,i| n*i }
+    (1..self).inject { |n,i| n*i }
   end
   
   def choose(i)
